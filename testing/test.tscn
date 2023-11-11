@@ -1,11 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm1cyjgt31jwc"]
+[gd_scene load_steps=3 format=3 uid="uid://dm1cyjgt31jwc"]
 
 [ext_resource type="Script" path="res://testing/test.gd" id="1_yrxdv"]
+[ext_resource type="PackedScene" uid="uid://bb8yvsx0g14vl" path="res://src/line_reader.tscn" id="2_apb2i"]
 
 [node name="Test" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_yrxdv")
+
+[node name="LineReader" parent="." instance=ExtResource("2_apb2i")]
+layout_mode = 1
+offset_left = 244.0
+offset_top = 85.0
+offset_right = 244.0
+offset_bottom = 85.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
