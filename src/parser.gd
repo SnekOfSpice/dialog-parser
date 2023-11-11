@@ -40,6 +40,8 @@ func _ready() -> void:
 		int_data[where] = loaded_data.get(str(i)).duplicate()
 	
 	page_data = int_data.duplicate()
+	
+	facts = data.get("facts")
 
 
 func read_page(number: int):

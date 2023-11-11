@@ -26,7 +26,21 @@ func read_new_line(new_line: Dictionary):
 	if facts_to_check.keys().size() > 0:
 		var is_condition_true := true
 		var operand_key = conditional_behavior.get("operand_key")
-		#match
+		var true_facts := []
+		for fact in facts_to_check:
+			
+		match operand_key:
+			"AND":
+				pass
+			"OR":
+				pass
+			"nOrMore":
+				pass
+			"nOrLess":
+				pass
+			"betweenNMincl":
+				pass
+			
 	
 	handle_header(line_data.get("header"))
 	
