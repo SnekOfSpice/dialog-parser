@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @export var property_for_name := ""
 @export var name_for_blank_name := ""
+@export var text_speed := 100.0
 
 signal line_finished(line_index)
 signal jump_to_page(page_index)
@@ -11,6 +12,7 @@ var line_data := {}
 var line_index
 
 var is_input_locked := false : set = set_is_input_locked
+var showing_text := false
 
 func _ready() -> void:
 	Parser.connect("read_new_line", read_new_line)
@@ -25,7 +27,16 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if is_input_locked: return
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			emit_signal("line_finished", line_index)
+			if showing_text:
+				if find_child("TextContent").visible_ratio >= 1.0:
+					if chunk_index >= line_chunks.size() - 1:
+						emit_signal("line_finished", line_index)
+					else:
+						read_next_chunk()
+				else:
+					find_child("TextContent").visible_ratio = 1.0
+			else:
+				emit_signal("line_finished", line_index)
 
 func set_is_input_locked(value: bool):
 	is_input_locked = value
@@ -59,10 +70,11 @@ func read_new_line(new_line: Dictionary):
 	var content_name = line_data.get("content").get("name") # wtf is this
 	
 	find_child("TextContainer").visible = line_type == Parser.LineType.Text
+	showing_text = line_type == Parser.LineType.Text
 	find_child("ChoiceContainer").visible = line_type == Parser.LineType.Choice
 	match line_type:
 		Parser.LineType.Text:
-			find_child("TextContent").text = content
+			start_showing_text(content)
 		Parser.LineType.Choice:
 			build_choices(content)
 		Parser.LineType.Instruction:
@@ -84,6 +96,73 @@ func read_new_line(new_line: Dictionary):
 	
 	# register facts
 	line_data.get("facts")
+
+func _process(delta: float) -> void:
+	if find_child("TextContent").visible_ratio < 1.0:
+		find_child("TextContent").visible_characters += text_speed * delta
+
+
+# TODO: different pause types and chunking. for now only line clears that are manually placed.
+#var chunks_to_show := []
+#var chunk_break_types := [] # defined for the one after the chunk
+#enum BreakTypes {ManualPause, AutoPause}
+
+
+# split by mp and ap, then a single part of that gets fed into the split code
+# and that actually displays it
+var line_chunks := []
+var chunk_index := 0
+var max_chunk_length := 50
+func start_showing_text(content: String):
+	line_chunks = content.split("<lc>")
+	
+	chunk_index = 0
+	
+	if text_speed > 0:
+		find_child("TextContent").visible_characters = 0
+	else:
+		find_child("TextContent").visible_ratio = 1.0
+	
+	find_child("TextContent").text = line_chunks[chunk_index]
+	
+#	for c in chunks_to_show:
+#		chunk_break_types.append(BreakTypes.LineClear)
+	
+	
+#	# separate by too long
+#	var i := 0
+#
+#	var limited_in_length := []
+#	for c in text_lines:
+#		#var size = find_child("TextContent").theme_override_fonts.normal_font.get_multiline_string_size(c)
+#		var needed_chunks = ceil(float(float(c.length()) / float(max_chunk_length)))
+#		prints("NEED ", needed_chunks, " FOR ", c.length())
+#		if needed_chunks > 1:
+#			for j in needed_chunks:
+#				#chunk_break_types.insert(i, BreakTypes.LineClear)
+#				i += 1
+#				# i think this is also relevant
+#				# string.lstrip(string.left(max_legth)
+#				limited_in_length.append(c.left(max_chunk_length))
+#				c = c.lstrip(c.left(max_chunk_length))
+#		else:
+#			limited_in_length.append(c)
+#
+#		i += 1
+#	printt(limited_in_length, limited_in_length.size())
+#	# separate by manual pause
+#
+#	# separate by auto pause
+
+func read_next_chunk():
+	chunk_index += 1
+	if text_speed > 0:
+		find_child("TextContent").visible_characters = 0
+	else:
+		find_child("TextContent").visible_ratio = 1.0
+	
+	find_child("TextContent").text = line_chunks[chunk_index]
+
 
 func build_choices(choices):
 	for c in find_child("ChoiceOptionContainer").get_children():
