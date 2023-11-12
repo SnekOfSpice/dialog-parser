@@ -5,30 +5,30 @@
 
 [node name="Test" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_yrxdv")
 
 [node name="LineReader" parent="." instance=ExtResource("2_apb2i")]
-layout_mode = 1
-offset_left = 244.0
-offset_top = 85.0
-offset_right = 244.0
-offset_bottom = 85.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="VBoxContainer" type="VBoxContainer" parent="LineReader"]
+offset_right = 85.0
+offset_bottom = 78.0
+mouse_filter = 2
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer"]
+[node name="PageIndexSlider" type="HSlider" parent="LineReader/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="LineReader/VBoxContainer"]
 layout_mode = 2
 text = "read page"
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="PageIndexLabel" type="Label" parent="LineReader/VBoxContainer"]
 layout_mode = 2
 
-[connection signal="value_changed" from="VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="LineReader/VBoxContainer/PageIndexSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="LineReader/VBoxContainer/Button" to="." method="_on_button_pressed"]
