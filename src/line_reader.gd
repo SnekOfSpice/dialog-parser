@@ -80,7 +80,7 @@ func read_new_line(new_line: Dictionary):
 			var delay_before = new_line.get("content").get("delay.before")
 			var delay_after = new_line.get("content").get("delay.after")
 			
-			find_child("InstructionHandler").execute(instruction_name, args, delay_before, delay_after)
+			find_child("InstructionHandler").wrapper_execute(instruction_name, args, delay_before, delay_after)
 	
 	# register facts
 	line_data.get("facts")

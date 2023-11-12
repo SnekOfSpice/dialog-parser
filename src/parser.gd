@@ -79,11 +79,12 @@ func read_next_line(finished_line_index: int):
 		if do_terminate:
 			emit_signal("terminate_page", page_index)
 		else:
-			if page_data.keys().has(page_index + 1):
-				read_page(page_index + 1)
+			var next = int(page_data.get(page_index).get("next"))
+			if page_data.keys().has(next):
+				read_page(next)
 			else:
 				emit_signal("terminate_page", page_index)
-				push_warning(str("tried to read non-existent page ", page_index + 1, " after non-terminating page ", page_index))
+				push_warning(str("tried to read non-existent page ", next, " after non-terminating page ", page_index))
 		return
 	read_line(finished_line_index + 1)
 

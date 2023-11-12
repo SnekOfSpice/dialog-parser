@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bb8yvsx0g14vl"]
 
 [ext_resource type="Script" path="res://src/line_reader.gd" id="1_f2s5m"]
-[ext_resource type="Script" path="res://src/InstructionHandler.gd" id="2_5jckx"]
+[ext_resource type="Script" path="res://src/InstructionHandlerInherit.gd" id="2_nljge"]
 
 [node name="LineReader" type="CanvasLayer" groups=["LineListener"]]
 script = ExtResource("1_f2s5m")
@@ -101,6 +101,6 @@ focus_mode = 0
 text = "finished"
 
 [node name="InstructionHandler" type="Node" parent="."]
-script = ExtResource("2_5jckx")
+script = ExtResource("2_nljge")
 
 [connection signal="pressed" from="DebugSim/FinishedButton" to="." method="_on_finished_button_pressed"]
