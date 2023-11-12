@@ -8,6 +8,7 @@ var page_data := {}
 var dropdown_titles := []
 var dropdowns := {}
 
+var line_reader = null
 
 var page_index := 0
 var line_index := 0

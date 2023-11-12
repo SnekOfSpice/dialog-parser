@@ -3,13 +3,17 @@ extends CanvasLayer
 @export var property_for_name := ""
 @export var name_for_blank_name := ""
 @export var text_speed := 100.0
+@export var auto_pause_duration := 0.2
 
 signal line_finished(line_index)
 signal jump_to_page(page_index)
+signal new_header(header)
+signal is_input_locked_changed(new_value)
 
 var line_data := {}
 
 var line_index
+var remaining_auto_pause_duration := 0.0
 
 var is_input_locked := false : set = set_is_input_locked
 var showing_text := false
@@ -19,7 +23,11 @@ func _ready() -> void:
 	Parser.connect("terminate_page", close)
 	Parser.open_connection()
 	
+	Parser.line_reader = self
+	
 	find_child("InstructionHandler").connect("set_input_lock", set_is_input_locked)
+	
+	remaining_auto_pause_duration = auto_pause_duration
 
 
 
@@ -39,14 +47,18 @@ func _unhandled_input(event: InputEvent) -> void:
 						find_child("TextContent").visible_ratio = 1.0
 					#find_next_pause()
 					elif next_pause_position_index < all_pause_positions_this_chunk_minus_pause_tags.size():
-						next_pause_position_index += 1
+						find_child("TextContent").visible_characters = all_pause_positions_this_chunk_minus_pause_tags[next_pause_position_index]
+						if next_pause_type == PauseTypes.Manual:
+							next_pause_position_index += 1
+							remaining_auto_pause_duration = auto_pause_duration
+						
 					
 			else:
 				emit_signal("line_finished", line_index)
 
 func set_is_input_locked(value: bool):
 	is_input_locked = value
-	find_child("NextPromptContainer").visible = not is_input_locked
+	emit_signal("is_input_locked_changed", is_input_locked)
 
 func close(_terminating_page):
 	prints("closing page ", _terminating_page)
@@ -103,17 +115,26 @@ func read_new_line(new_line: Dictionary):
 	# register facts
 	line_data.get("facts")
 
+
 func _process(delta: float) -> void:
 	if next_pause_position_index < all_pause_positions_this_chunk_minus_pause_tags.size() and next_pause_position_index != -1:
 		
 		if find_child("TextContent").visible_characters < all_pause_positions_this_chunk_minus_pause_tags[next_pause_position_index]:
 			#print("b")
 			find_child("TextContent").visible_characters += text_speed * delta
-#		else:
-#			print("a")
+		elif remaining_auto_pause_duration > 0 and next_pause_type == PauseTypes.Auto:
+			var last_dur = remaining_auto_pause_duration
+			remaining_auto_pause_duration -= delta
+			print(remaining_auto_pause_duration)
+			if last_dur > 0 and remaining_auto_pause_duration <= 0:
+				next_pause_position_index += 1
+				remaining_auto_pause_duration = auto_pause_duration
+				print("-------------")
+			print("auto")
 	elif find_child("TextContent").visible_ratio < 1.0:
 		find_child("TextContent").visible_characters += text_speed * delta
 		#print("c")
+	
 
 
 # TODO: different pause types and chunking. for now only line clears that are manually placed.
@@ -315,6 +336,7 @@ func evaluate_conditionals(conditionals) -> Array:
 	
 	return [conditional_is_true, behavior]
 
+
 func handle_header(header: Array):
 	#prints("HEADER ", header)
 	for prop in header:
@@ -327,7 +349,8 @@ func handle_header(header: Array):
 		if property_name == property_for_name:
 			find_child("NameLabel").text = values[1]
 			find_child("NameContainer").visible = values[1] != name_for_blank_name
-			
+	
+	emit_signal("new_header", header)
 
 func chunkify(line) -> Array:
 	var line_type = int(line.get("line_type"))

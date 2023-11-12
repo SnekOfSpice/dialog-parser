@@ -1,7 +1,18 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dd3wmvu0xxyhs"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dd3wmvu0xxyhs"]
 
 [ext_resource type="FontFile" uid="uid://ckbctvwh4kk0m" path="res://style/ZeldaFont.ttf" id="1_8ruyj"]
 [ext_resource type="FontFile" uid="uid://cfvy1kmgrhnn7" path="res://style/TimesNewPixel.ttf" id="1_xb66s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwf55"]
+bg_color = Color(0.0666667, 0.0509804, 0.0941176, 0.45098)
+border_width_left = 5
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0.145098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1d5wb"]
+bg_color = Color(0.0980392, 0.0745098, 0.0823529, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ps5h"]
 bg_color = Color(0.0784314, 0.0784314, 0.0941176, 1)
@@ -23,6 +34,12 @@ content_margin_right = 19.0
 content_margin_bottom = 9.0
 
 [resource]
+Button/colors/font_color = Color(0.780392, 0.815686, 0.92549, 1)
+Button/colors/font_disabled_color = Color(0.921569, 0.435294, 0.690196, 0.501961)
+Button/font_sizes/font_size = 36
+Button/fonts/font = ExtResource("1_xb66s")
+Button/styles/disabled = SubResource("StyleBoxFlat_jwf55")
+Button/styles/normal = SubResource("StyleBoxFlat_1d5wb")
 Label/font_sizes/font_size = 40
 Label/fonts/font = ExtResource("1_8ruyj")
 Label/styles/normal = SubResource("StyleBoxFlat_2ps5h")

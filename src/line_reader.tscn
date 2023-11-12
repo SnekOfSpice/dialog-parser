@@ -68,6 +68,7 @@ scroll_active = false
 autowrap_mode = 2
 
 [node name="NextPromptContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/NextPromptContainer"]
