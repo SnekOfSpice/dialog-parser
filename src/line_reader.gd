@@ -35,9 +35,11 @@ func _unhandled_input(event: InputEvent) -> void:
 						read_next_chunk()
 				else:
 					
-					if next_pause_position == -1:
+					if next_pause_position_index >= all_pause_positions_this_chunk_minus_pause_tags.size():
 						find_child("TextContent").visible_ratio = 1.0
-					find_next_pause()
+					#find_next_pause()
+					elif next_pause_position_index < all_pause_positions_this_chunk_minus_pause_tags.size():
+						next_pause_position_index += 1
 					
 			else:
 				emit_signal("line_finished", line_index)
@@ -102,15 +104,16 @@ func read_new_line(new_line: Dictionary):
 	line_data.get("facts")
 
 func _process(delta: float) -> void:
-	if next_pause_position != -1:
-		if find_child("TextContent").visible_characters < next_pause_position:
-			print("b")
+	if next_pause_position_index < all_pause_positions_this_chunk_minus_pause_tags.size() and next_pause_position_index != -1:
+		
+		if find_child("TextContent").visible_characters < all_pause_positions_this_chunk_minus_pause_tags[next_pause_position_index]:
+			#print("b")
 			find_child("TextContent").visible_characters += text_speed * delta
-		else:
-			print("a")
+#		else:
+#			print("a")
 	elif find_child("TextContent").visible_ratio < 1.0:
 		find_child("TextContent").visible_characters += text_speed * delta
-		print("c")
+		#print("c")
 
 
 # TODO: different pause types and chunking. for now only line clears that are manually placed.
@@ -160,6 +163,8 @@ func start_showing_text(content: String):
 #	# separate by auto pause
 
 var next_pause_position := -1
+var next_pause_position_index := -1
+var all_pause_positions_this_chunk_minus_pause_tags := []
 var next_pause_type := 0
 var goal_pauses_this_chunk := 0
 enum PauseTypes {Manual, Auto}
@@ -170,11 +175,42 @@ func read_next_chunk():
 	else:
 		find_child("TextContent").visible_ratio = 1.0
 	
+	all_pause_positions_this_chunk_minus_pause_tags.clear()
+	var new_text : String = line_chunks[chunk_index]
+	var current_position = find_child("TextContent").visible_characters
+	var total_pauses_this_chunk := 0
+	var next_mp = new_text.find("<mp>")
+	var next_ap = new_text.find("<ap>")
+	while  next_ap !=  -1 or next_mp != -1:
+		var next_pause = max(min(next_mp, next_ap), 0)
+		next_mp = new_text.find("<mp>", next_pause + 4 * total_pauses_this_chunk)
+		next_ap = new_text.find("<ap>", next_pause + 4 * total_pauses_this_chunk)
+		if next_mp == -1 and next_ap != -1:
+			if not all_pause_positions_this_chunk_minus_pause_tags.has(next_ap):
+				all_pause_positions_this_chunk_minus_pause_tags.append(next_ap)
+		elif next_mp != -1 and next_ap == -1:
+			if not all_pause_positions_this_chunk_minus_pause_tags.has(next_mp):
+				all_pause_positions_this_chunk_minus_pause_tags.append(next_mp)
+		elif next_mp != -1 and next_ap != -1:
+			if not all_pause_positions_this_chunk_minus_pause_tags.has(min(next_ap, next_mp)):
+				all_pause_positions_this_chunk_minus_pause_tags.append(min(next_ap, next_mp))
+		total_pauses_this_chunk += 1
+		#total_pauses_this_chunk= all_pause_positions_this_chunk_minus_pause_tags.size()
+	
+	print(all_pause_positions_this_chunk_minus_pause_tags)
 	pause_count_this_chunk = 0
+	next_pause_position_index = 0
 	goal_pauses_this_chunk = line_chunks[chunk_index].count("<mp>") + line_chunks[chunk_index].count("<ap>")
 	find_next_pause()
 	
-	find_child("TextContent").text = line_chunks[chunk_index]
+	var cleaned_text : String = line_chunks[chunk_index]
+	var i = 0
+	for pos in all_pause_positions_this_chunk_minus_pause_tags:
+		cleaned_text = cleaned_text.erase(pos-(i*4), 4)
+		i += 1
+		
+	
+	find_child("TextContent").text = cleaned_text
 
 var pause_count_this_chunk := 0
 func find_next_pause():
