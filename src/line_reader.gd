@@ -34,7 +34,11 @@ func _unhandled_input(event: InputEvent) -> void:
 					else:
 						read_next_chunk()
 				else:
-					find_child("TextContent").visible_ratio = 1.0
+					
+					if next_pause_position == -1:
+						find_child("TextContent").visible_ratio = 1.0
+					find_next_pause()
+					
 			else:
 				emit_signal("line_finished", line_index)
 
@@ -98,14 +102,21 @@ func read_new_line(new_line: Dictionary):
 	line_data.get("facts")
 
 func _process(delta: float) -> void:
-	if find_child("TextContent").visible_ratio < 1.0:
+	if next_pause_position != -1:
+		if find_child("TextContent").visible_characters < next_pause_position:
+			print("b")
+			find_child("TextContent").visible_characters += text_speed * delta
+		else:
+			print("a")
+	elif find_child("TextContent").visible_ratio < 1.0:
 		find_child("TextContent").visible_characters += text_speed * delta
+		print("c")
 
 
 # TODO: different pause types and chunking. for now only line clears that are manually placed.
 #var chunks_to_show := []
 #var chunk_break_types := [] # defined for the one after the chunk
-#enum BreakTypes {ManualPause, AutoPause}
+#
 
 
 # split by mp and ap, then a single part of that gets fed into the split code
@@ -115,15 +126,9 @@ var chunk_index := 0
 var max_chunk_length := 50
 func start_showing_text(content: String):
 	line_chunks = content.split("<lc>")
-	
-	chunk_index = 0
-	
-	if text_speed > 0:
-		find_child("TextContent").visible_characters = 0
-	else:
-		find_child("TextContent").visible_ratio = 1.0
-	
-	find_child("TextContent").text = line_chunks[chunk_index]
+	#if line_chunks.is_empty(): line_chunks = [""] # shouldnt ever happen but idk
+	chunk_index = -1
+	read_next_chunk()
 	
 #	for c in chunks_to_show:
 #		chunk_break_types.append(BreakTypes.LineClear)
@@ -154,6 +159,10 @@ func start_showing_text(content: String):
 #
 #	# separate by auto pause
 
+var next_pause_position := -1
+var next_pause_type := 0
+var goal_pauses_this_chunk := 0
+enum PauseTypes {Manual, Auto}
 func read_next_chunk():
 	chunk_index += 1
 	if text_speed > 0:
@@ -161,7 +170,29 @@ func read_next_chunk():
 	else:
 		find_child("TextContent").visible_ratio = 1.0
 	
+	pause_count_this_chunk = 0
+	goal_pauses_this_chunk = line_chunks[chunk_index].count("<mp>") + line_chunks[chunk_index].count("<ap>")
+	find_next_pause()
+	
 	find_child("TextContent").text = line_chunks[chunk_index]
+
+var pause_count_this_chunk := 0
+func find_next_pause():
+	var new_text : String = line_chunks[chunk_index]
+	var current_position = find_child("TextContent").visible_characters
+	var next_mp = new_text.find("<mp>", current_position + 4 * pause_count_this_chunk)
+	var next_ap = new_text.find("<ap>", current_position + 4 * pause_count_this_chunk)
+	if next_ap == -1:
+		if next_mp == -1:
+			next_pause_position = -1
+		else:
+			next_pause_position = next_mp
+			next_pause_type = PauseTypes.Manual
+			pause_count_this_chunk += 1
+	elif next_ap != -1:
+		next_pause_position = next_ap
+		next_pause_type = PauseTypes.Auto
+		pause_count_this_chunk += 1
 
 
 func build_choices(choices):
