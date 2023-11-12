@@ -10,7 +10,7 @@ var page_data := {}
 var dropdown_titles := []
 var dropdowns := {}
 
-var line_reader = null
+var line_reader : LineReader = null
 
 var page_index := 0
 var line_index := 0
@@ -105,3 +105,11 @@ func open_connection():
 		l.connect("line_finished", read_next_line)
 		l.connect("jump_to_page", read_page)
 	
+	for l in get_tree().get_nodes_in_group("ParserDependent"):
+		l.parser_init()
+	
+
+func change_fact(fact_name: String, new_value: bool):
+	facts[fact_name] = new_value
+	for l in get_tree().get_nodes_in_group("FactListener"):
+		l.fact_changed(fact_name, new_value)

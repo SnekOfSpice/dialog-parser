@@ -3,7 +3,7 @@ class_name LineReader
 
 @export var property_for_name := ""
 @export var name_for_blank_name := ""
-@export var text_speed := 100.0
+@export var text_speed := 0.5#100.0
 @export var auto_pause_duration := 0.2
 
 signal line_finished(line_index)
@@ -22,9 +22,10 @@ var showing_text := false
 func _ready() -> void:
 	Parser.connect("read_new_line", read_new_line)
 	Parser.connect("terminate_page", close)
-	Parser.open_connection()
+	
 	
 	Parser.line_reader = self
+	Parser.open_connection()
 	
 	find_child("InstructionHandler").connect("set_input_lock", set_is_input_locked)
 	find_child("InstructionHandler").connect("instruction_completed", instruction_completed)
@@ -118,14 +119,19 @@ func read_new_line(new_line: Dictionary):
 			find_child("InstructionHandler").wrapper_execute(instruction_name, args, delay_before, delay_after)
 	
 	# register facts
-	line_data.get("facts")
+	var facts = line_data.get("facts")
+	for f in facts.keys():
+		Parser.change_fact(f, facts.get(f))
+	
+	
 
 
 func _process(delta: float) -> void:
 	if next_pause_position_index < pause_positions.size() and next_pause_position_index != -1:
 		
 		if find_child("TextContent").visible_characters < pause_positions[next_pause_position_index]:
-			find_child("TextContent").visible_characters += text_speed * delta
+			#find_child("TextContent").visible_characters += text_speed * delta
+			find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
 		elif remaining_auto_pause_duration > 0 and next_pause_type == PauseTypes.Auto:
 			var last_dur = remaining_auto_pause_duration
 			remaining_auto_pause_duration -= delta
@@ -133,7 +139,8 @@ func _process(delta: float) -> void:
 				next_pause_position_index += 1
 				remaining_auto_pause_duration = auto_pause_duration
 	elif find_child("TextContent").visible_ratio < 1.0:
-		find_child("TextContent").visible_characters += text_speed * delta
+		#find_child("TextContent").visible_characters += text_speed * delta
+		find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
 	
 
 

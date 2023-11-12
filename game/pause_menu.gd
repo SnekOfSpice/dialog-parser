@@ -1,12 +1,12 @@
 extends CanvasLayer
 
 
-const MAX_TEXT_SPEED := 401
+const MAX_TEXT_SPEED := 201
 
 func _ready() -> void:
-	find_child("TextSpeedSlider").min_value = 50
+	find_child("TextSpeedSlider").min_value = 1
 	find_child("TextSpeedSlider").max_value = MAX_TEXT_SPEED
-	find_child("TextSpeedSlider").value = 100
+	find_child("TextSpeedSlider").value = 80
 
 func _on_fullscreen_button_pressed() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
