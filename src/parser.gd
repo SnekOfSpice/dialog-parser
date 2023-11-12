@@ -28,7 +28,7 @@ enum LineType {
 	Text, Choice, Instruction
 }
 
-enum DataTypes {_String, _Integer, _Float, _Array, _Dictionary, _DropDown}
+enum DataTypes {_String, _Integer, _Float, _Array, _Dictionary, _DropDown, _Boolean}
 
 signal read_new_line(line)
 signal terminate_page(page_index)

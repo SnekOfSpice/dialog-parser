@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu33mw8t7dsk8"]
+
+[ext_resource type="Script" path="res://game/pause_menu.gd" id="1_1qk8w"]
+[ext_resource type="Theme" uid="uid://dd3wmvu0xxyhs" path="res://style/theme.tres" id="2_wv4c5"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_fweip"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_1qk8w")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_wv4c5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Text Speed"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextSpeedSlider" type="HSlider" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 50.0
+max_value = 401.0
+value = 50.0
+
+[node name="TextSpeedLabel" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "100"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Screen Options"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="FullscreenButton" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_fweip")
+text = "Fullscreen"
+
+[node name="WindowedButton" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_fweip")
+text = "Windowed"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+
+[connection signal="value_changed" from="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2/TextSpeedSlider" to="." method="_on_text_speed_slider_value_changed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer/WindowedButton" to="." method="_on_windowed_button_pressed"]
