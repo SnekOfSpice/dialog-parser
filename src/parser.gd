@@ -1,8 +1,10 @@
 extends Node
 
 
-@export_file("*.json") var source_file
+#@export_file("*.json") var source_file
 @export var source_path := ""
+@export var source_path_demo := ""
+@export var show_demo := false
 
 var page_data := {}
 var dropdown_titles := []
@@ -33,7 +35,8 @@ signal terminate_page(page_index)
 signal read_new_page(page_index)
 
 func _ready() -> void:
-	var file = FileAccess.open(source_path, FileAccess.READ)
+	var path = source_path_demo if show_demo else source_path
+	var file = FileAccess.open(path, FileAccess.READ)
 	var data : Dictionary = JSON.parse_string(file.get_as_text())
 	file.close()
 	
@@ -74,7 +77,11 @@ func read_page(number: int):
 	read_line(line_index)
 
 func read_line(index: int):
+	if lines.size() == 0:
+		push_warning(str("No lines defined for page ", page_index))
+		return
 	emit_signal("read_new_line", lines[index])
+	
 
 func read_next_line(finished_line_index: int):
 	if finished_line_index >= max_line_index_on_page:

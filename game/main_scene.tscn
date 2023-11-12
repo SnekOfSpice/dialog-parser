@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhc45ew2mfqbu"]
+
+[ext_resource type="Script" path="res://game/main_scene.gd" id="1_2p4ut"]
+[ext_resource type="PackedScene" uid="uid://bb8yvsx0g14vl" path="res://src/line_reader.tscn" id="1_y64f0"]
+
+[node name="MainScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_2p4ut")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Game" type="Node2D" parent="SubViewportContainer/SubViewport"]
+
+[node name="LineReader" parent="." instance=ExtResource("1_y64f0")]
