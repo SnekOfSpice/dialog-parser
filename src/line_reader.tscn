@@ -66,6 +66,16 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 2
 
+[node name="NextPromptContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/NextPromptContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/NextPromptContainer/PanelContainer"]
+custom_minimum_size = Vector2(16.68, 6.215)
+layout_mode = 2
+
 [node name="ChoiceContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0

@@ -10,17 +10,26 @@ var line_data := {}
 
 var line_index
 
+var is_input_locked := false : set = set_is_input_locked
+
 func _ready() -> void:
 	Parser.connect("read_new_line", read_new_line)
 	Parser.connect("terminate_page", close)
 	Parser.open_connection()
+	
+	find_child("InstructionHandler").connect("set_input_lock", set_is_input_locked)
 
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
+		if is_input_locked: return
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			emit_signal("line_finished", line_index)
+
+func set_is_input_locked(value: bool):
+	is_input_locked = value
+	find_child("NextPromptContainer").visible = not is_input_locked
 
 func close(_terminating_page):
 	prints("closing page ", _terminating_page)
@@ -48,7 +57,7 @@ func read_new_line(new_line: Dictionary):
 	if line_type == Parser.LineType.Choice:
 		content = line_data.get("content").get("choices")
 	var content_name = line_data.get("content").get("name") # wtf is this
-	print(line_data)
+	
 	find_child("TextContainer").visible = line_type == Parser.LineType.Text
 	find_child("ChoiceContainer").visible = line_type == Parser.LineType.Choice
 	match line_type:
@@ -60,7 +69,18 @@ func read_new_line(new_line: Dictionary):
 			if not find_child("InstructionHandler").has_method("execute"):
 				push_error("InsutrctionHandler doesn't have execute method.")
 				return
-			find_child("InstructionHandler").execute(content)
+			
+			var instruction_name = content_name
+			var args = {}
+			
+			# transform content to more friendly args
+			for c in content:
+				args[c.get("name")] = c.get("value")
+			
+			var delay_before = new_line.get("content").get("delay.before")
+			var delay_after = new_line.get("content").get("delay.after")
+			
+			find_child("InstructionHandler").execute(instruction_name, args, delay_before, delay_after)
 	
 	# register facts
 	line_data.get("facts")
@@ -150,7 +170,7 @@ func evaluate_conditionals(conditionals) -> Array:
 	return [conditional_is_true, behavior]
 
 func handle_header(header: Array):
-	prints("HEADER ", header)
+	#prints("HEADER ", header)
 	for prop in header:
 		var data_type = prop.get("data_type")
 		var property_name = prop.get("property_name")
@@ -165,7 +185,7 @@ func handle_header(header: Array):
 
 func chunkify(line) -> Array:
 	var line_type = int(line.get("line_type"))
-	print(line)
+	#print(line)
 	match line_type:
 		Parser.LineType.Text:
 			print("text")
