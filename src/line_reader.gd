@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name LineReader
 
 @export var property_for_name := ""
 @export var name_for_blank_name := ""
@@ -26,6 +27,7 @@ func _ready() -> void:
 	Parser.line_reader = self
 	
 	find_child("InstructionHandler").connect("set_input_lock", set_is_input_locked)
+	find_child("InstructionHandler").connect("instruction_completed", instruction_completed)
 	
 	remaining_auto_pause_duration = auto_pause_duration
 
@@ -42,12 +44,12 @@ func _unhandled_input(event: InputEvent) -> void:
 					else:
 						read_next_chunk()
 				else:
-					
-					if next_pause_position_index >= all_pause_positions_this_chunk_minus_pause_tags.size():
+					find_next_pause()
+					if next_pause_position_index >= pause_positions.size():
 						find_child("TextContent").visible_ratio = 1.0
-					#find_next_pause()
-					elif next_pause_position_index < all_pause_positions_this_chunk_minus_pause_tags.size():
-						find_child("TextContent").visible_characters = all_pause_positions_this_chunk_minus_pause_tags[next_pause_position_index]
+					
+					elif next_pause_position_index < pause_positions.size():
+						find_child("TextContent").visible_characters = pause_positions[next_pause_position_index]
 						if next_pause_type == PauseTypes.Manual:
 							next_pause_position_index += 1
 							remaining_auto_pause_duration = auto_pause_duration
@@ -55,6 +57,9 @@ func _unhandled_input(event: InputEvent) -> void:
 					
 			else:
 				emit_signal("line_finished", line_index)
+
+func instruction_completed():
+	emit_signal("line_finished", line_index)
 
 func set_is_input_locked(value: bool):
 	is_input_locked = value
@@ -117,34 +122,21 @@ func read_new_line(new_line: Dictionary):
 
 
 func _process(delta: float) -> void:
-	if next_pause_position_index < all_pause_positions_this_chunk_minus_pause_tags.size() and next_pause_position_index != -1:
+	if next_pause_position_index < pause_positions.size() and next_pause_position_index != -1:
 		
-		if find_child("TextContent").visible_characters < all_pause_positions_this_chunk_minus_pause_tags[next_pause_position_index]:
-			#print("b")
+		if find_child("TextContent").visible_characters < pause_positions[next_pause_position_index]:
 			find_child("TextContent").visible_characters += text_speed * delta
 		elif remaining_auto_pause_duration > 0 and next_pause_type == PauseTypes.Auto:
 			var last_dur = remaining_auto_pause_duration
 			remaining_auto_pause_duration -= delta
-			print(remaining_auto_pause_duration)
 			if last_dur > 0 and remaining_auto_pause_duration <= 0:
 				next_pause_position_index += 1
 				remaining_auto_pause_duration = auto_pause_duration
-				print("-------------")
-			print("auto")
 	elif find_child("TextContent").visible_ratio < 1.0:
 		find_child("TextContent").visible_characters += text_speed * delta
-		#print("c")
 	
 
 
-# TODO: different pause types and chunking. for now only line clears that are manually placed.
-#var chunks_to_show := []
-#var chunk_break_types := [] # defined for the one after the chunk
-#
-
-
-# split by mp and ap, then a single part of that gets fed into the split code
-# and that actually displays it
 var line_chunks := []
 var chunk_index := 0
 var max_chunk_length := 50
@@ -185,9 +177,9 @@ func start_showing_text(content: String):
 
 var next_pause_position := -1
 var next_pause_position_index := -1
-var all_pause_positions_this_chunk_minus_pause_tags := []
+var pause_positions := []
 var next_pause_type := 0
-var goal_pauses_this_chunk := 0
+#var goal_pauses_this_chunk := 0
 enum PauseTypes {Manual, Auto}
 func read_next_chunk():
 	chunk_index += 1
@@ -196,7 +188,7 @@ func read_next_chunk():
 	else:
 		find_child("TextContent").visible_ratio = 1.0
 	
-	all_pause_positions_this_chunk_minus_pause_tags.clear()
+	pause_positions.clear()
 	var new_text : String = line_chunks[chunk_index]
 	var current_position = find_child("TextContent").visible_characters
 	var total_pauses_this_chunk := 0
@@ -207,26 +199,24 @@ func read_next_chunk():
 		next_mp = new_text.find("<mp>", next_pause + 4 * total_pauses_this_chunk)
 		next_ap = new_text.find("<ap>", next_pause + 4 * total_pauses_this_chunk)
 		if next_mp == -1 and next_ap != -1:
-			if not all_pause_positions_this_chunk_minus_pause_tags.has(next_ap):
-				all_pause_positions_this_chunk_minus_pause_tags.append(next_ap)
+			if not pause_positions.has(next_ap):
+				pause_positions.append(next_ap)
 		elif next_mp != -1 and next_ap == -1:
-			if not all_pause_positions_this_chunk_minus_pause_tags.has(next_mp):
-				all_pause_positions_this_chunk_minus_pause_tags.append(next_mp)
+			if not pause_positions.has(next_mp):
+				pause_positions.append(next_mp)
 		elif next_mp != -1 and next_ap != -1:
-			if not all_pause_positions_this_chunk_minus_pause_tags.has(min(next_ap, next_mp)):
-				all_pause_positions_this_chunk_minus_pause_tags.append(min(next_ap, next_mp))
+			if not pause_positions.has(min(next_ap, next_mp)):
+				pause_positions.append(min(next_ap, next_mp))
 		total_pauses_this_chunk += 1
-		#total_pauses_this_chunk= all_pause_positions_this_chunk_minus_pause_tags.size()
 	
-	print(all_pause_positions_this_chunk_minus_pause_tags)
-	pause_count_this_chunk = 0
+	
 	next_pause_position_index = 0
-	goal_pauses_this_chunk = line_chunks[chunk_index].count("<mp>") + line_chunks[chunk_index].count("<ap>")
+	#goal_pauses_this_chunk = line_chunks[chunk_index].count("<mp>") + line_chunks[chunk_index].count("<ap>")
 	find_next_pause()
 	
 	var cleaned_text : String = line_chunks[chunk_index]
 	var i = 0
-	for pos in all_pause_positions_this_chunk_minus_pause_tags:
+	for pos in pause_positions:
 		cleaned_text = cleaned_text.erase(pos-(i*4), 4)
 		i += 1
 		
@@ -351,18 +341,6 @@ func handle_header(header: Array):
 			find_child("NameContainer").visible = values[1] != name_for_blank_name
 	
 	emit_signal("new_header", header)
-
-func chunkify(line) -> Array:
-	var line_type = int(line.get("line_type"))
-	#print(line)
-	match line_type:
-		Parser.LineType.Text:
-			print("text")
-		Parser.LineType.Choice:
-			print("choice")
-		Parser.LineType.Instruction:
-			print("instruction")
-	return []
 
 
 

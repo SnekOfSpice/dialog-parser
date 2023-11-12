@@ -2,6 +2,7 @@ extends Node
 class_name InstructionHandler
 
 signal set_input_lock(value)
+signal instruction_completed()
 
 
 func wrapper_execute(instruction_name, args, delay_before := 0.0, delay_after := 0.0):
@@ -15,6 +16,7 @@ func wrapper_execute(instruction_name, args, delay_before := 0.0, delay_after :=
 		await get_tree().create_timer(delay_after).timeout
 	
 	emit_signal("set_input_lock", false)
+	emit_signal("instruction_completed")
 
 func execute(instruction_name, args):
 	pass

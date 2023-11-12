@@ -30,6 +30,7 @@ enum DataTypes {_String, _Integer, _Float, _Array, _Dictionary, _DropDown}
 
 signal read_new_line(line)
 signal terminate_page(page_index)
+signal read_new_page(page_index)
 
 func _ready() -> void:
 	var file = FileAccess.open(source_path, FileAccess.READ)
@@ -64,6 +65,7 @@ func read_page(number: int):
 		push_warning("number not in page data")
 		return
 	
+	emit_signal("read_new_page", number)
 	page_index = number
 	lines = page_data.get(page_index).get("lines")
 	max_line_index_on_page = lines.size() - 1
