@@ -53,6 +53,9 @@ func _ready() -> void:
 	facts = data.get("facts")
 	dropdown_titles = data.get("dropdown_titles")
 	dropdowns = data.get("dropdowns")
+	
+	if show_demo:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func drop_down_values_to_string_array(values:=[0,0]) -> Array:
 	var result = ["", ""]

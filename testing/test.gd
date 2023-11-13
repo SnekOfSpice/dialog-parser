@@ -9,8 +9,6 @@ func _ready() -> void:
 		if i > highest:
 			highest = i
 	find_child("PageIndexSlider").max_value = highest
-	if Parser.show_demo:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 
 

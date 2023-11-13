@@ -18,6 +18,11 @@ var remaining_auto_pause_duration := 0.0
 
 var is_input_locked := false : set = set_is_input_locked
 var showing_text := false
+var using_dialog_syntax := false
+
+var dialog_lines := []
+var dialog_actors := []
+var dialog_line_index := 0
 
 func _ready() -> void:
 	Parser.connect("read_new_line", read_new_line)
@@ -42,7 +47,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			if showing_text:
 				if find_child("TextContent").visible_ratio >= 1.0:
 					if chunk_index >= line_chunks.size() - 1:
-						emit_signal("line_finished", line_index)
+						if dialog_line_index >= dialog_lines.size() - 1:
+							emit_signal("line_finished", line_index)
+						else:
+							set_dialog_line_index(dialog_line_index + 1)
+							start_showing_text()
 					else:
 						read_next_chunk()
 				else:
@@ -103,7 +112,26 @@ func read_new_line(new_line: Dictionary):
 	find_child("ChoiceContainer").visible = line_type == Parser.LineType.Choice
 	match line_type:
 		Parser.LineType.Text:
-			start_showing_text(content)
+			using_dialog_syntax = line_data.get("content").get("use_dialog_syntax")
+			if using_dialog_syntax:
+				var lines = content.split("[]>")
+				dialog_actors.clear()
+				dialog_lines.clear()
+				for l in lines:
+					if l.is_empty():
+						continue
+					var colon_pos = l.find(":")
+					var actor_name = l.split(":")[0]
+					dialog_actors.append(actor_name)
+					var line :String = l.lstrip(str(actor_name, ":"))
+					while line.begins_with(" "):
+						line = line.trim_prefix(" ")
+					dialog_lines.append(line)
+			else:
+				dialog_lines = [content]
+				dialog_actors.clear()
+			set_dialog_line_index(0)
+			start_showing_text()
 		Parser.LineType.Choice:
 			build_choices(content)
 		Parser.LineType.Instruction:
@@ -152,40 +180,12 @@ func _process(delta: float) -> void:
 var line_chunks := []
 var chunk_index := 0
 var max_chunk_length := 50
-func start_showing_text(content: String):
+func start_showing_text():
+	var content : String = dialog_lines[dialog_line_index]
 	line_chunks = content.split("<lc>")
-	#if line_chunks.is_empty(): line_chunks = [""] # shouldnt ever happen but idk
 	chunk_index = -1
 	read_next_chunk()
-	
-#	for c in chunks_to_show:
-#		chunk_break_types.append(BreakTypes.LineClear)
-	
-	
-#	# separate by too long
-#	var i := 0
-#
-#	var limited_in_length := []
-#	for c in text_lines:
-#		#var size = find_child("TextContent").theme_override_fonts.normal_font.get_multiline_string_size(c)
-#		var needed_chunks = ceil(float(float(c.length()) / float(max_chunk_length)))
-#		prints("NEED ", needed_chunks, " FOR ", c.length())
-#		if needed_chunks > 1:
-#			for j in needed_chunks:
-#				#chunk_break_types.insert(i, BreakTypes.LineClear)
-#				i += 1
-#				# i think this is also relevant
-#				# string.lstrip(string.left(max_legth)
-#				limited_in_length.append(c.left(max_chunk_length))
-#				c = c.lstrip(c.left(max_chunk_length))
-#		else:
-#			limited_in_length.append(c)
-#
-#		i += 1
-#	printt(limited_in_length, limited_in_length.size())
-#	# separate by manual pause
-#
-#	# separate by auto pause
+
 
 var next_pause_position := -1
 var next_pause_position_index := -1
@@ -354,6 +354,10 @@ func handle_header(header: Array):
 	
 	emit_signal("new_header", header)
 
+func set_dialog_line_index(value: int):
+	dialog_line_index = value
+	if using_dialog_syntax:
+		find_child("NameLabel").text = dialog_actors[dialog_line_index]
 
 
 func _on_finished_button_pressed() -> void:
