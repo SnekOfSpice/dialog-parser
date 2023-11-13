@@ -61,9 +61,10 @@ func _unhandled_input(event: InputEvent) -> void:
 						find_child("TextContent").visible_ratio = 1.0
 					
 					elif next_pause_position_index < pause_positions.size():
-						find_child("TextContent").visible_characters = pause_positions[next_pause_position_index]
+						find_child("TextContent").visible_characters = pause_positions[next_pause_position_index] - 4 * next_pause_position_index 
 						if next_pause_type == PauseTypes.Manual:
 							next_pause_position_index += 1
+							find_next_pause()
 							remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
 						
 					
@@ -163,7 +164,7 @@ func read_new_line(new_line: Dictionary):
 func _process(delta: float) -> void:
 	if next_pause_position_index < pause_positions.size() and next_pause_position_index != -1:
 		
-		if find_child("TextContent").visible_characters < pause_positions[next_pause_position_index]:
+		if find_child("TextContent").visible_characters < pause_positions[next_pause_position_index] - 4 * next_pause_position_index :
 			#find_child("TextContent").visible_characters += text_speed * delta
 			find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
 		elif remaining_auto_pause_duration > 0 and next_pause_type == PauseTypes.Auto:
@@ -171,6 +172,7 @@ func _process(delta: float) -> void:
 			remaining_auto_pause_duration -= delta
 			if last_dur > 0 and remaining_auto_pause_duration <= 0:
 				next_pause_position_index += 1
+				find_next_pause()
 				remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
 	elif find_child("TextContent").visible_ratio < 1.0:
 		#find_child("TextContent").visible_characters += text_speed * delta
@@ -240,8 +242,8 @@ var pause_count_this_chunk := 0
 func find_next_pause():
 	var new_text : String = line_chunks[chunk_index]
 	var current_position = find_child("TextContent").visible_characters
-	var next_mp = new_text.find("<mp>", current_position + 4 * pause_count_this_chunk)
-	var next_ap = new_text.find("<ap>", current_position + 4 * pause_count_this_chunk)
+	var next_mp = new_text.find("<mp>", current_position - 4 * next_pause_position_index)
+	var next_ap = new_text.find("<ap>", current_position - 4 * next_pause_position_index)
 	if next_ap == -1:
 		if next_mp == -1:
 			next_pause_position = -1
