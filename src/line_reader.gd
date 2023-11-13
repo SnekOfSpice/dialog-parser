@@ -112,7 +112,7 @@ func read_new_line(new_line: Dictionary):
 	find_child("ChoiceContainer").visible = line_type == Parser.LineType.Choice
 	match line_type:
 		Parser.LineType.Text:
-			using_dialog_syntax = line_data.get("content").get("use_dialog_syntax")
+			using_dialog_syntax = line_data.get("content").get("use_dialog_syntax", false)
 			if using_dialog_syntax:
 				var lines = content.split("[]>")
 				dialog_actors.clear()
@@ -123,7 +123,7 @@ func read_new_line(new_line: Dictionary):
 					var colon_pos = l.find(":")
 					var actor_name = l.split(":")[0]
 					dialog_actors.append(actor_name)
-					var line :String = l.lstrip(str(actor_name, ":"))
+					var line : String = l.trim_prefix(str(actor_name, ":"))
 					while line.begins_with(" "):
 						line = line.trim_prefix(" ")
 					dialog_lines.append(line)
