@@ -3,7 +3,7 @@ extends Control
 
 
 func _ready() -> void:
-	Parser.read_page(3)
+	Parser.read_page(0)
 
 
 func _unhandled_input(event: InputEvent) -> void:

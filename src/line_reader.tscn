@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb8yvsx0g14vl"]
+[gd_scene load_steps=3 format=3 uid="uid://bb8yvsx0g14vl"]
 
 [ext_resource type="Script" path="res://src/line_reader.gd" id="1_f2s5m"]
 [ext_resource type="Theme" uid="uid://dd3wmvu0xxyhs" path="res://style/theme.tres" id="2_cswuk"]
-[ext_resource type="Script" path="res://src/InstructionHandlerInherit.gd" id="2_nljge"]
 
 [node name="LineReader" type="CanvasLayer" groups=["LineListener"]]
 script = ExtResource("1_f2s5m")
@@ -104,8 +103,5 @@ offset_bottom = 131.0
 layout_mode = 2
 focus_mode = 0
 text = "finished"
-
-[node name="InstructionHandler" type="Node" parent="."]
-script = ExtResource("2_nljge")
 
 [connection signal="pressed" from="DebugSim/FinishedButton" to="." method="_on_finished_button_pressed"]

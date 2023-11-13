@@ -29,14 +29,21 @@ func _ready() -> void:
 	Parser.connect("read_new_line", read_new_line)
 	Parser.connect("terminate_page", close)
 	
-	
 	Parser.line_reader = self
 	Parser.open_connection()
+	
+	remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
+	
+	if not find_child("InstructionHandler"):
+		push_error("No InsutrctionHandler as child of LineReader (name must be exact match).")
+		return
 	
 	find_child("InstructionHandler").connect("set_input_lock", set_is_input_locked)
 	find_child("InstructionHandler").connect("instruction_completed", instruction_completed)
 	
-	remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
+		
+	
+	
 
 
 
@@ -122,7 +129,7 @@ func read_new_line(new_line: Dictionary):
 				for l in lines:
 					if l.is_empty():
 						continue
-					var colon_pos = l.find(":")
+					#var colon_pos = l.find(":")
 					var actor_name = l.split(":")[0]
 					dialog_actors.append(actor_name)
 					var line : String = l.trim_prefix(str(actor_name, ":"))
@@ -137,6 +144,9 @@ func read_new_line(new_line: Dictionary):
 		Parser.LineType.Choice:
 			build_choices(content)
 		Parser.LineType.Instruction:
+			if not find_child("InstructionHandler"):
+				push_error("No InsutrctionHandler as child of LineReader (name must be exact match).")
+				return
 			if not find_child("InstructionHandler").has_method("execute"):
 				push_error("InsutrctionHandler doesn't have execute method.")
 				return
@@ -205,7 +215,7 @@ func read_next_chunk():
 	
 	pause_positions.clear()
 	var new_text : String = line_chunks[chunk_index]
-	var current_position = find_child("TextContent").visible_characters
+	#var current_position = find_child("TextContent").visible_characters
 	var total_pauses_this_chunk := 0
 	var next_mp = new_text.find("<mp>")
 	var next_ap = new_text.find("<ap>")

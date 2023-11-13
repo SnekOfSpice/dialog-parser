@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhc45ew2mfqbu"]
+[gd_scene load_steps=7 format=3 uid="uid://dhc45ew2mfqbu"]
 
 [ext_resource type="Script" path="res://game/main_scene.gd" id="1_2p4ut"]
 [ext_resource type="PackedScene" uid="uid://bb8yvsx0g14vl" path="res://src/line_reader.tscn" id="1_y64f0"]
 [ext_resource type="PackedScene" uid="uid://c67ti8jynl2ey" path="res://game/game.tscn" id="2_opnta"]
+[ext_resource type="Script" path="res://src/InstructionHandlerInherit.gd" id="4_axwkl"]
 [ext_resource type="PackedScene" uid="uid://bu33mw8t7dsk8" path="res://game/pause_menu.tscn" id="4_vd1ov"]
+[ext_resource type="PackedScene" uid="uid://cd30e6wacwrav" path="res://game/game_finished.tscn" id="6_ltep6"]
 
 [node name="MainScene" type="Control"]
 layout_mode = 3
@@ -32,5 +34,12 @@ render_target_update_mode = 4
 name_for_blank_name = "narrator"
 auto_pause_duration = 0.4
 
+[node name="InstructionHandler" type="Node" parent="LineReader"]
+script = ExtResource("4_axwkl")
+
 [node name="PauseMenu" parent="." instance=ExtResource("4_vd1ov")]
 visible = false
+
+[node name="GameFinished" parent="." instance=ExtResource("6_ltep6")]
+
+[node name="MainMenu" type="CanvasLayer" parent="."]

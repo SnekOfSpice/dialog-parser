@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd30e6wacwrav"]
+
+[ext_resource type="Script" path="res://game/game_finished.gd" id="1_w5s0e"]
+
+[node name="GameFinished" type="CanvasLayer"]
+script = ExtResource("1_w5s0e")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsyyljt7tpol3"]
+
+[ext_resource type="Script" path="res://game/characters/zero.gd" id="1_r51iq"]
+[ext_resource type="Texture2D" uid="uid://bwuoyedjgdxgg" path="res://game/characters/zero-distraught.png" id="2_vm202"]
+[ext_resource type="Texture2D" uid="uid://dk4atdxyjevgq" path="res://game/characters/eye.png" id="3_xmwps"]
+[ext_resource type="Texture2D" uid="uid://d0mlex3wpppxl" path="res://game/characters/zero-neutral.png" id="4_e64rv"]
+[ext_resource type="Texture2D" uid="uid://dwu78vdtfrtv6" path="res://game/characters/zero-sweaty.png" id="5_hv1du"]
+[ext_resource type="Texture2D" uid="uid://c51y8wnmmff68" path="res://game/characters/zero-teasing.png" id="6_u3lqo"]
+[ext_resource type="Texture2D" uid="uid://dih61rj5dr0vn" path="res://game/characters/zero-working.png" id="7_x5rsp"]
+
+[node name="Zero" type="Node2D" groups=["ParserDependent"]]
+script = ExtResource("1_r51iq")
+character_name = "zero"
+
+[node name="Expressions" type="Node2D" parent="."]
+
+[node name="Zero-distraught" type="Sprite2D" parent="Expressions"]
+visible = false
+position = Vector2(22, 41)
+texture = ExtResource("2_vm202")
+
+[node name="Eye" type="Sprite2D" parent="Expressions/Zero-distraught"]
+position = Vector2(-14, -89)
+texture = ExtResource("3_xmwps")
+
+[node name="Zero-neutral" type="Sprite2D" parent="Expressions"]
+visible = false
+position = Vector2(22, 41)
+texture = ExtResource("4_e64rv")
+
+[node name="Eye" type="Sprite2D" parent="Expressions/Zero-neutral"]
+position = Vector2(-108, -184)
+texture = ExtResource("3_xmwps")
+
+[node name="Zero-sweaty" type="Sprite2D" parent="Expressions"]
+visible = false
+position = Vector2(22, 41)
+texture = ExtResource("5_hv1du")
+
+[node name="Eye" type="Sprite2D" parent="Expressions/Zero-sweaty"]
+position = Vector2(22, -150)
+texture = ExtResource("3_xmwps")
+
+[node name="Zero-teasing" type="Sprite2D" parent="Expressions"]
+visible = false
+position = Vector2(22, 41)
+texture = ExtResource("6_u3lqo")
+
+[node name="Eye" type="Sprite2D" parent="Expressions/Zero-teasing"]
+position = Vector2(92, -101)
+texture = ExtResource("3_xmwps")
+
+[node name="Zero-working" type="Sprite2D" parent="Expressions"]
+position = Vector2(22, 41)
+texture = ExtResource("7_x5rsp")
+
+[node name="Eye" type="Sprite2D" parent="Expressions/Zero-working"]
+position = Vector2(-177, -107)
+texture = ExtResource("3_xmwps")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm1cyjgt31jwc"]
+[gd_scene load_steps=4 format=3 uid="uid://dm1cyjgt31jwc"]
 
 [ext_resource type="Script" path="res://testing/test.gd" id="1_yrxdv"]
 [ext_resource type="PackedScene" uid="uid://bb8yvsx0g14vl" path="res://src/line_reader.tscn" id="2_apb2i"]
+[ext_resource type="Script" path="res://src/InstructionHandlerInherit.gd" id="3_ipjct"]
 
 [node name="Test" type="Control"]
 layout_mode = 3
@@ -30,6 +31,9 @@ text = "read page"
 
 [node name="PageIndexLabel" type="Label" parent="LineReader/VBoxContainer"]
 layout_mode = 2
+
+[node name="InstructionHandler" type="Node" parent="LineReader"]
+script = ExtResource("3_ipjct")
 
 [connection signal="value_changed" from="LineReader/VBoxContainer/PageIndexSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="LineReader/VBoxContainer/Button" to="." method="_on_button_pressed"]

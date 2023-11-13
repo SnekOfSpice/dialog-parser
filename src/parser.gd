@@ -1,7 +1,7 @@
 extends Node
 
 
-#@export_file("*.json") var source_file
+@export_file("*.json") var source_file
 @export var source_path := ""
 @export var source_path_demo := ""
 @export var show_demo := false
@@ -36,8 +36,8 @@ signal page_finished(page_index: int)
 signal read_new_page(page_index: int)
 
 func _ready() -> void:
-	var path = source_path_demo if show_demo else source_path
-	var file = FileAccess.open(path, FileAccess.READ)
+	#var path = source_path_demo if show_demo else source_path
+	var file = FileAccess.open(source_file, FileAccess.READ)
 	var data : Dictionary = JSON.parse_string(file.get_as_text())
 	file.close()
 	
@@ -61,7 +61,7 @@ func _ready() -> void:
 func drop_down_values_to_string_array(values:=[0,0]) -> Array:
 	var result = ["", ""]
 	var title = dropdown_titles[values[0]]
-	var title_index = dropdown_titles.find(title)
+	#var title_index = dropdown_titles.find(title)
 	var value = dropdowns.get(title)[values[1]]
 	result[0] = title
 	result[1] = value
