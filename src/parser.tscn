@@ -6,3 +6,4 @@
 script = ExtResource("1_202h4")
 source_path = "D:/100_godot/dialog-editor/io/when_the_sea_received_the_sky_script.json"
 source_path_demo = "D:/100_godot/dialog-editor/io/demo-nov1.json"
+show_demo = true
