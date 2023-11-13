@@ -4,3 +4,11 @@
 
 [node name="Euphoria" type="Node2D" groups=["ParserDependent"]]
 script = ExtResource("1_fuehi")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Eye" type="Sprite2D" parent="Visuals"]
+
+[node name="FacialExpression" type="AnimatedSprite2D" parent="Visuals"]
+
+[node name="Body" type="Sprite2D" parent="Visuals"]

@@ -37,6 +37,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if is_input_locked: return
+		if terminated: return
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if showing_text:
 				if find_child("TextContent").visible_ratio >= 1.0:
@@ -66,12 +67,16 @@ func set_is_input_locked(value: bool):
 	is_input_locked = value
 	emit_signal("is_input_locked_changed", is_input_locked)
 
+var terminated := false
 func close(_terminating_page):
 	prints("closing page ", _terminating_page)
+	visible = false
+	terminated = true
 
 func read_new_line(new_line: Dictionary):
 	line_data = new_line
 	line_index = new_line.get("meta.line_index")
+	terminated = false
 	
 	var eval = evaluate_conditionals(line_data.get("conditionals"))
 	var conditional_is_true = eval[0]
