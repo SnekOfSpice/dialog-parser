@@ -6,10 +6,11 @@ class_name LineReader
 @export var text_speed := 0.5#100.0
 @export var auto_pause_duration := 0.2
 
-signal line_finished(line_index)
-signal jump_to_page(page_index)
-signal new_header(header)
-signal is_input_locked_changed(new_value)
+signal line_finished(line_index: int)
+signal jump_to_page(page_index: int)
+signal new_header(header: Array)
+signal is_input_locked_changed(new_value: bool)
+signal currently_speaking(actor_name: String)
 
 var line_data := {}
 
@@ -35,7 +36,7 @@ func _ready() -> void:
 	find_child("InstructionHandler").connect("set_input_lock", set_is_input_locked)
 	find_child("InstructionHandler").connect("instruction_completed", instruction_completed)
 	
-	remaining_auto_pause_duration = auto_pause_duration
+	remaining_auto_pause_duration = auto_pause_duration / (text_speed / 100.0)
 
 
 
@@ -63,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 						find_child("TextContent").visible_characters = pause_positions[next_pause_position_index]
 						if next_pause_type == PauseTypes.Manual:
 							next_pause_position_index += 1
-							remaining_auto_pause_duration = auto_pause_duration
+							remaining_auto_pause_duration = auto_pause_duration / (text_speed / 100.0)
 						
 					
 			else:
@@ -170,7 +171,7 @@ func _process(delta: float) -> void:
 			remaining_auto_pause_duration -= delta
 			if last_dur > 0 and remaining_auto_pause_duration <= 0:
 				next_pause_position_index += 1
-				remaining_auto_pause_duration = auto_pause_duration
+				remaining_auto_pause_duration = auto_pause_duration / (text_speed / 100.0)
 	elif find_child("TextContent").visible_ratio < 1.0:
 		#find_child("TextContent").visible_characters += text_speed * delta
 		find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
@@ -259,7 +260,7 @@ func build_choices(choices):
 		c.queue_free()
 	
 	for option in choices:
-		var conditional_eval = evaluate_conditionals(option.get("conditionals"))
+		var conditional_eval = evaluate_conditionals(option.get("conditionals"), option.get("choice_text.enabled_as_default"))
 		var cond_true = conditional_eval[0]
 		var cond_behavior = conditional_eval[1]
 		
@@ -310,13 +311,14 @@ func choice_pressed(do_jump_page, target_page):
 # returns an array of size 2.
 # index 0 is if the conditionals are satisfied
 # index 1 is the behavior if it's true
-func evaluate_conditionals(conditionals) -> Array:
+func evaluate_conditionals(conditionals, enabled_as_default := true) -> Array:
 	var conditional_is_true := true
 	var behavior = line_data.get("conditionals").get("behavior_key")
 	var args = conditionals.get("operand_args")
 	var facts_to_check = conditionals.get("facts")
 	if facts_to_check.keys().size() == 0:
-		return [true, "Enable"]
+		var default_key = "Enable" if enabled_as_default else "Disable"
+		return [true, default_key]
 	
 	
 	var operand_key = conditionals.get("operand_key")
@@ -340,7 +342,6 @@ func evaluate_conditionals(conditionals) -> Array:
 
 
 func handle_header(header: Array):
-	#prints("HEADER ", header)
 	for prop in header:
 		var data_type = prop.get("data_type")
 		var property_name = prop.get("property_name")
@@ -349,16 +350,20 @@ func handle_header(header: Array):
 			values = Parser.drop_down_values_to_string_array(values)
 		
 		if property_name == property_for_name:
-			find_child("NameLabel").text = values[1]
-			find_child("NameContainer").visible = values[1] != name_for_blank_name
+			update_name_label(values[1])
 	
 	emit_signal("new_header", header)
+
 
 func set_dialog_line_index(value: int):
 	dialog_line_index = value
 	if using_dialog_syntax:
-		find_child("NameLabel").text = dialog_actors[dialog_line_index]
+		update_name_label(dialog_actors[dialog_line_index])
 
+func update_name_label(actor_name: String):
+	find_child("NameLabel").text = actor_name
+	emit_signal("currently_speaking", actor_name)
+	find_child("NameContainer").visible = actor_name != name_for_blank_name
 
 func _on_finished_button_pressed() -> void:
 	emit_signal("line_finished", line_index)

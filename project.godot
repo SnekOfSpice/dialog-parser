@@ -21,7 +21,6 @@ Parser="*res://src/parser.tscn"
 
 [display]
 
-window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [rendering]

@@ -1,13 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://baeby0gv4sv22"]
+[gd_scene load_steps=3 format=3 uid="uid://baeby0gv4sv22"]
 
 [ext_resource type="Script" path="res://game/characters/character.gd" id="1_fuehi"]
+[ext_resource type="Texture2D" uid="uid://bj8knkcrqf4rp" path="res://icon.svg" id="2_n4xjx"]
 
 [node name="Euphoria" type="Node2D" groups=["ParserDependent"]]
 script = ExtResource("1_fuehi")
+character_name = "euphoria"
 
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="Eye" type="Sprite2D" parent="Visuals"]
+rotation = -1.22168
+texture = ExtResource("2_n4xjx")
 
 [node name="FacialExpression" type="AnimatedSprite2D" parent="Visuals"]
 

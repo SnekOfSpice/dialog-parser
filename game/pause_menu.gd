@@ -6,7 +6,8 @@ const MAX_TEXT_SPEED := 201
 func _ready() -> void:
 	find_child("TextSpeedSlider").min_value = 1
 	find_child("TextSpeedSlider").max_value = MAX_TEXT_SPEED
-	find_child("TextSpeedSlider").value = 80
+	find_child("TextSpeedSlider").value = 60
+	Parser.line_reader.text_speed = 60
 
 func _on_fullscreen_button_pressed() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)

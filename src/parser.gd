@@ -31,8 +31,9 @@ enum LineType {
 enum DataTypes {_String, _Integer, _Float, _Array, _Dictionary, _DropDown, _Boolean}
 
 signal read_new_line(line)
-signal terminate_page(page_index)
-signal read_new_page(page_index)
+signal terminate_page(page_index: int)
+signal page_finished(page_index: int)
+signal read_new_page(page_index: int)
 
 func _ready() -> void:
 	var path = source_path_demo if show_demo else source_path
@@ -94,6 +95,7 @@ func read_next_line(finished_line_index: int):
 		else:
 			var next = int(page_data.get(page_index).get("next"))
 			if page_data.keys().has(next):
+				emit_signal("page_finished", page_index)
 				read_page(next)
 			else:
 				emit_signal("terminate_page", page_index)
