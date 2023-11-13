@@ -36,7 +36,7 @@ func _ready() -> void:
 	find_child("InstructionHandler").connect("set_input_lock", set_is_input_locked)
 	find_child("InstructionHandler").connect("instruction_completed", instruction_completed)
 	
-	remaining_auto_pause_duration = auto_pause_duration / (text_speed / 100.0)
+	remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
 
 
 
@@ -64,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 						find_child("TextContent").visible_characters = pause_positions[next_pause_position_index]
 						if next_pause_type == PauseTypes.Manual:
 							next_pause_position_index += 1
-							remaining_auto_pause_duration = auto_pause_duration / (text_speed / 100.0)
+							remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
 						
 					
 			else:
@@ -171,7 +171,7 @@ func _process(delta: float) -> void:
 			remaining_auto_pause_duration -= delta
 			if last_dur > 0 and remaining_auto_pause_duration <= 0:
 				next_pause_position_index += 1
-				remaining_auto_pause_duration = auto_pause_duration / (text_speed / 100.0)
+				remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
 	elif find_child("TextContent").visible_ratio < 1.0:
 		#find_child("TextContent").visible_characters += text_speed * delta
 		find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
