@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ds6fl57xuebss"
+path="res://.godot/imported/CØL - Slow, Deep Breaths - 03 Slow, Deep Breaths.ogg-62277b0c333b394dc5eab39e5a3e489f.oggvorbisstr"
+
+[deps]
+
+source_file="res://game/sound/CØL - Slow, Deep Breaths - 03 Slow, Deep Breaths.ogg"
+dest_files=["res://.godot/imported/CØL - Slow, Deep Breaths - 03 Slow, Deep Breaths.ogg-62277b0c333b394dc5eab39e5a3e489f.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

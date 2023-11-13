@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://5r1nh3076coa"]
+
+[ext_resource type="Script" path="res://game/sound/sound.gd" id="1_2h37s"]
+
+[node name="Sound" type="Node"]
+script = ExtResource("1_2h37s")
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true

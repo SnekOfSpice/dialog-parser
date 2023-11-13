@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Parser="*res://src/parser.tscn"
+Sound="*res://game/sound/sound.tscn"
 
 [display]
 
