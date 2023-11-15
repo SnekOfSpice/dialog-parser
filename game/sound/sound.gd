@@ -1,11 +1,14 @@
 extends Node
 
 const BGM_SLOW_DEEP_BREATHS = "res://game/sound/CØL - Slow, Deep Breaths - 03 Slow, Deep Breaths.ogg"
+const BGM_FAILURE_TO_COMPLY = "res://game/sound/CØL - Anoscetia - 02 Failure to Comply Will Result in Death.ogg"
+const BGM_WHERE_IS_HEAVEN = "res://game/sound/CØL - Where is Heaven-.ogg"
+const BGM_PSYCH = "res://game/sound/Giacomo Forte - Warm 60s (Indie, vintage, psychedelic, rock, acid, synth, dreamy).mp3"
 
-var rampup_time := 7.0
+var rampup_time := 1.0
 
-func _ready() -> void:
-	set_background_music(BGM_SLOW_DEEP_BREATHS, 1.0)
+#func _ready() -> void:
+#	set_background_music(BGM_SLOW_DEEP_BREATHS)
 
 func set_background_music(key: String, _rampup_time := rampup_time):
 	rampup_time = _rampup_time

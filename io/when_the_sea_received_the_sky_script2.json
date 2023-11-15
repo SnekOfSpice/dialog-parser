@@ -90,7 +90,8 @@
 				"hide-characters",
 				"new-background",
 				"attack",
-				"release"
+				"release",
+				"sustain"
 			],
 			"name": "black-fade-in-out"
 		},
@@ -117,6 +118,71 @@
 	"page_data": {
 		"0": {
 			"lines": [
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "key",
+								"value": "Warm 60s"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 4,
+						"name": "set-background-music"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 0,
+					"meta.visible": true
+				},
 				{
 					"conditionals": {
 						"behavior": 0,
@@ -179,7 +245,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 0,
+					"meta.line_index": 1,
 					"meta.visible": true
 				},
 				{
@@ -246,7 +312,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 1,
+					"meta.line_index": 2,
 					"meta.visible": true
 				},
 				{
@@ -311,7 +377,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 2,
+					"meta.line_index": 3,
 					"meta.visible": true
 				},
 				{
@@ -378,7 +444,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 3,
+					"meta.line_index": 4,
 					"meta.visible": true
 				},
 				{
@@ -408,6 +474,10 @@
 							},
 							{
 								"name": "release",
+								"value": ""
+							},
+							{
+								"name": "sustain",
 								"value": ""
 							}
 						],
@@ -455,7 +525,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 4,
+					"meta.line_index": 5,
 					"meta.visible": true
 				},
 				{
@@ -522,7 +592,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 5,
+					"meta.line_index": 6,
 					"meta.visible": true
 				},
 				{
@@ -587,7 +657,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 6,
+					"meta.line_index": 7,
 					"meta.visible": true
 				},
 				{
@@ -654,7 +724,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 7,
+					"meta.line_index": 8,
 					"meta.visible": true
 				},
 				{
@@ -721,7 +791,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 8,
+					"meta.line_index": 9,
 					"meta.visible": true
 				},
 				{
@@ -788,7 +858,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 9,
+					"meta.line_index": 10,
 					"meta.visible": true
 				},
 				{
@@ -855,7 +925,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 10,
+					"meta.line_index": 11,
 					"meta.visible": true
 				}
 			],
@@ -1087,6 +1157,71 @@
 					"content": {
 						"content": [
 							{
+								"name": "key",
+								"value": "Failure to Comply Will Result in Death"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 4,
+						"name": "set-background-music"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 0,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
 								"name": "background-name",
 								"value": "first-cicle-outside"
 							}
@@ -1135,7 +1270,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 0,
+					"meta.line_index": 1,
 					"meta.visible": true
 				},
 				{
@@ -1202,7 +1337,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 1,
+					"meta.line_index": 2,
 					"meta.visible": true
 				}
 			],
@@ -1379,7 +1514,7 @@
 								"target_page": 0
 							},
 							{
-								"choice_text.disabled": "Spill the beans (what are you, suicidal?)",
+								"choice_text.disabled": "Spill the beans (You don't want to die *here*, do you?)",
 								"choice_text.enabled": "",
 								"choice_text.enabled_as_default": false,
 								"conditionals": {
@@ -1464,7 +1599,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>euphoria: >our honor, they are not mine. They may be the result of seed extractions someone conducted on the already circulating plants, technoflora, that's- that are out there. Recently, I got into buying what I want, instead of growing it myself. All of the vendors appeared legitimate.\n[]>oldrone:Just mere days ago, a shipment of controlled parts destined to you was seized.\n[]>euphoria:Appeared legitimate. As per §451 of the federated vendor bill, I am entitled to the assumption of trade in good faith.\n[]>narrator:Oldrone adjusts his spectacles. He lets out an exasperated sigh.\n[]>oldrone:We will pause the proceedings. You will receive another summons should this not prove a valid objection...<ap>Dismissed.\n[]>narrator:You bow your head and wordlessly leave the room.",
+						"content": "[]>euphoria: Your honor, they are not mine. They may be the result of seed extractions someone conducted on the already circulating plants, technoflora, that's- that are out there. Recently, I got into buying what I want, instead of growing it myself. All of the vendors appeared legitimate.\n[]>oldrone:Just mere days ago, a shipment of controlled parts destined to you was seized.\n[]>euphoria:Appeared legitimate. As per §451 of the federated vendor bill, I am entitled to the assumption of trade in good faith.\n[]>narrator:Oldrone adjusts his spectacles. He lets out an exasperated sigh.\n[]>oldrone:We will pause the proceedings. You will receive another summons should this not prove a valid objection...<ap>Dismissed.\n[]>narrator:You bow your head and wordlessly leave the room.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -1604,7 +1739,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:Your gaze is empty. So are your thoughts. You don't remember the ride home as soon as you pass the doorstep.<lc>You find Zero on the kitchen floor, nursing a cup of vitamin supplement tea and a bag of chips. Slowly, she turns her head and stares at you with a look that says \"I understand you don't want to, but please tell me how bad it is\".<lc>You answer.\n[]>euphoria:Bad. <ap>Very bad. <ap>We're fucked. <ap>They found out, I don't know how but they found out.\n[]>zero:How even?\n[]>euphoria:Probably one of the people I supplied left some shit out. I don't know. <ap>I don't care. <ap>God.\n[]>zero:...\n[]>euphoria:THOSE OLD FUCKS \"EITHER JOIN OUR CULT OR SEIZE YOUR CULTIVATION!\"<lc>OH YEA BECAUSE I'M DOINGALL THIS FOR FUN AND NOT TO SURVIVE!\n[]>euphoria:...\n[]>euphoria:Fuck...\n[]>euphoria:Fuck, sorry, I didn't mean to shout.<mp>I'm just so tired.\n[]>zero:...<ap>Aren't we also running out of time?\n[]>euphoria:We sure as hell are.",
+						"content": "[]>narrator:Your gaze is empty. So are your thoughts. You don't remember the ride home as soon as you pass the doorstep.<lc>You find Zero on the kitchen floor, nursing a cup of vitamin supplement tea and a bag of chips. Slowly, she turns her head and stares at you with a look that says \"I understand you don't want to, but please tell me how bad it is\".<lc>You answer.\n[]>euphoria:It's bad. <ap>Very bad. <ap>We're fucked. <ap>They found out, I don't know how but they found out.\n[]>zero:How even?\n[]>euphoria:Probably one of the people I supplied left some shit out. I don't know. <ap>I don't care. <ap>God.\n[]>zero:...\n[]>euphoria:THOSE OLD FUCKS \"EITHER JOIN OUR CULT OR SEIZE YOUR CULTIVATION!\"<lc>OH YEA BECAUSE I'M DOING ALL THIS FOR FUN AND NOT TO SURVIVE!\n[]>euphoria:...\n[]>euphoria:Fuck...\n[]>euphoria:Fuck, sorry, I didn't mean to shout. <mp>I'm just so tired.\n[]>zero:...<ap>Aren't we also running out of time?\n[]>euphoria:We sure as hell are.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -1662,6 +1797,87 @@
 						"operand_key": "AND"
 					},
 					"content": {
+						"content": [
+							{
+								"name": "hide-characters",
+								"value": "true"
+							},
+							{
+								"name": "new-background",
+								"value": "workshop"
+							},
+							{
+								"name": "attack",
+								"value": ""
+							},
+							{
+								"name": "release",
+								"value": ""
+							},
+							{
+								"name": "sustain",
+								"value": ""
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 0,
+						"name": "black-fade-in-out"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": false,
+					"meta.line_index": 2,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
 						"active_actors": [
 							"narrator",
 							"euphoria",
@@ -1671,7 +1887,695 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:as soon as you enter the living room, zero deflates. she begins to dejectedly and absent-mindedly stare at your wallpaper while the room is filled by tunes of your favorite ambient noise artists. when you let yiur gaze wander for a bit, there's a new letter on the table. it wasn't there when you left. you have a feeling this was how she had been for a few moments now, before you returned.\nshe turns and gives you a kiss.\n[]>zero:I'm so happy you returned.\n[]>euphoria: Why wouldn't I return?\n[]>zero:Immediate execution. <ap>Jail. <ap>Hit by a car. <ap>Something bad.\n[]>euphoria: I wouldn't be that easy to kill.\n[]>zero:I'm just happy yo be with you.\n[]>narrator:her voice starts trembling. you hold her tighter. <lc>Minutes pass. Small wet spots have now formed on your chest.\n[]>zero:I... <ap><ap>hate this body\n[]>narrator:Her voice is filled with despair, anger and the revenants of choked tears. She breaks away.\n[]>euphoria:...\n[]>zero:It's not even worth the upkeep. Read the letter.\n[]>euphoria:...\n[]>euphoria:You're gonna lose your eye?\n[]>zero:One week. Then it'll be in my brain.\n[]>narrator:You stare at each other. No attempt at movement emanates from Zero's body.\n[]>euphoria:Shit...<ap>Can I give you a hug?\n[]>zero:...please...\n[]>narrator:You gently guide her to the couch again. You take place atop her and press your form into her, trying to comfort whatever part of her soul is not completely annihilated right now. Both of you stay like this for the rest of the day, only stirred when you decide to get food for Zero and you.",
+						"content": "[]>euphoria:Fuck fuck fuck...\n[]>narrator:It is now late afternoon. You can barely focus on making progress for the ritual.\n[]>euphoria:Fuck the circles, fuck it all.<ap>No matter. I'll focus on working for now. Easy tasks, Euphoria, easy tasks.\n[]>narrator:You find your work unsteady. Yet, you tend to the plants.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								3
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 3,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>euphoria:At least the heartchamber is holding up. I still can't believe I pulled that off... <lc>Or that Zero was willing to donate that high of a price. But now we're thriving with it, and the world after us... or after me... will too.\n[]>narrator:The ever subtle pulse of the chamber underneath the building gives the workshop a synchronized and ticking clock. The yet small embedded LEDs in the tree before you give you an accurate flash on every beat.\n[]>euphoria:The guiding lights of the machine titans, yes? Weak LEDs, eternally pulsing. So broody.\n[]>narrator:You bask in the aura of your workshop and its creations.\n[]>euphoria:...I wish I could kill Oldrone myself before the ritual. <mp>Enjoy the mercy, dickbag.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								1
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 4,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>narrator:You hear steps descend down the basement.\n[]>zero:Hi there! Thought I'd check on you!\n[]>euphoria:I'm doing great. Actually that sounded so sarcastic. Yes I'm doing fine.\n[]>zero:I'm glad!\n[]>narrator:She gives you a hug.\n[]>zero:I'm just so happy you returned.\n[]>euphoria: Why wouldn't I return?\n[]>zero:Immediate execution. <ap>Jail. <ap>Hit by a car. <ap>Something bad.\n[]>euphoria: I wouldn't be that easy to kill. Especially not to some goverment lowlives.\n[]>zero:You always say so...\n[]>euphoria:Because it's true!\n[]>zero:...Probably.<lc>I'm just happy to be with you.\n[]>euphoria:Me too...\n[]>zero:...<lc>Say, you've been down here for a few hours now, yes? Oh and by the way, don't let that state pig occupy too much of your mind. He's not worth it.\n[]>euphoria:Ugh I know. Existential threats are just never fun. But yes? I probably have. Gotta make progress at some point instead of just thinking about it.\n[]>zero:But you've made so much progress already today!",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 5,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>zero:I propose you take a break.\n[]>euphoria:I still gotta work more though...\n[]>zero:Please?\n[]>narrator:She moves in closer, nuzzling her head against your chest.\n[]>euphoria:This doesn't change the state of work.\n[]>narrator:Her arms trail down your spine.\n[]>zero:But you could change the state of me...\n[]>euphoria:So smooth.\n[]>zero:Shuddup.\n[]>narrator:Zero continues dragging her sharp claws up and down your back.\n[]>zero:You look good when you shiver like that.\n[]>narrator:And you like when you look good.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								2
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 6,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "Fine. Let me finish up and then I'll come with.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": false
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								1
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								3
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								2
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 7,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "background-name",
+								"value": "apartment"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 3,
+						"name": "set-background"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 8,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>narrator:As soon as you step through the apartment door, your headspace shifts. What you perceived as a slight disturbance and distraction in your workshop mere moments ago, is now a much different beast.\n[]>euphoria:You're lucky you're this cute.\n[]>narrator:You push Zero down to the floor. You made sure to give her new parts all the sensoric feedback cycles imaginable. And you induge in that fact, kissing the metal and bones and wires all over your lover while you occupy her mouth with your fingers. In the morning, you'll realize you never even made it to the bed.\n[]>zero:...\n[]>euphoria:Thank you for bringing me up here again. You're so fun to consume.\n[]>zero:*muffled, flustered approval*\n[]>euphoria:... and indulge in.\n[]>narrator:You shift your weight up.\n[]>euphoria:Is it okay for you if I sit on your face?\n[]>narrator:With massive eyes, she nods.\n[]>euphoria:Hehe.... thank you.\n[]>narrator:The temperature fluctuations of her facial actuators send literal and metaphorical shivers down your spine. As you grind on Zero's face, the microscopic and macroscopic mandibles of her jaw area lacerate your thighs and nethers in all the right places. When this happened the first time, Zero was mortified, understandably. But this is different from assault. It is willed. It took Zero time to realize that this was her seeing you in a safe and controlled environment with what once was a dangerous coping mechanism to you. <lc>Gracefully, you dance your hips across that razor field, always staying on the edge (in both ways), but never crossing-<ap> one of them. If one were have permission to exsanguinate you, it would only be yourself. <ap>You cover her with your... cum.... or whatever it is now.<lc>It goes on like this. You remember to stay hydrated.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								2
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								1
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 9,
+					"meta.visible": true
+				}
+			],
+			"next": 5,
+			"number": 4,
+			"page_key": "",
+			"terminate": false
+		},
+		"5": {
+			"lines": [
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "background-name",
+								"value": "bedroom"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 3,
+						"name": "set-background"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": false,
+					"meta.line_index": 0,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>narrator:It's been a long night. Yet, with no set work schedule to bother you, you awake well-rested.\n[]>zero:cheeeee.....\n[]>narrator:You find Zero staring at you when you awake.\n[]>euphoria:Good morning.\n[]>zero:ehehe....\n[]>narrator:She squeezes you tightly.\n[]>euphoria:Slept well?\n[]>zero:Very well!\n[]>narrator:The smaller extremeties of her abdomen tickle your legs.\n[]>euphoria:...\n[]>euphoria:Alrighty I gotta get up now.\n[]>zero:Wait why?\n[]>euphoria:I still have unfinished work to do from yesterday!\n[]>zero:Ugh fine. I'll clean up the apartment a bit.\n[]>euphoria:Thank you.\n[]>narrator:You give her a kiss on her forehead.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": false,
+					"meta.line_index": 1,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "hide-characters",
+								"value": "true"
+							},
+							{
+								"name": "new-background",
+								"value": "apartment"
+							},
+							{
+								"name": "attack",
+								"value": ""
+							},
+							{
+								"name": "release",
+								"value": ""
+							},
+							{
+								"name": "sustain",
+								"value": "4.0"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 0,
+						"name": "black-fade-in-out"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 2,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>narrator:When you return to the living room after around two hours, Zero is visibly deflated. She stares dejectedly and absent-mindedly at the wallpaper while the room is filled by tunes of your favorite ambient noise artists. When you let your gaze wander for a bit, there's a new letter on the table. it wasn't there when you left.\nshe turns and gives you a kiss.\n[]>narrator:She tries to choke out syllables. The trembling in her voice is too strong to vocalize anything. You move in to hold her tight. <lc>Minutes pass. Small wet spots have now formed on your chest.\n[]>zero:I... <ap><ap>hate this body\n[]>narrator:Her voice is filled with despair, anger and the revenants of choked tears. She breaks away.\n[]>euphoria:...\n[]>zero:It's not even worth the upkeep. Read the letter.\n[]>narrator:While you read, Zero stares out the window.\n[]>euphoria:...\n[]>euphoria:You're gonna lose your eye?\n[]>zero:One week. Then it'll be in my brain.\n[]>narrator:You stare at each other. No attempt at movement emanates from Zero's body.\n[]>euphoria:Shit...<ap>Can I give you a hug?\n[]>zero:...please...\n[]>narrator:You gently guide her to the couch again. You take place atop her and press your form into her, trying to comfort whatever part of her soul is not completely annihilated right now. Both of you stay like this for the rest of the day, only stirred when you decide to get food for Zero and you.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -1713,8 +2617,8 @@
 						}
 					],
 					"line_type": 0,
-					"meta.is_head_editable": true,
-					"meta.line_index": 2,
+					"meta.is_head_editable": false,
+					"meta.line_index": 3,
 					"meta.visible": true
 				},
 				{
@@ -1780,8 +2684,8 @@
 						}
 					],
 					"line_type": 0,
-					"meta.is_head_editable": false,
-					"meta.line_index": 3,
+					"meta.is_head_editable": true,
+					"meta.line_index": 4,
 					"meta.visible": true
 				},
 				{
@@ -1796,16 +2700,11 @@
 						"operand_key": "AND"
 					},
 					"content": {
-						"content": [
-							{
-								"name": "",
-								"value": ""
-							}
-						],
+						"content": [],
 						"delay.after": 0,
 						"delay.before": 0,
-						"meta.selected_index": 1,
-						"name": "hide-all-characters"
+						"meta.selected_index": 0,
+						"name": ""
 					},
 					"facts": {
 
@@ -1846,7 +2745,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 4,
+					"meta.line_index": 5,
 					"meta.visible": true
 				},
 				{
@@ -1913,16 +2812,16 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 5,
+					"meta.line_index": 6,
 					"meta.visible": true
 				}
 			],
-			"next": 5,
-			"number": 4,
+			"next": 6,
+			"number": 5,
 			"page_key": "",
 			"terminate": false
 		},
-		"5": {
+		"6": {
 			"lines": [
 				{
 					"conditionals": {
@@ -2296,6 +3195,10 @@
 							{
 								"name": "release",
 								"value": "10.0"
+							},
+							{
+								"name": "sustain",
+								"value": "6.0"
 							}
 						],
 						"delay.after": 1,
@@ -2346,13 +3249,78 @@
 					"meta.visible": true
 				}
 			],
-			"next": 6,
-			"number": 5,
+			"next": 7,
+			"number": 6,
 			"page_key": "",
 			"terminate": false
 		},
-		"6": {
+		"7": {
 			"lines": [
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "key",
+								"value": "Where is Heaven?"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 4,
+						"name": "set-background-music"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": false,
+					"meta.line_index": 0,
+					"meta.visible": true
+				},
 				{
 					"conditionals": {
 						"behavior": 0,
@@ -2374,7 +3342,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:Everything slowly grows into focus again. tear-like drops of blood run down the skin and wiring of your face. but as the lights floods your cornea, a distant pressure seems to have been evaporated. before you, stands Euphoria. Her face spread wide by the widest and most pure grin. Not even the deep vermillion void in her eye socket able to mar this pride.\n[]>zero:...\n[]>euphoria:Ehehe... I hope you like it.\n[]>zero:Euphoria... we could've grown more.\n[]>euphoria:But you needed it now.\n[]>zero:...\n[]>euphoria:I couldn't watch you... your brain get eaten by itself.\n[]>narrator:You body is weak now. It has been for a long time but now it feels more so. Surgery still takes its toll on you.",
+						"content": "[]>narrator:Everything slowly grows into focus again. Tear-like drops of blood run down the skin and wiring of your face. but as the lights floods your cornea, a distant pressure seems to have been evaporated. Before you, stands Euphoria. Her face spread wide by the widest and most pure grin. Not even the deep vermillion void in her eye socket able to mar this pride.\n[]>zero:...\n[]>euphoria:Ehehe... I hope you like it.\n[]>zero:Euphoria... we could've grown more.\n[]>euphoria:But you needed it now.\n[]>zero:...\n[]>euphoria:I couldn't watch you... your brain get eaten by itself.\n[]>narrator:You body is weak now. It has been for a long time but now it feels more so. Surgery still takes its toll on you.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -2417,7 +3385,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 0,
+					"meta.line_index": 1,
 					"meta.visible": true
 				},
 				{
@@ -2441,7 +3409,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>zero:Can I lay here for a bit.\n[]>euphoria:Of course. I'll bring you food.\n[]>zero:Th... thank you.\n[]>euphoria:I haven't gotten anything yet, hehe.\n[]>narrator:Euphoria does a happy twirls and ascends the steps to your apartment. There are no clocks down here. Not even in your hardest try could you ascertain the day, let alone the time in it.",
+						"content": "[]>zero:Can I... Can I lay here for a bit?\n[]>euphoria:Of course. I'll bring you food.\n[]>zero:Th... thank you.\n[]>euphoria:I haven't gotten anything yet, hehe.\n[]>narrator:Euphoria does a happy twirls and ascends the steps to your apartment. There are no clocks down here. Not even in your hardest try could you ascertain the day, let alone the time in it.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -2484,16 +3452,16 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 1,
+					"meta.line_index": 2,
 					"meta.visible": true
 				}
 			],
-			"next": 7,
-			"number": 6,
+			"next": 8,
+			"number": 7,
 			"page_key": "",
 			"terminate": false
 		},
-		"7": {
+		"8": {
 			"lines": [
 				{
 					"conditionals": {
@@ -2516,7 +3484,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>zero:Soooo... this is it, huh? Haven't been down here in a while.\n[]>narrator:Leaves spliced with wires drape themselves over the operating curtain.\n[]>zero:We kept that palm? I wanna game. We can make a game thing out of it.\n[]>narrator:A small pristine potted fern keeps you company. It might be the only thing down here not laced with metal scars. The leaves are strange to the touch.\n[]>zero:So soft...\n[]>euphoria:As are you!\n[]>narrator:An echo down the stairwell.<mp>The source trails shortly behind.\n[]>zero:What remains of my skin... I guess.\n[]>euphoria:And everything else too, you know. You allows comfort me too.\n[]>zero:You made them.\n[]>euphoria:That's why they're good.\n[]>narrator:Euphoria sets down a tray.\n[]>euphoria:Veggie sticks! And dino nuggies!\n[]>narrator:The lizard-shaped protein preparations were always a source of comfort. You're glad they are compatible with your internals. Not everything is.\n[]>zero:Hungry...\n[]>euphoria:Well, dig in. I'm gonna steal a few from you though.\n[]>zero:Feel free.\n[]>narrator:She procures two forks and hands you one.",
+						"content": "[]>zero:Soooo... this is it, huh? Haven't been down here in a while.\n[]>narrator:Leaves spliced with wires drape themselves over the operating curtain.\n[]>zero:We kept that palm? I wanna game. We can make a game thing out of it.\n[]>narrator:A small pristine potted fern keeps you company. It might be the only thing down here not laced with metal scars. The leaves are strange to the touch.\n[]>zero:So soft...\n[]>euphoria:As are you!\n[]>narrator:An echo down the stairwell.<mp>The source trails shortly behind.\n[]>zero:What remains of my skin... I guess.\n[]>euphoria:And everything else too, you know. Your alloys comfort me too.\n[]>zero:You made them.\n[]>euphoria:That's why they're good.\n[]>narrator:Euphoria sets down a tray.\n[]>euphoria:Veggie sticks! And dino nuggies!\n[]>narrator:The lizard-shaped protein preparations were always a source of comfort. You're glad they are compatible with your internals. Not everything is.\n[]>zero:Hungry...\n[]>euphoria:Well, dig in. I'm gonna steal a few from you though.\n[]>zero:Feel free.\n[]>narrator:She procures two forks and hands you one.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -2563,12 +3531,12 @@
 					"meta.visible": true
 				}
 			],
-			"next": 8,
-			"number": 7,
+			"next": 9,
+			"number": 8,
 			"page_key": "",
 			"terminate": false
 		},
-		"8": {
+		"9": {
 			"lines": [
 				{
 					"conditionals": {
@@ -2591,7 +3559,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:Days have passed. you can now see like before, perhaps even a smidgen better. definitely a smidgen better. During your breaks, you visit Euphoria in her workshop across the basement hallway, watching her tend to her plants. this is where you always get your machine parts. <lc>You pick up the cardboard box that has all the things you ask from Euphoria, this time elbow joints. They still have their blackberry brambles. <lc>Right now, Euphoria seems to prepare the crate of ocular stems you requested from her. small potted plants, like water lilies that hover their pads in the air, sprout various eye components. euphoria plucks the eye fruits with utmost care. you imagine what you would look like with one of them.\n[]>zero:Would you have given me one of those?\n[]>euphoria:Instead of mine?\n[]>zero:Yes.\n[]>euphoria:Difficult to say. On one hand, I'm proud of my work and know it's good. On the other hand, that's in the past and why should I think about what I cannot change? Besides, this is way gayer.\n[]>zero:Yes it was. but you could still have depth perception, had things lined up differently.\n[]>euphoria:They didn't though. I'll manage! Also, take a look at this!\n[]>narrator:Euphoria procures what looks like...\n[]>zero:Tumbleweed?",
+						"content": "[]>narrator:Days have passed. you can now see like before, perhaps even a smidgen better. Definitely a smidgen better. During your breaks, you visit Euphoria in her workshop across the basement hallway, watching her tend to her plants. This is where you always get your machine parts. <lc>You pick up the cardboard box that has all the things you ask from Euphoria, this time elbow joints. They still have their blackberry brambles. <lc>Right now, Euphoria seems to prepare the crate of ocular stems you requested from her. small potted plants, like water lilies that hover their pads in the air, sprout various eye components. euphoria plucks the eye fruits with utmost care. you imagine what you would look like with one of them.\n[]>zero:Would you have given me one of those?\n[]>euphoria:Instead of mine?\n[]>zero:Yes.\n[]>euphoria:Difficult to say. On one hand, I'm proud of my work and know it's good. On the other hand, that's in the past and why should I think about what I cannot change? Besides, this is way gayer.\n[]>zero:Yes it was. but you could still have depth perception, had things lined up differently.\n[]>euphoria:They didn't though. I'll manage! Also, take a look at this!\n[]>narrator:Euphoria procures what looks like...\n[]>zero:Tumbleweed?",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -2705,12 +3673,12 @@
 					"meta.visible": true
 				}
 			],
-			"next": 9,
-			"number": 8,
+			"next": 10,
+			"number": 9,
 			"page_key": "",
 			"terminate": false
 		},
-		"9": {
+		"10": {
 			"lines": [
 				{
 					"conditionals": {
@@ -2798,7 +3766,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:you return with the elbow joints to the grand hall yiu call your own workshop. massive chunks of metal line the walls, every titan hand-built and the blueprints also of your own design. you think this was once a cathedral. yiu had tk make... modifications to make the titans fit. or a singular one. the finished ones get sent underground into the heartchamber. It is an arduous task, lining all the parts up, notbgetting distracted, but also not becoming so understimulazed you relapse.\n[]>zero:Hello, funny knife.\n[]>narrator:You cut away the brambles from the joints you now have in your posession.",
+						"content": "[]>narrator:You return with the elbow joints to the grand hall you call your own workshop. massive chunks of metal line the walls, every titan hand-built and the blueprints also of your own design. you think this was once a cathedral. yiu had tk make... modifications to make the titans fit. or a singular one. the finished ones get sent underground into the heartchamber. It is an arduous task, lining all the parts up, notbgetting distracted, but also not becoming so understimulazed you relapse.\n[]>zero:Hello, funny knife.\n[]>narrator:You cut away the brambles from the joints you now have in your posession.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -3111,10 +4079,933 @@
 					"meta.visible": true
 				}
 			],
-			"next": 0,
-			"number": 9,
+			"next": 11,
+			"number": 10,
 			"page_key": "",
 			"terminate": false
+		},
+		"11": {
+			"lines": [
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "background-name",
+								"value": "basement-hallway"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 3,
+						"name": "set-background"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 0,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>narrator:You stand in the basement hallway. Two doors before you, one for each of you. The fruits of your labor from these last weeks standing in full blossom inside.\n[]>euphoria:We will construct this world anew. It will be awesome.\n[]>zero:It will.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								4
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								4
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 1,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "",
+								"value": ""
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 1,
+						"name": "hide-all-characters"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 2,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>zero+euphoria:And there's no one I'd rather do it with.<lc>I love you.\n[]>narrator:One final deep and tender kiss, and infinite tears become your wedding dresses.<lc>You depart to your rooms.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								4
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 3,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "hide-characters",
+								"value": "true"
+							},
+							{
+								"name": "new-background",
+								"value": "zero-workshop"
+							},
+							{
+								"name": "attack",
+								"value": ""
+							},
+							{
+								"name": "release",
+								"value": "7.0"
+							},
+							{
+								"name": "sustain",
+								"value": "5.0"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 0,
+						"name": "black-fade-in-out"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 4,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>narrator:You barely emerge from the cave anymore. But the grand work is proceeding. Euphoria's eye gives you sight like never before, unprecendented precision and drive fuels your motions. Almost devoured by mechanical grace, you move about the machine titan like a beetle across a cadaver.\n[]>zero:Aaahhg!\n[]>narrator:Your arm of flesh grows weak as you work more. You keep splicing more parts into it. Should it come to it, you can just graft a new one from the parts you have. You've seen Euphoria work.<lc>You barely rest anymore.\n[]>zero:I hope at least you are enjoying the show!\n[]>narrator:The ribcage-sized brambleskull Euphoria gave you has found its place atop one of your shelves.\n[]>zero:You know, you're actually quite cute. <ap>I like your big eyes.\n[]>narrator:It has heard and witnessed many of your frustrations and moments of genius, only rivaling how much Euphoria has gotten to see over the years.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								4
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 5,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>zero:You know, I doubt this will happen. But maybe, just maybe, you'll also be there with me after the ritual.\n[]>zero:I won't be me of course, just scattered across all the things, everywhere and such. <mp>Euphoria is fine with just vanishing and being nothing across the cosmos. I'll be there to keep everything together. Find me in the silence, will you?\n[]>narrator:The skull does not respond. It could not.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								1
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 6,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>zero:Well, back to work.\n[]>narrator:It goes on like this. Many days pass, and eventually, you lower the last machine titan down into the heartchamber.\n[]>zero:Just gotta seal it now. Can't let you all get messed up while the ritual does its thing.\n[]>narrator:You weld the hatch shut. It takes several days to go around the entire perimeter.\n[]>narrator:And then you rest.\n[]>zero:I hope Euphoria is making good progress.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								4
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 7,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "hide-characters",
+								"value": "true"
+							},
+							{
+								"name": "new-background",
+								"value": ""
+							},
+							{
+								"name": "attack",
+								"value": ""
+							},
+							{
+								"name": "release",
+								"value": ""
+							},
+							{
+								"name": "sustain",
+								"value": ""
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 0,
+						"name": "black-fade-in-out"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 8,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "[]>narrator:It is deep in the night when you finally feel Euphoria's pulse resonates through your eye. Her ritual of ash is blossoming.\n[]>narrator:Tears most bitter and most sweet run down your face. A few drops of blood are mixed in still, too.\n[]>zero:Euphoria... my dear...\n[]>narrator:Roots start breaking through the wall, enveloping everything you two have lived in ever since you met. \n[]>zero:Let me never forget your name.\n[]>narrator:You inhale sharply.\n[]>zero:Euphoria...",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": true
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								true,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 9,
+					"meta.visible": true
+				}
+			],
+			"next": 12,
+			"number": 11,
+			"page_key": "",
+			"terminate": false
+		},
+		"12": {
+			"lines": [
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "key",
+								"value": "ending-winds"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 4,
+						"name": "set-background-music"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 0,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"content": [
+							{
+								"name": "hide-characters",
+								"value": "true"
+							},
+							{
+								"name": "new-background",
+								"value": "ending"
+							},
+							{
+								"name": "attack",
+								"value": "0"
+							},
+							{
+								"name": "release",
+								"value": "20.0"
+							},
+							{
+								"name": "sustain",
+								"value": "5.0"
+							}
+						],
+						"delay.after": 3.73,
+						"delay.before": 0,
+						"meta.selected_index": 0,
+						"name": "black-fade-in-out"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 1,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
+						"active_actors": [
+							"narrator",
+							"euphoria",
+							"zero",
+							"oldrone",
+							"zero+euphoria",
+							""
+						],
+						"active_actors_title": "character",
+						"content": "The world is scoured by horrible winds. Entire cities sanded down to nothing. Existence is buried by dust. <lc>Aeons pass, and then the air stirrs. Your heart continues to beat and the machine titans awake... <ap>emerging from the dust, they now wander and carry the weight of a thousand thoughts with them.<lc>Love<ap>, anarchy<ap>, autonomy.<ap> The secrets of alchemy and the threads of fate.<ap> Blood<ap>, bones<ap>, the void and the abyss<ap>, anything rotten still left<ap>, and the very dust that protected them. <ap>Everything dear to you, eternal and loved.",
+						"selected_actor_dropdown_index": 0,
+						"use_dialog_syntax": false
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 0,
+					"meta.is_head_editable": true,
+					"meta.line_index": 2,
+					"meta.visible": true
+				}
+			],
+			"next": 0,
+			"number": 12,
+			"page_key": "ending",
+			"terminate": true
 		}
 	}
 }

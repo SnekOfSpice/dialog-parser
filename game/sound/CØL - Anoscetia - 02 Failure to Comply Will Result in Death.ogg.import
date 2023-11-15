@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://inb4lr31md2x"
+path="res://.godot/imported/CØL - Anoscetia - 02 Failure to Comply Will Result in Death.ogg-99524776657dbf307c55dbf8c41a00ec.oggvorbisstr"
+
+[deps]
+
+source_file="res://game/sound/CØL - Anoscetia - 02 Failure to Comply Will Result in Death.ogg"
+dest_files=["res://.godot/imported/CØL - Anoscetia - 02 Failure to Comply Will Result in Death.ogg-99524776657dbf307c55dbf8c41a00ec.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

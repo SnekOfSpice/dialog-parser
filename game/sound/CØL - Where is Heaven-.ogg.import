@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://tklkyiuqhcxf"
+path="res://.godot/imported/CØL - Where is Heaven-.ogg-b26f1f9acb8ad7d758cee9139780bfe1.oggvorbisstr"
+
+[deps]
+
+source_file="res://game/sound/CØL - Where is Heaven-.ogg"
+dest_files=["res://.godot/imported/CØL - Where is Heaven-.ogg-b26f1f9acb8ad7d758cee9139780bfe1.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

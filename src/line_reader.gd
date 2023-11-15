@@ -39,7 +39,7 @@ func _ready() -> void:
 		return
 	
 	find_child("InstructionHandler").connect("set_input_lock", set_is_input_locked)
-	find_child("InstructionHandler").connect("instruction_completed", instruction_completed)
+	find_child("InstructionHandler").connect("instruction_wrapped_completed", instruction_completed)
 	
 		
 	
@@ -79,6 +79,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				emit_signal("line_finished", line_index)
 
 func instruction_completed():
+	print("LINE READER RECEIVED COMPLETED INSTRUCTIO")
 	emit_signal("line_finished", line_index)
 
 func set_is_input_locked(value: bool):
@@ -162,7 +163,8 @@ func read_new_line(new_line: Dictionary):
 			var delay_after = new_line.get("content").get("delay.after")
 			
 			find_child("InstructionHandler").wrapper_execute(instruction_name, args, delay_before, delay_after)
-	
+			
+			
 	# register facts
 	var facts = line_data.get("facts")
 	for f in facts.keys():
