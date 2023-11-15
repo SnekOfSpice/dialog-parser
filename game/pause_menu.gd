@@ -9,6 +9,9 @@ func _ready() -> void:
 	find_child("TextSpeedSlider").value = 60
 	Parser.line_reader.text_speed = 60
 	
+	find_child("VolumeLabel").text = str(Options.music_volume + 80)
+	find_child("VolumeSlider").value = Options.music_volume + 80
+	
 	connect("visibility_changed", on_visibility_changed)
 
 func _on_fullscreen_button_pressed() -> void:
@@ -39,3 +42,13 @@ func update_text_speed_slider(value: float):
 	else:
 		find_child("TextSpeedLabel").text = str(value)
 		Parser.line_reader.text_speed = value
+
+
+func _on_volume_slider_value_changed(value: float) -> void:
+	Options.music_volume = value - 80
+	find_child("VolumeLabel").text = str(value)
+	
+
+
+func _on_close_options_button_pressed() -> void:
+	visible = false

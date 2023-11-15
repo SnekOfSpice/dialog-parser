@@ -681,7 +681,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:You make you way down into the cellar. There, just as dehydrated as you are, is your tree. \n[]>euphoria:Hello, little one.\n[]>narrator:Undefined machine parts line the floor: mismatched wiring, half-molded engines, globs of unrefined metal.<lc>And through it all, vast swathes of green emerge. Unfathomable crossbreeds of plant and machine all over, including the center piece of the workshop: Your tree.<ap>You gently caress the delicate leaves of the sprouting sapling before watering it.<lc>Upon inspecting the various fruit blossoms you find on these plants, their iridescent surface biomembranes reflect your workshop back at you. One orchid droops from the ceiling where an air duct once was. On this one, and on its few siblings that are all lined up in this makeshift greenhouse/workshop, you experiment with the most exotic parts. One might turn into a heart pump yet. Another one a vein with an internal clock perhaps. <lc>All of them bear the weight of a better life and receive water as such.",
+						"content": "[]>narrator:You make your way down into the cellar. There, just as dehydrated as you are, is your tree. \n[]>euphoria:Hello, little one.\n[]>narrator:Undefined machine parts line the floor: mismatched wiring, half-molded engines, globs of unrefined metal.<lc>And through it all, vast swathes of green emerge. Unfathomable crossbreeds of plant and machine all over, including the center piece of the workshop: Your tree.<ap> You gently caress the delicate leaves of the sprouting sapling before watering it. <lc>Upon inspecting the various fruit blossoms you find on these plants, their iridescent surface biomembranes reflect your workshop back at you. One orchid droops from the ceiling where an air duct once was. On this one, and on its few siblings that are all lined up in this makeshift greenhouse/workshop, you experiment with the most exotic parts. One might turn into a heart pump yet. Another one a vein with an internal clock perhaps. <lc>All of them bear the weight of a better life and receive water as such.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -748,7 +748,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>euphoria:Inventory...\n[]>narrator:A shelf with scraps of paper.\n[]>euphoria:Bone replacemts are still hard to come by. Buuuuut these silenced lungs should be a delight once grown.<ap>hehe.",
+						"content": "[]>euphoria:Inventory...\n[]>narrator:A shelf with scraps of paper.\n[]>euphoria:Bone replacemts are still hard to come by. Buuuuut these silenced lungs should be a delight once grown.<ap> Hehe.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -3789,6 +3789,71 @@
 						"operand_key": "AND"
 					},
 					"content": {
+						"content": [
+							{
+								"name": "key",
+								"value": "Slow, Deep Breaths"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 4,
+						"name": "set-background-music"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 1,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
 						"active_actors": [
 							"narrator",
 							"euphoria",
@@ -3798,7 +3863,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:You return with the elbow joints to the grand hall you call your own workshop. massive chunks of metal line the walls, every titan hand-built and the blueprints also of your own design. You think this was once a cathedral. yiu had tk make... modifications to make the titans fit. Or a singular one. The finished ones get sent underground into the heartchamber. It is an arduous task, lining all the parts up, not getting distracted, but also not becoming so understimulated you relapse.\n[]>zero:Hello, funny knife.\n[]>narrator:You cut away the brambles from the joints you now have in your posession.",
+						"content": "[]>narrator:You return with the elbow joints to the grand hall you call your own workshop. massive chunks of metal line the walls, every titan hand-built and the blueprints also of your own design. You think this was once a cathedral. You had to make... modifications to make the titans fit. Or a singular one. The finished ones get sent underground into the heartchamber. It is an arduous task, lining all the parts up, not getting distracted, but also not becoming so understimulated you relapse.\n[]>zero:Hello, funny knife.\n[]>narrator:You cut away the brambles from the joints you now have in your posession.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -3841,71 +3906,6 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 1,
-					"meta.visible": true
-				},
-				{
-					"conditionals": {
-						"behavior": 0,
-						"behavior_key": "Show",
-						"facts": {
-
-						},
-						"operand": 0,
-						"operand_args": [],
-						"operand_key": "AND"
-					},
-					"content": {
-						"content": [
-							{
-								"name": "background-name",
-								"value": "workshop-euphoria"
-							}
-						],
-						"delay.after": 0,
-						"delay.before": 0,
-						"meta.selected_index": 3,
-						"name": "set-background"
-					},
-					"facts": {
-
-					},
-					"header": [
-						{
-							"data_type": 5,
-							"property_name": "character",
-							"values": [
-								0,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-euphoria",
-							"values": [
-								1,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-zero",
-							"values": [
-								2,
-								0
-							]
-						},
-						{
-							"data_type": 6,
-							"property_name": "update-emotions",
-							"values": [
-								false,
-								null
-							]
-						}
-					],
-					"line_type": 2,
-					"meta.is_head_editable": false,
 					"meta.line_index": 2,
 					"meta.visible": true
 				},
@@ -3988,6 +3988,71 @@
 						"operand_key": "AND"
 					},
 					"content": {
+						"content": [
+							{
+								"name": "background-name",
+								"value": "workshop-euphoria"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 3,
+						"name": "set-background"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": false,
+					"meta.line_index": 4,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
 						"active_actors": [
 							"narrator",
 							"euphoria",
@@ -4040,7 +4105,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 4,
+					"meta.line_index": 5,
 					"meta.visible": true
 				},
 				{
@@ -4107,7 +4172,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 5,
+					"meta.line_index": 6,
 					"meta.visible": true
 				},
 				{
@@ -4174,7 +4239,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 6,
+					"meta.line_index": 7,
 					"meta.visible": true
 				}
 			],

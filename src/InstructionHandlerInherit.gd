@@ -44,6 +44,8 @@ func execute(instruction_name, args):
 					Sound.set_background_music(Sound.BGM_PSYCH)
 				"Winds":
 					Sound.set_background_music(Sound.BGM_WINDS)
+				"Slow, Deep Breaths":
+					Sound.set_background_music(Sound.BGM_SLOW_DEEP_BREATHS)
 	
 
 
