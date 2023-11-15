@@ -52,17 +52,17 @@ layout_mode = 2
 text = "Screen Options"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="WindowModeContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="FullscreenButton" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="FullscreenButton" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/WindowModeContainer"]
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_fweip")
 text = "Fullscreen"
 
-[node name="WindowedButton" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="WindowedButton" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/WindowModeContainer"]
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_fweip")
@@ -76,5 +76,5 @@ layout_mode = 2
 text = "Quit Game"
 
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2/TextSpeedSlider" to="." method="_on_text_speed_slider_value_changed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer/WindowedButton" to="." method="_on_windowed_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/WindowModeContainer/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/WindowModeContainer/WindowedButton" to="." method="_on_windowed_button_pressed"]

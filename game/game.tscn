@@ -1,12 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://c67ti8jynl2ey"]
+[gd_scene load_steps=13 format=3 uid="uid://c67ti8jynl2ey"]
 
+[ext_resource type="Script" path="res://game/game.gd" id="1_rvq16"]
 [ext_resource type="PackedScene" uid="uid://baeby0gv4sv22" path="res://game/characters/euphoria.tscn" id="2_w4l3c"]
 [ext_resource type="PackedScene" uid="uid://bsyyljt7tpol3" path="res://game/characters/zero.tscn" id="2_wckkk"]
+[ext_resource type="Texture2D" uid="uid://b8rdqildk6mvf" path="res://game/backgrounds/apartment.png" id="2_xhcvx"]
+[ext_resource type="Texture2D" uid="uid://cuyjngdk7g64q" path="res://game/backgrounds/basement-hallway.png" id="3_ko370"]
+[ext_resource type="Texture2D" uid="uid://u5j8qad2ds54" path="res://game/backgrounds/bedroom.png" id="4_3ojq1"]
+[ext_resource type="Texture2D" uid="uid://cmclqy65lu104" path="res://game/backgrounds/courtroom.png" id="5_emscq"]
+[ext_resource type="Texture2D" uid="uid://byu5k87fq7ip8" path="res://game/backgrounds/ending.png" id="6_tij5b"]
+[ext_resource type="Texture2D" uid="uid://dm3yiuexm0dse" path="res://game/backgrounds/first-circle-outside.png" id="7_5tre2"]
+[ext_resource type="Texture2D" uid="uid://boitgclj1ehkw" path="res://game/backgrounds/sickbed.png" id="8_3x1rr"]
+[ext_resource type="Texture2D" uid="uid://067cg4hhglf7" path="res://game/backgrounds/workshop-euphoria.png" id="9_2u06j"]
+[ext_resource type="Texture2D" uid="uid://don6j11a5b2sq" path="res://game/backgrounds/workshop-zero.png" id="10_nxijg"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_rvq16")
+backgrounds = Array[Texture]([ExtResource("2_xhcvx"), ExtResource("3_ko370"), ExtResource("4_3ojq1"), ExtResource("5_emscq"), ExtResource("6_tij5b"), ExtResource("7_5tre2"), ExtResource("8_3x1rr"), ExtResource("9_2u06j"), ExtResource("10_nxijg")])
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_xhcvx")
+centered = false
 
 [node name="Euphoria" parent="." instance=ExtResource("2_w4l3c")]
-position = Vector2(765, 269)
+position = Vector2(1075, 523)
 
 [node name="Zero" parent="." instance=ExtResource("2_wckkk")]
-position = Vector2(311, 267)
+position = Vector2(313, 477)

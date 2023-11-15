@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhc45ew2mfqbu"]
+[gd_scene load_steps=9 format=3 uid="uid://dhc45ew2mfqbu"]
 
 [ext_resource type="Script" path="res://game/main_scene.gd" id="1_2p4ut"]
 [ext_resource type="PackedScene" uid="uid://bb8yvsx0g14vl" path="res://src/line_reader.tscn" id="1_y64f0"]
 [ext_resource type="PackedScene" uid="uid://c67ti8jynl2ey" path="res://game/game.tscn" id="2_opnta"]
+[ext_resource type="PackedScene" uid="uid://bo3vwa8qi2bm8" path="res://game/main_menu.tscn" id="3_b52at"]
 [ext_resource type="Script" path="res://src/InstructionHandlerInherit.gd" id="4_axwkl"]
 [ext_resource type="PackedScene" uid="uid://r0tb7qevdcwr" path="res://game/black.tscn" id="4_ut3ne"]
 [ext_resource type="PackedScene" uid="uid://bu33mw8t7dsk8" path="res://game/pause_menu.tscn" id="4_vd1ov"]
@@ -26,7 +27,7 @@ mouse_filter = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1152, 648)
+size = Vector2i(1440, 900)
 render_target_update_mode = 4
 
 [node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_opnta")]
@@ -36,16 +37,17 @@ name_for_blank_name = "narrator"
 auto_pause_duration = 0.4
 
 [node name="Black" parent="LineReader" instance=ExtResource("4_ut3ne")]
+visible = false
 
 [node name="InstructionHandler" type="Node" parent="LineReader"]
 script = ExtResource("4_axwkl")
 
-[node name="PauseMenu" parent="." instance=ExtResource("4_vd1ov")]
-visible = false
-
 [node name="GameFinished" parent="." instance=ExtResource("6_ltep6")]
 
-[node name="MainMenu" type="CanvasLayer" parent="."]
+[node name="MainMenu" parent="." instance=ExtResource("3_b52at")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_vd1ov")]
+visible = false
 
 [connection signal="instruction_completed" from="LineReader/Black" to="LineReader/InstructionHandler" method="_on_black_instruction_completed"]
 [connection signal="make_screen_black" from="LineReader/InstructionHandler" to="LineReader/Black" method="_on_instruction_handler_make_screen_black"]

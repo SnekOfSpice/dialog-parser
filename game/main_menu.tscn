@@ -1,0 +1,154 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo3vwa8qi2bm8"]
+
+[ext_resource type="Script" path="res://game/main_menu.gd" id="1_w2x55"]
+[ext_resource type="Theme" uid="uid://dd3wmvu0xxyhs" path="res://style/theme.tres" id="2_j2yue"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_w2x55")
+
+[node name="MenuContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_j2yue")
+
+[node name="Panel" type="Panel" parent="MenuContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="StartNewButton" type="Button" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "Start"
+alignment = 0
+
+[node name="LoadButton" type="Button" parent="MenuContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "Load"
+alignment = 0
+
+[node name="ViewCWButton" type="Button" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "Content Warnings"
+alignment = 0
+
+[node name="OptionsButton" type="Button" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "Options"
+alignment = 0
+
+[node name="CreditsButton" type="Button" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "Credits"
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "Quit"
+alignment = 0
+
+[node name="ConfirmAge" type="ColorRect" parent="MenuContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0156863, 0.0156863, 0.0156863, 0.396078)
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuContainer/ConfirmAge"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -25.5
+offset_right = 350.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/ConfirmAge/PanelContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MenuContainer/ConfirmAge/PanelContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]This game is intended for mature audiences. It is made for and by freaks on the internet :3
+Detailed content warnings can be viewed in the main menu.[/center]"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/ConfirmAge/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ConfirmAgeButton" type="Button" parent="MenuContainer/ConfirmAge/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "I'm ok with that"
+
+[node name="AbortButton" type="Button" parent="MenuContainer/ConfirmAge/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Get me out"
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MenuContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "credits"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MenuContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(850, 0)
+layout_mode = 2
+text = "sfgdfh dfdfg afdfdf"
+fit_content = true
+
+[connection signal="pressed" from="MenuContainer/VBoxContainer/StartNewButton" to="." method="_on_start_new_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuContainer/ConfirmAge/PanelContainer/VBoxContainer/HBoxContainer/ConfirmAgeButton" to="." method="_on_confirm_age_button_pressed"]
+[connection signal="pressed" from="MenuContainer/ConfirmAge/PanelContainer/VBoxContainer/HBoxContainer/AbortButton" to="." method="_on_abort_button_pressed"]

@@ -3,8 +3,16 @@ extends Control
 
 
 func _ready() -> void:
-	Parser.read_page(0)
+	
+	
+	# note: this is fucking bad and awful
+	find_child("Black").connect("request_background_change", request_background_change)
+	find_child("InstructionHandler").connect("request_background_change", request_background_change)
 
+#	Parser.read_page(0)
+
+func request_background_change(new_background):
+	find_child("Game").request_background_change(new_background)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):

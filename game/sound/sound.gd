@@ -4,11 +4,10 @@ const BGM_SLOW_DEEP_BREATHS = "res://game/sound/CØL - Slow, Deep Breaths - 03 S
 const BGM_FAILURE_TO_COMPLY = "res://game/sound/CØL - Anoscetia - 02 Failure to Comply Will Result in Death.ogg"
 const BGM_WHERE_IS_HEAVEN = "res://game/sound/CØL - Where is Heaven-.ogg"
 const BGM_PSYCH = "res://game/sound/Giacomo Forte - Warm 60s (Indie, vintage, psychedelic, rock, acid, synth, dreamy).mp3"
+const BGM_WINDS = "res://game/sound/610365__klankbeeld__snow-city-nl-0009pm-210206_0243.ogg"
 
 var rampup_time := 1.0
-
-#func _ready() -> void:
-#	set_background_music(BGM_SLOW_DEEP_BREATHS)
+var target_volume := 0
 
 func set_background_music(key: String, _rampup_time := rampup_time):
 	rampup_time = _rampup_time
@@ -20,10 +19,15 @@ func set_background_music(key: String, _rampup_time := rampup_time):
 	await timer.timeout
 	$BGMPlayer.stream = load(key)
 	$BGMPlayer.playing = true
+	
+	if key == BGM_WINDS:
+		target_volume = Options.music_volume + 12
+	else:
+		target_volume = Options.music_volume
 
 func ramp_up_background_music():
 	var t = get_tree().create_tween()
-	t.tween_property($BGMPlayer, "volume_db", 0, rampup_time)
+	t.tween_property($BGMPlayer, "volume_db", target_volume, rampup_time)
 
 # idk TODO ig
 func play(soundName:String, randomPitch := true) -> AudioStreamPlayer:
