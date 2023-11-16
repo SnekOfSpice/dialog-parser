@@ -153,22 +153,28 @@ horizontal_alignment = 1
 [node name="RichTextLabel" type="RichTextLabel" parent="MenuContainer/CreditsContainer/VBoxContainer"]
 custom_minimum_size = Vector2(850, 0)
 layout_mode = 2
-text = "Writing and Coding
+bbcode_enabled = true
+text = "[b]=Writing and Coding[/b]
 	Snek (https://snekofspice.itch.io/)
 
-Visuals
-Fonts: ZeldaFont by Anna and TimesNewPixel by pentacom via bitfontmaker2
-Character Art: Bloodmachine (https://bloodmachine.neocities.org/) and Snek
+[b]=Visuals[/b]
+Fonts via bitfontmaker2
+	ZeldaFont by Anna
+	TimesNewPixel by pentacom (Expanded for § and Ø by Snek)
+Character Art
+	Bloodmachine (https://bloodmachine.neocities.org/)
+Character Design
+	Snek
 
-Audio
-Music:
-My dear friend CØL (https://colmusic45.bandcamp.com/)
-	Failure to Comply Will Result in Death
-	Where is Heaven?
-	Slow, Deep Breaths
-Free Music Archive:
-	Giacomo Forte - warm 60s (CC BY-NC) 
-other sfx via freesound.org
+[b]=Audio[/b]
+Music
+	My dear friend CØL (https://colmusic45.bandcamp.com/)
+		Failure to Comply Will Result in Death
+		Where is Heaven?
+		Slow, Deep Breaths
+	Free Music Archive
+		Giacomo Forte - Warm 60s (CC BY-NC) 
+Other SFX via freesound.org
 	klankbeeld - snow city NL 0009PM 210206_0243.wav"
 fit_content = true
 
