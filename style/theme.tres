@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=8 format=3 uid="uid://dd3wmvu0xxyhs"]
 
-[ext_resource type="FontFile" uid="uid://ckbctvwh4kk0m" path="res://style/ZeldaFont.ttf" id="1_8ruyj"]
 [ext_resource type="FontFile" uid="uid://rvnhwlkt81ow" path="res://style/TimesNewPixelexp.ttf" id="1_t6bxu"]
+[ext_resource type="FontFile" uid="uid://bnqgb1fpoaocj" path="res://style/atha.ttf" id="2_38r3n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwf55"]
 bg_color = Color(0.0666667, 0.0509804, 0.0941176, 0.45098)
@@ -40,8 +40,8 @@ Button/font_sizes/font_size = 36
 Button/fonts/font = ExtResource("1_t6bxu")
 Button/styles/disabled = SubResource("StyleBoxFlat_jwf55")
 Button/styles/normal = SubResource("StyleBoxFlat_1d5wb")
-Label/font_sizes/font_size = 40
-Label/fonts/font = ExtResource("1_8ruyj")
+Label/font_sizes/font_size = 42
+Label/fonts/font = ExtResource("2_38r3n")
 Label/styles/normal = SubResource("StyleBoxFlat_2ps5h")
 Panel/styles/panel = SubResource("StyleBoxFlat_8gqlk")
 RichTextLabel/colors/default_color = Color(0.882353, 0.858824, 0.811765, 1)

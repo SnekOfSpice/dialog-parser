@@ -10,6 +10,7 @@ signal request_background_change(background_name: String)
 
 func _ready() -> void:
 	$ColorRect.modulate.a = 0.0
+	visible = true
 
 func fade_in(duration: float):
 	if duration == 0.0:

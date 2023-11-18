@@ -170,12 +170,16 @@ Character Design
 Music
 	My dear friend CØL (https://colmusic45.bandcamp.com/)
 		Failure to Comply Will Result in Death
+		Jeremiah I (Intro)
 		Where is Heaven?
 		Slow, Deep Breaths
+		This Is All Too Much For Me (Piano Only) 
 	Free Music Archive
 		Giacomo Forte - Warm 60s (CC BY-NC) 
+		Serge Quadrado - Melancholy (CC BY-NC) 
 Other SFX via freesound.org
-	klankbeeld - snow city NL 0009PM 210206_0243.wav"
+	klankbeeld - snow city NL 0009PM 210206_0243.wav
+	Many spliced together for the eye sfx"
 fit_content = true
 
 [node name="CloseCreditsButton" type="Button" parent="MenuContainer/CreditsContainer/VBoxContainer"]

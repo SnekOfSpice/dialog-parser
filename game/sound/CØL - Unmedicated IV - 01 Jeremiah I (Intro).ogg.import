@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b88dyvbcg4nv0"
+path="res://.godot/imported/CØL - Unmedicated IV - 01 Jeremiah I (Intro).ogg-d6d12e473e66ed9b3b128e4880d92313.oggvorbisstr"
+
+[deps]
+
+source_file="res://game/sound/CØL - Unmedicated IV - 01 Jeremiah I (Intro).ogg"
+dest_files=["res://.godot/imported/CØL - Unmedicated IV - 01 Jeremiah I (Intro).ogg-d6d12e473e66ed9b3b128e4880d92313.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

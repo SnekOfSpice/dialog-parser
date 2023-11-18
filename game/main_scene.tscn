@@ -35,6 +35,12 @@ render_target_update_mode = 4
 [node name="LineReader" parent="." instance=ExtResource("1_y64f0")]
 name_for_blank_name = "narrator"
 auto_pause_duration = 0.4
+name_map = {
+"euphoria": "Euphoria",
+"oldrone": "Oldrone",
+"zero": "Zero",
+"zero+euphoria": "Zero & Euphoria"
+}
 
 [node name="Black" parent="LineReader" instance=ExtResource("4_ut3ne")]
 visible = false

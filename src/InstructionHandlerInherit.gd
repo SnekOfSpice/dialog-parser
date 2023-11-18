@@ -7,7 +7,10 @@ func execute(instruction_name, args):
 	prints("EXECUTING ", instruction_name, " WITH ARGS ", args)
 	match instruction_name:
 		"play-sfx":
-			Sound.play(args.get("key", ""))
+			var rand_pitch := true
+			if args.get("random-pitch") == "false":
+				rand_pitch = false
+			Sound.play(args.get("key", ""), rand_pitch)
 			
 		"hide-all-characters":
 			for c in get_tree().get_nodes_in_group("Character"):
@@ -46,6 +49,14 @@ func execute(instruction_name, args):
 					Sound.set_background_music(Sound.BGM_WINDS)
 				"Slow, Deep Breaths":
 					Sound.set_background_music(Sound.BGM_SLOW_DEEP_BREATHS)
+				"This Is All Too Much For Me":
+					Sound.set_background_music(Sound.BGM_TOO_MUCH_FOR_ME)
+				"Melancholy":
+					Sound.set_background_music(Sound.BGM_MELANCHOLY)
+				"Jeremiah":
+					Sound.set_background_music(Sound.BGM_JEREMIAH)
+				"":
+					Sound.set_background_music("")
 	
 
 
