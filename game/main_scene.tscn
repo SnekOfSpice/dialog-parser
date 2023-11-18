@@ -57,4 +57,6 @@ visible = false
 
 [connection signal="instruction_completed" from="LineReader/Black" to="LineReader/InstructionHandler" method="_on_black_instruction_completed"]
 [connection signal="make_screen_black" from="LineReader/InstructionHandler" to="LineReader/Black" method="_on_instruction_handler_make_screen_black"]
+[connection signal="request_main_menu" from="GameFinished" to="." method="_on_game_finished_request_main_menu"]
 [connection signal="request_show_options" from="MainMenu" to="." method="_on_main_menu_request_show_options"]
+[connection signal="request_main_menu" from="PauseMenu" to="." method="_on_pause_menu_request_main_menu"]

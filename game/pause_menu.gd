@@ -3,6 +3,8 @@ extends CanvasLayer
 
 const MAX_TEXT_SPEED := 201
 
+signal request_main_menu()
+
 func _ready() -> void:
 	find_child("TextSpeedSlider").min_value = 1
 	find_child("TextSpeedSlider").max_value = MAX_TEXT_SPEED
@@ -13,6 +15,9 @@ func _ready() -> void:
 	find_child("VolumeSlider").value = Options.music_volume + 80
 	
 	connect("visibility_changed", on_visibility_changed)
+	
+	find_child("FullscreenButton").button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	find_child("WindowedButton").button_pressed = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
 
 func _on_fullscreen_button_pressed() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -46,9 +51,19 @@ func update_text_speed_slider(value: float):
 
 func _on_volume_slider_value_changed(value: float) -> void:
 	Options.music_volume = value - 80
+	Sound.set_target_volume(value - 80)
 	find_child("VolumeLabel").text = str(value)
 	
 
 
 func _on_close_options_button_pressed() -> void:
 	visible = false
+
+
+func _on_main_menu_button_pressed() -> void:
+	visible = false
+	emit_signal("request_main_menu")
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

@@ -91,7 +91,8 @@
 				"new-background",
 				"attack",
 				"release",
-				"sustain"
+				"sustain",
+				"new-background-music"
 			],
 			"name": "black-fade-in-out"
 		},
@@ -132,79 +133,34 @@
 					"content": {
 						"content": [
 							{
-								"name": "key",
+								"name": "hide-characters",
+								"value": ""
+							},
+							{
+								"name": "new-background",
+								"value": "bedroom"
+							},
+							{
+								"name": "attack",
+								"value": "0.0"
+							},
+							{
+								"name": "release",
+								"value": "7.0"
+							},
+							{
+								"name": "sustain",
+								"value": "2.0"
+							},
+							{
+								"name": "new-background-music",
 								"value": "Warm 60s"
 							}
 						],
-						"delay.after": 0,
+						"delay.after": 2.99,
 						"delay.before": 0,
-						"meta.selected_index": 4,
-						"name": "set-background-music"
-					},
-					"facts": {
-
-					},
-					"header": [
-						{
-							"data_type": 5,
-							"property_name": "character",
-							"values": [
-								0,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-euphoria",
-							"values": [
-								1,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-zero",
-							"values": [
-								2,
-								0
-							]
-						},
-						{
-							"data_type": 6,
-							"property_name": "update-emotions",
-							"values": [
-								false,
-								null
-							]
-						}
-					],
-					"line_type": 2,
-					"meta.is_head_editable": true,
-					"meta.line_index": 0,
-					"meta.visible": true
-				},
-				{
-					"conditionals": {
-						"behavior": 0,
-						"behavior_key": "Show",
-						"facts": {
-
-						},
-						"operand": 0,
-						"operand_args": [],
-						"operand_key": "AND"
-					},
-					"content": {
-						"content": [
-							{
-								"name": "background-name",
-								"value": "bedroom"
-							}
-						],
-						"delay.after": 0,
-						"delay.before": 0,
-						"meta.selected_index": 3,
-						"name": "set-background"
+						"meta.selected_index": 0,
+						"name": "black-fade-in-out"
 					},
 					"facts": {
 
@@ -245,7 +201,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 1,
+					"meta.line_index": 0,
 					"meta.visible": true
 				},
 				{
@@ -312,7 +268,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 2,
+					"meta.line_index": 1,
 					"meta.visible": true
 				},
 				{
@@ -377,7 +333,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 3,
+					"meta.line_index": 2,
 					"meta.visible": true
 				},
 				{
@@ -444,7 +400,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 4,
+					"meta.line_index": 3,
 					"meta.visible": true
 				},
 				{
@@ -525,7 +481,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 5,
+					"meta.line_index": 4,
 					"meta.visible": true
 				},
 				{
@@ -549,7 +505,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:You awake next to Zero. She's still passed out. Some of the momentary source of anesthetic dripping both down your thighs. (Or what could be said to be Zero's thigh-ish area). As you roll over, a splitting headache runs through your skull. You're dehydrated. Severely.<lc>As you rummage through the contents of the table surface you make sure to not disturb the delicate arrangement of items and trinkets.<mp>You find a small glass still filled with water and tip it against your lips, and a thought enters your head.\n[]>euphoria:Ah fuck...",
+						"content": "[]>narrator:You awake next to Zero. She's still passed out. Some of the momentary source of anesthetic dripping both down your thighs. (Or what could be said to be Zero's thigh-ish area). As you roll over, a splitting headache runs through your skull. You're dehydrated. Severely.<lc>As you rummage through the contents of the table surface you make sure to not disturb the delicate arrangement of items and trinkets.<mp> You find a small glass still filled with water and tip it against your lips, and a thought enters your head.\n[]>euphoria:Ah fuck...",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -592,7 +548,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 6,
+					"meta.line_index": 5,
 					"meta.visible": true
 				},
 				{
@@ -673,7 +629,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 7,
+					"meta.line_index": 6,
 					"meta.visible": true
 				},
 				{
@@ -740,7 +696,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 8,
+					"meta.line_index": 7,
 					"meta.visible": true
 				},
 				{
@@ -807,7 +763,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 9,
+					"meta.line_index": 8,
 					"meta.visible": true
 				},
 				{
@@ -874,7 +830,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 10,
+					"meta.line_index": 9,
 					"meta.visible": true
 				},
 				{
@@ -941,7 +897,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 11,
+					"meta.line_index": 10,
 					"meta.visible": true
 				}
 			],
@@ -1038,7 +994,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:You emerge back in your apartment, Zero now having had the time to wake and even shower apparently. You were faster with your plants once.<lc>Sipping fresh coffee, she smiles at you.\n[]>zero:My my, can't even wait for me to wake up, huh?\n[]>euphoria:We fucked for like 8 days.\n[]>zero:That's not even one weeeeek!\n[]>euphoria:Do you know how much stuff I can get done in 8 days?\n[]>zero:Quite accurately, actually. Yes.\n[]>euphoria:*sigh*... Zero, I'm...<ap>not in the mood.<lc>I have to go before the circles.",
+						"content": "[]>narrator:You emerge back in your apartment, Zero now having had the time to wake and even shower apparently. You were faster with your plants once.<lc>Sipping fresh coffee, she smiles at you.\n[]>zero:My my, can't even wait for me to wake up, huh?\n[]>euphoria:We fucked for like 8 days.\n[]>zero:That's not even one weeeeek!\n[]>euphoria:Do you know how much stuff I can get done in 8 days?\n[]>zero:Quite accurately, actually. Yes.\n[]>euphoria:*sigh*... Zero, I'm...<ap> not in the mood.<lc>I have to go before the circles.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -1682,7 +1638,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>euphoria: Your honor, they are not mine. They may be the result of seed extractions someone conducted on the already circulating plants, technoflora, that's- that are out there. Recently, I got into buying what I want, instead of growing it myself. All of the vendors appeared legitimate.\n[]>oldrone:Please remain cognizant of your statements not contempting the court. Just mere days ago, a shipment of controlled parts destined to you was seized.\n[]>euphoria:As I elaborated, they appeared legitimate. As per §451 of the federated vendor bill, I am entitled to the assumption of trade in good faith.\n[]>narrator:Oldrone adjusts his spectacles. He lets out an exasperated sigh.\n[]>oldrone:Even that may be true. Yet, when we searched your apartment four days in the past, we seized another specimen, of same lineage. It would have been ripe in just over two weeks.\n[]>euphoria:I would have been there when you searched.\n[]>oldrone:It seemed you were occupied with sexual practices.\n[]>euphoria:[Did they forget the fucking basement???]<lc>I was not informed of this.\n[]>oldrone:That would defeat the point of a search, would it not? Please do not waste this circle's time with tautologies.\n[]>euphoria:I apologize. <mp>But even so, I maintain that even any specimen you may allege to find in my domicile, is also not mine or in my care.\n[]>oldrone:Come again? Who else has access to your apartment?\n[]>euphoria:Just my partner. And any malicious actors willing to accuse me. Ties to my illegal activity months ago may still hold me back.\n[]>oldrone:Ridiculous.\n[]>euphoria:I urge you to sample the specimen you seized, if it exists. Find any of my biological byproducts older than a week, such as exhaled carbon dioxide or the trace aminos of dead skill cells.<lc>Until then, under $9178.a of the narcotics and bio statute, which defines ownership of domestically held blooming organisms by continued shared physical proximity for over a week or during the bearing of produce, you cannot prove that this suppsed-to-exist specimen is mine.\n[]>narrator:Oldrone's stare burns with apathetic hatred.\n[]>oldrone:We will pause the proceedings. You will receive another summons should this not prove a valid objection...<ap>Dismissed.\n[]>narrator:You bow your head and wordlessly leave the room.",
+						"content": "[]>euphoria: Your honor, they are not mine. They may be the result of seed extractions someone conducted on the already circulating plants, technoflora, that's- that are out there. Recently, I got into buying what I want, instead of growing it myself. All of the vendors appeared legitimate.\n[]>oldrone:Please remain cognizant of your statements not contempting the court. Just mere days ago, a shipment of controlled parts destined to you was seized.\n[]>euphoria:As I elaborated, they appeared legitimate. As per §451 of the federated vendor bill, I am entitled to the assumption of trade in good faith.\n[]>narrator:Oldrone adjusts his spectacles. He lets out an exasperated sigh.\n[]>oldrone:Even that may be true. Yet, when we searched your apartment four days in the past, we seized another specimen, of same lineage. It would have been ripe in just over two weeks.\n[]>euphoria:I would have been there when you searched.\n[]>oldrone:It seemed you were occupied with sexual practices.\n[]>euphoria:[Did they forget the fucking basement???]<lc>I was not informed of this.\n[]>oldrone:That would defeat the point of a search, would it not? Please do not waste this circle's time with tautologies.\n[]>euphoria:I apologize. <mp>But even so, I maintain that even any specimen you may allege to find in my domicile, is also not mine or in my care.\n[]>oldrone:Come again? Who else has access to your apartment?\n[]>euphoria:Just my partner. And any malicious actors willing to accuse me. Ties to my illegal activity months ago may still hold me back.\n[]>oldrone:Ridiculous.\n[]>euphoria:I urge you to sample the specimen you seized, if it exists. Find any of my biological byproducts older than a week, such as exhaled carbon dioxide or the trace aminos of dead skill cells.<lc>Until then, under $9178.a of the narcotics and bio statute, which defines ownership of domestically held blooming organisms by continued shared physical proximity for over a week or during the bearing of produce, you cannot prove that this suppsed-to-exist specimen is mine.\n[]>narrator:Oldrone's stare burns with apathetic hatred.\n[]>oldrone:We will pause the proceedings. You will receive another summons should this not prove a valid objection...<mp> Dismissed.\n[]>narrator:You bow your head and wordlessly leave the room.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -1887,7 +1843,7 @@
 							},
 							{
 								"name": "new-background",
-								"value": "workshop"
+								"value": "workshop-euphoria"
 							},
 							{
 								"name": "attack",
@@ -1900,6 +1856,10 @@
 							{
 								"name": "sustain",
 								"value": ""
+							},
+							{
+								"name": "new-background-music",
+								"value": "Unsteady Work"
 							}
 						],
 						"delay.after": 0,
@@ -2095,6 +2055,71 @@
 						"operand_key": "AND"
 					},
 					"content": {
+						"content": [
+							{
+								"name": "key",
+								"value": "Zero Dragging Nails"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 4,
+						"name": "set-background-music"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 5,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
 						"active_actors": [
 							"narrator",
 							"euphoria",
@@ -2147,7 +2172,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 5,
+					"meta.line_index": 6,
 					"meta.visible": true
 				},
 				{
@@ -2214,7 +2239,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 6,
+					"meta.line_index": 7,
 					"meta.visible": true
 				},
 				{
@@ -2281,71 +2306,6 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 7,
-					"meta.visible": true
-				},
-				{
-					"conditionals": {
-						"behavior": 0,
-						"behavior_key": "Show",
-						"facts": {
-
-						},
-						"operand": 0,
-						"operand_args": [],
-						"operand_key": "AND"
-					},
-					"content": {
-						"content": [
-							{
-								"name": "key",
-								"value": "Melancholy"
-							}
-						],
-						"delay.after": 0,
-						"delay.before": 0,
-						"meta.selected_index": 4,
-						"name": "set-background-music"
-					},
-					"facts": {
-
-					},
-					"header": [
-						{
-							"data_type": 5,
-							"property_name": "character",
-							"values": [
-								0,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-euphoria",
-							"values": [
-								1,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-zero",
-							"values": [
-								2,
-								0
-							]
-						},
-						{
-							"data_type": 6,
-							"property_name": "update-emotions",
-							"values": [
-								false,
-								null
-							]
-						}
-					],
-					"line_type": 2,
-					"meta.is_head_editable": true,
 					"meta.line_index": 8,
 					"meta.visible": true
 				},
@@ -2381,6 +2341,10 @@
 							{
 								"name": "sustain",
 								"value": ""
+							},
+							{
+								"name": "new-background-music",
+								"value": "Melancholy"
 							}
 						],
 						"delay.after": 0,
@@ -2451,7 +2415,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:As soon as you step through the apartment door, your headspace shifts. What you perceived as a slight disturbance and distraction in your workshop mere moments ago, is now a much different beast.\n[]>euphoria:You're lucky you're this cute.\n[]>narrator:You push Zero down to the floor. You made sure to give her new parts all the sensoric feedback cycles imaginable when you installed them. And you indulge in that fact, kissing the metal and bones and wires all over your lover while you occupy her mouth with your fingers. In the morning, you'll realize you never even made it to the bed.\n[]>zero:...\n[]>euphoria:Thank you for bringing me up here again. You're so fun to consume.\n[]>zero:*muffled, flustered approval*\n[]>euphoria:... and indulge in.\n[]>narrator:You shift your weight up.\n[]>euphoria:Is it okay for you if I sit on your face?\n[]>narrator:With massive eyes, she nods.\n[]>euphoria:Hehe.... thank you.\n[]>narrator:The temperature fluctuations of her facial actuators send literal and metaphorical shivers down your spine. As you grind on Zero's face, the microscopic and macroscopic mandibles of her jaw area lacerate your thighs and nethers in all the right places. When this happened the first time, Zero was mortified, understandably. <lc>But this is different from those parts of your past. It is willed. It took Zero time to realize that this was her seeing you in a safe and controlled environment with what once was a dangerous coping mechanism to you. You feel safe, letting yourself fall like this around her.<lc>Gracefully, you dance your hips across that razor field, always staying on the edge (in both ways), but never crossing-<ap> one of them. If one were have permission to exsanguinate you, it would only be yourself. <ap>You cover her with your... cum.... or whatever it is now.<lc>Over the next hours this becomes a repeat occurrence, the only external thing either of you is ever concerned with being the computer wiring on the floor not getting shorted by your escapades.",
+						"content": "[]>narrator:As soon as you step through the apartment door, your headspace shifts. What you perceived as a slight disturbance and distraction in your workshop mere moments ago, is now a much different beast.\n[]>euphoria:You're lucky you're this cute.\n[]>narrator:You push Zero down to the floor. You made sure to give her new parts all the sensoric feedback cycles imaginable when you installed them. And you indulge in that fact, kissing the metal and bones and wires all over your lover while you occupy her mouth with your fingers. In the morning, you'll realize you never even made it to the bed before 5 am.\n[]>zero:...\n[]>euphoria:Thank you for bringing me up here again. You're so fun to consume.\n[]>zero:*muffled, flustered approval*\n[]>euphoria:...and indulge in.\n[]>narrator:You shift your weight up.\n[]>euphoria:Is it okay for you if I sit on your face?\n[]>narrator:With massive eyes, she nods.\n[]>euphoria:Hehe.... thank you.\n[]>narrator:The temperature fluctuations of her facial actuators send literal and metaphorical shivers down your spine. <mp>As you grind on Zero's face, the microscopic and macroscopic mandibles of her jaw area lacerate your thighs and nethers in all the right places. When this happened the first time, Zero was mortified, understandably. <lc>But this is different from those parts of your past. It is willed. It took Zero time to realize that this was her seeing you in a safe and controlled environment with what once was a dangerous coping mechanism to you. You feel safe, letting yourself fall like this around her.<lc>Gracefully, you dance your hips across that razor field, always staying on the edge (in both ways), but never crossing-<ap> one of them. If one were have permission to exsanguinate you, it would only be yourself. <ap>You cover her with your... cum.... or whatever it is now.<lc>Over the next hours this becomes a repeat occurrence, the only external thing either of you is ever concerned with being the computer wiring on the floor not getting shorted by your escapades.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -2585,7 +2549,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>zero:??? o...k...\n[]>narrator:And she gets up-<mp>As you swing one of your legs up, and into Zero's leg chassis, the wall behind her receives a small arc of blood. You look down.\n[]>euphoria:Still good... hehe...\n[]>narrator:And the other leg goes up to Zero's immediate shock. She's now holding your close, very close in fact, to her own torso, lest you fall down with your legs now locked behind her waist- Even almost making zero fall over backwards if it weren't for the ridiculously strong hind legs of hers.",
+						"content": "[]>zero:??? o...k...\n[]>narrator:And she gets up-<mp> As you swing one of your legs up, and into Zero's leg chassis, the wall behind her receives a small arc of blood. You look down.\n[]>euphoria:Still good... hehe...\n[]>narrator:And the other leg goes up to Zero's immediate shock. She's now holding your close, very close in fact, to her own torso, lest you fall down with your legs now locked behind her waist- Even almost making zero fall over backwards if it weren't for the ridiculously strong hind legs of hers.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -2942,7 +2906,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:It's been a long night. Yet, with no set work schedule to bother you, you awake well-rested.\n[]>zero:cheeeee.....\n[]>narrator:You find Zero staring at you when you awake.\n[]>euphoria:Good morning.\n[]>zero:ehehe....\n[]>narrator:She squeezes you tightly.\n[]>euphoria:Slept well?\n[]>zero:Very well!\n[]>narrator:The smaller extremeties of her abdomen tickle your legs.\n[]>euphoria:...\n[]>euphoria:Alrighty I gotta get up now.\n[]>zero:Wait why?\n[]>euphoria:I still have unfinished work to do from yesterday!\n[]>zero:Ugh fine. I'll clean up the apartment a bit.\n[]>euphoria:Thank you.\n[]>narrator:You give her a kiss on her forehead.",
+						"content": "[]>narrator:It's been a long night. Yet, with no set work schedule to bother you, you awake well-rested.\n[]>zero:Cheeeee.....\n[]>narrator:You find Zero staring at you when you awake.\n[]>euphoria:Good morning.\n[]>zero:Ehehe....\n[]>narrator:She squeezes you tightly.\n[]>euphoria:Slept well?\n[]>zero:Very well!\n[]>narrator:The smaller extremeties of her abdomen tickle your legs.\n[]>euphoria:...\n[]>euphoria:Alrighty I gotta get up now.\n[]>zero:Wait why?\n[]>euphoria:I still have unfinished work to do from yesterday!\n[]>zero:Ugh fine. I'll clean up the apartment a bit.\n[]>euphoria:Thank you.\n[]>narrator:You give her a kiss on her forehead.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -3020,6 +2984,10 @@
 							{
 								"name": "sustain",
 								"value": "4.0"
+							},
+							{
+								"name": "new-background-music",
+								"value": "Jeremiah"
 							}
 						],
 						"delay.after": 0,
@@ -3081,71 +3049,6 @@
 						"operand_key": "AND"
 					},
 					"content": {
-						"content": [
-							{
-								"name": "key",
-								"value": "Jeremiah"
-							}
-						],
-						"delay.after": 0,
-						"delay.before": 0,
-						"meta.selected_index": 4,
-						"name": "set-background-music"
-					},
-					"facts": {
-
-					},
-					"header": [
-						{
-							"data_type": 5,
-							"property_name": "character",
-							"values": [
-								0,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-euphoria",
-							"values": [
-								1,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-zero",
-							"values": [
-								2,
-								0
-							]
-						},
-						{
-							"data_type": 6,
-							"property_name": "update-emotions",
-							"values": [
-								false,
-								null
-							]
-						}
-					],
-					"line_type": 2,
-					"meta.is_head_editable": true,
-					"meta.line_index": 2,
-					"meta.visible": true
-				},
-				{
-					"conditionals": {
-						"behavior": 0,
-						"behavior_key": "Show",
-						"facts": {
-
-						},
-						"operand": 0,
-						"operand_args": [],
-						"operand_key": "AND"
-					},
-					"content": {
 						"active_actors": [
 							"narrator",
 							"euphoria",
@@ -3155,7 +3058,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:When you return to the living room after around two hours, Zero is visibly deflated. She stares dejectedly and absent-mindedly at the wallpaper while the room is filled by tunes of your favorite ambient noise artists. When you let your gaze wander for a bit, there's a new letter on the table. It wasn't there when you left.\n[]>narrator:She tries to choke out syllables. The trembling in her voice is too strong to vocalize anything. You move in to hold her tight. <lc>Minutes pass. Small wet spots have now formed on your chest.\n[]>zero:I... <ap><ap>hate this body\n[]>narrator:Her voice is filled with despair, anger and the revenants of choked tears. She breaks away.\n[]>euphoria:...\n[]>zero:It's not even worth the upkeep. Read the letter.\n[]>narrator:While you read, Zero stares out the window.\n[]>euphoria:...\n[]>euphoria:You're gonna lose your eye?\n[]>zero:One week. Then it'll be in my brain.\n[]>narrator:You stare at each other. No attempt at movement emanates from Zero's body.\n[]>euphoria:Shit...<ap>Can I give you a hug?\n[]>zero:...please...\n[]>narrator:You gently guide her to the couch again. You take place atop her and press your form into her, trying to comfort whatever part of her soul is not completely annihilated right now. Both of you stay like this for the rest of the day, only stirred when you decide to get food for Zero and you.",
+						"content": "[]>narrator:When you return to the living room after around two hours, Zero is visibly deflated. She stares dejectedly and absent-mindedly at the wallpaper while the room is filled by tunes of your favorite ambient noise artists. When you let your gaze wander for a bit, there's a new letter on the table. It wasn't there when you left.\n[]>narrator:She tries to choke out syllables. The trembling in her voice is too strong to vocalize anything. You move in to hold her tight. <lc>Minutes pass. Small wet spots have now formed on your chest.\n[]>zero:I... <ap><ap>hate this body\n[]>narrator:Her voice is filled with despair, anger and the revenants of choked tears. She breaks away.\n[]>euphoria:...\n[]>zero:It's not even worth the upkeep. Read the letter.\n[]>narrator:While you read, Zero stares out the window.\n[]>euphoria:...\n[]>euphoria:You're gonna lose your eye?\n[]>zero:One week. Then it'll be in my brain.\n[]>narrator:You stare at each other. No attempt at movement emanates from Zero's body.\n[]>euphoria:Shit...<ap> Can I give you a hug?\n[]>zero:...please...\n[]>narrator:You gently guide her to the couch again. You take place atop her and press your form into her, trying to comfort whatever part of her soul is not completely annihilated right now. Both of you stay like this for the rest of the day, only stirred when you decide to get food for Zero and you.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -3198,7 +3101,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": false,
-					"meta.line_index": 3,
+					"meta.line_index": 2,
 					"meta.visible": true
 				},
 				{
@@ -3265,7 +3168,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 4,
+					"meta.line_index": 3,
 					"meta.visible": true
 				},
 				{
@@ -3325,7 +3228,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": false,
-					"meta.line_index": 5,
+					"meta.line_index": 4,
 					"meta.visible": true
 				},
 				{
@@ -3392,7 +3295,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 6,
+					"meta.line_index": 5,
 					"meta.visible": true
 				}
 			],
@@ -3489,7 +3392,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>euphoria:Lay down please. I'll fasten you now.\n[]>narrator:Zero wordlessly complies. Her expression is open, no defenses up. Complete and utter trust. You tie her down, head rested on the softest pillow. You apply the anesthetic gel to her orbital area and in a few minutes you too, are ready.",
+						"content": "[]>euphoria:Lay down please. I'll fasten you now.\n[]>narrator:Zero wordlessly complies. Her expression is empty, no defenses or reactions emenating. Complete and utter trust for you. You tie her down, head rested on the softest pillow. You apply the anesthetic gel to her orbital area and in a few minutes you too, are ready.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -3920,7 +3823,7 @@
 							}
 						],
 						"delay.after": 0,
-						"delay.before": 0,
+						"delay.before": 2.32,
 						"meta.selected_index": 4,
 						"name": "set-background-music"
 					},
@@ -3987,7 +3890,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:Everything slowly grows into focus again. Tear-like drops of blood run down the skin and wiring of your face. but as the lights floods your cornea, a distant pressure seems to have been evaporated. Before you, stands Euphoria. Her face spread wide by the widest and most pure grin. Not even the deep vermillion void in her eye socket able to mar this pride.\n[]>zero:...\n[]>euphoria:Ehehe... I hope you like it.\n[]>zero:Euphoria... we could've grown more.\n[]>euphoria:But you needed it now.\n[]>zero:...\n[]>euphoria:I couldn't watch you... your brain get eaten by itself.\n[]>zero:...You're sweet.\n[]>euphoria:Have you looked at yourself? I think we're way past the point of it being new that I care about you.\n[]>zero:...Still.<lc>Can I... have a kiss?\n[]>narrator:Euphoria wordlessly moves in and fulfills your request.\n[]>narrator:After some time, she straightens back up, needing to be braced over the gurney like that probably a bit too uncomfortable after such a surgery.\n[]>euphoria:Besides, I don't even know of the quality of the plants. I know of the quality of my own.<mp> But enough about that.\n[]>narrator:Euphoria pats your head. Your body is weak now. It has been for a long time but now it feels more so. Surgery still takes its toll on you.\n[]>euphoria:So how are you feeling right now? Or still too early to tell?\n[]>zero:My eye feels weird.\n[]>euphoria:I think that's to be expected.\n[]>zero:Probably.\n[]>zero:Give me a few more moments, then I can decide...<lc>...",
+						"content": "[]>narrator:Everything slowly grows into focus again. Tear-like drops of blood run down the skin and wiring of your face. But as the lights flood your cornea, a distant pressure seems to have been evaporated. Before you, stands Euphoria. Her face bears the widest and most pure grin, radiant like a supernova. Not even the deep vermillion void in her eye socket able to mar this pride.\n[]>zero:...\n[]>euphoria:Ehehe... I hope you like it.\n[]>zero:Euphoria... we could've grown more.\n[]>euphoria:But you needed it now.\n[]>zero:...\n[]>euphoria:I couldn't watch you... your brain get eaten by itself.\n[]>zero:...You're sweet.\n[]>euphoria:Have you looked at yourself? I think we're way past the point of it being new that I care about you.\n[]>zero:...Still.<lc>Can I... have a kiss?\n[]>narrator:Euphoria wordlessly moves in and fulfills your request.\n[]>narrator:After some time, she straightens back up, needing to be braced over the gurney like that probably a bit too uncomfortable after such a surgery.\n[]>euphoria:Besides, I don't even know of the quality of the plants. I know of the quality of my own.<mp> But enough about that.\n[]>narrator:Euphoria pats your head. Your body is weak now. It has been for a long time but now it feels more so. Surgery still takes its toll on you.\n[]>euphoria:So how are you feeling right now? Or still too early to tell?\n[]>zero:My eye feels weird.\n[]>euphoria:I think that's to be expected.\n[]>zero:Probably.\n[]>zero:Give me a few more moments, then I can decide...<lc>...",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -4129,7 +4032,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>zero:Soooo... this is it, huh? Haven't been down here in a while.\n[]>narrator:Leaves spliced with wires drape themselves over the operating curtain.\n[]>zero:We kept that palm? I wanna game. We can make a game thing out of it.\n[]>narrator:A small pristine potted fern keeps you company. It might be the only thing down here not laced with metal scars. The leaves are strange to the touch.\n[]>zero:So soft...\n[]>euphoria:As are you!\n[]>narrator:An echo down the stairwell.<mp>The source trails shortly behind.\n[]>zero:What remains of my skin... I guess.\n[]>euphoria:And everything else too, you know. Your alloys comfort me too.\n[]>zero:You made them.\n[]>euphoria:That's why they're good.\n[]>narrator:Euphoria sets down a tray.\n[]>euphoria:Veggie sticks! And dino nuggies!\n[]>narrator:The lizard-shaped protein preparations were always a source of comfort. You're glad they are compatible with your internals. Not everything is.\n[]>zero:Hungry...\n[]>euphoria:Well, dig in. I'm gonna steal a few from you though.\n[]>zero:Feel free.\n[]>narrator:She procures two forks and hands you one.",
+						"content": "[]>zero:Soooo... this is it, huh? Haven't been down here behind the curtains in a while.\n[]>narrator:Leaves spliced with wires drape themselves over the operating curtain.\n[]>zero:We kept that palm? I wanna game. We can make a game thing out of it.\n[]>narrator:A small pristine potted fern keeps you company. It might be the only thing down here not laced with metal scars. The leaves are strange to the touch.\n[]>zero:So soft...\n[]>euphoria:As are you!\n[]>narrator:An echo down the stairwell.<mp> The source trails shortly behind.\n[]>zero:What remains of my skin... I guess.\n[]>euphoria:And everything else too, you know. Your alloys comfort me too.\n[]>zero:You made them.\n[]>euphoria:That's why they're good.\n[]>narrator:Euphoria sets down a tray.\n[]>euphoria:Veggie sticks! And dino nuggies!\n[]>narrator:The lizard-shaped protein preparations were always a source of comfort. You're glad they are compatible with your internals. Not everything is.\n[]>zero:Hungry...\n[]>euphoria:Well, dig in. I'm gonna steal a few from you though.\n[]>zero:Feel free.\n[]>narrator:She procures two forks and hands you one.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -4336,7 +4239,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>euphoria:A specially-shaped bit of tumbleweed!<mp>...<ap>Okay, technically its last genetic ancestor with tumbleweed is as distant as algea to tumbleweed. This is more like very filigree tulip bramble.\n[]>narrator:And she rotates the brambles. You see...\n[]>zero:A skull?\n[]>euphoria:Rightio. Maybe we can do something with this, doesn't matter if not. But it looks cool. Maybe structural reinforcement for the titans? Maybe a soul container??\n[]>zero:A what? Do you even know how to pull that off?\n[]>euphoria:Not yet.\n[]>zero:...\n[]>euphoria:But we'll see.\n[]>zero:Keep me updated.\n[]>euphoria:Will do.\n[]>narrator:She puts the skullbramble back into the workbench's footrest.",
+						"content": "[]>euphoria:A specially-shaped bit of tumbleweed! <mp>...<ap>Okay, technically its last genetic ancestor with tumbleweed is as distant as algea to tumbleweed. This is more like very filigree tulip bramble.\n[]>narrator:And she rotates the brambles. You see...\n[]>zero:A skull?\n[]>euphoria:Rightio. Maybe we can do something with this, doesn't matter if not. But it looks cool. Maybe structural reinforcement for the titans? Maybe a soul container??\n[]>zero:A what? Do you even know how to pull that off?\n[]>euphoria:Not yet.\n[]>zero:...\n[]>euphoria:But we'll see.\n[]>zero:Keep me updated.\n[]>euphoria:Will do.\n[]>narrator:She puts the skullbramble back into the workbench's footrest.<mp> As she does, you give her a hug from behind. Her hair smells nice.<lc>You pick up your box of elbow joints and nod her goodbye for now.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -4541,7 +4444,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:You return with the elbow joints to the grand hall you call your own workshop. Massive chunks of metal line the walls, every titan hand-built and the blueprints also of your own design. You think this was once a cathedral. You had to make... modifications to make the titans fit. Or a singular one. The finished ones get sent underground into the heartchamber. It is an arduous task, lining all the parts up, not getting distracted, but also not becoming so understimulated you relapse.\n[]>zero:Hello, funny knife.\n[]>narrator:You cut away the brambles from the joints you now have in your posession.",
+						"content": "[]>narrator:You return with the elbow joints to the grand hall you call your own workshop. Massive chunks of metal line the walls, every titan hand-built and the blueprints also of your own design. You think this was once a cathedral. You had to make... modifications to make the titans fit. Or a singular one. The finished ones get sent underground into the heartchamber. It is an arduous task, lining all the parts up, not getting distracted, but also not becoming so understimulated you relapse.\n[]>zero:Hello, funny knife.\n[]>narrator:You cut away the brambles from the joints you now have in your possession.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -4664,6 +4567,71 @@
 						"operand_key": "AND"
 					},
 					"content": {
+						"content": [
+							{
+								"name": "key",
+								"value": "Zero Dragging Nails"
+							}
+						],
+						"delay.after": 0,
+						"delay.before": 0,
+						"meta.selected_index": 4,
+						"name": "set-background-music"
+					},
+					"facts": {
+
+					},
+					"header": [
+						{
+							"data_type": 5,
+							"property_name": "character",
+							"values": [
+								0,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-euphoria",
+							"values": [
+								1,
+								0
+							]
+						},
+						{
+							"data_type": 5,
+							"property_name": "emotion-zero",
+							"values": [
+								2,
+								0
+							]
+						},
+						{
+							"data_type": 6,
+							"property_name": "update-emotions",
+							"values": [
+								false,
+								null
+							]
+						}
+					],
+					"line_type": 2,
+					"meta.is_head_editable": true,
+					"meta.line_index": 4,
+					"meta.visible": true
+				},
+				{
+					"conditionals": {
+						"behavior": 0,
+						"behavior_key": "Show",
+						"facts": {
+
+						},
+						"operand": 0,
+						"operand_args": [],
+						"operand_key": "AND"
+					},
+					"content": {
 						"active_actors": [
 							"narrator",
 							"euphoria",
@@ -4716,7 +4684,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 4,
+					"meta.line_index": 5,
 					"meta.visible": true
 				},
 				{
@@ -4783,7 +4751,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 5,
+					"meta.line_index": 6,
 					"meta.visible": true
 				},
 				{
@@ -4807,7 +4775,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>euphoria:I didn't know where else to attach the main artery!\n[]>narrator:You hope you didn't actually hurt Euphoria.\n[]>zero:Well, I'm here though. So. Call it worldspine. \"Machine titans, children and dwellers of the worldspine\"... <ap>Doesn't that sound cool?\n[]>euphoria:You don't just choose a name just because it sounds cool. It has to feel right.\n[]>zero:Well if you insist, you asked me and it feels right to me *because* it sounds cool.\n[]>euphoria:Only because you said heartroot sounds like a potato. But now I also can't forget that.<mp> Fine. Worldspine it is.\n[]>zero:Yippie!",
+						"content": "[]>euphoria:I didn't know where else to attach the main artery!\n[]>narrator:You hope you didn't actually hurt Euphoria.\n[]>zero:Well, I'm here though. So. Call it worldspine. \"Machine titans, children and dwellers of the worldspine\"... <ap>Doesn't that sound cool?\n[]>euphoria:You don't just choose a name just because it sounds cool. It has to feel right.\n[]>zero:Well if you insist, you asked me and it feels right to me *because* it sounds cool.\n[]>euphoria:Only because you said heartroot sounds like a potato.<mp> But now I also can't forget that.<mp> Fine. <ap>Worldspine it is.\n[]>zero:Yippie!",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -4850,7 +4818,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 6,
+					"meta.line_index": 7,
 					"meta.visible": true
 				},
 				{
@@ -4917,7 +4885,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 7,
+					"meta.line_index": 8,
 					"meta.visible": true
 				},
 				{
@@ -4941,7 +4909,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:Within minutes, you escalate into a makeout session against the workshop desk. Euphoria grips your nape with her still-flesh hand, digging those frail keratin-based nails into your soft and exposed neck.\n[]>zero:Aren't... aren't we supposed to be working right now...\n[]>euphoria:I think this is quite important spiritual work actually.\n[]>narrator:Euphoria grinds their crotch on your chassis. You hold her closer.\n[]>euphoria:You taste so good.\n[]>zero:...<lc>What do I taste like?\n[]>euphoria:Objectively? Salt and oxide and aluminum and saliva. Subjectively?\n[]>narrator:Euphoria does not continue the thought before you two tonguewrestle again.\n[]>euphoria:Absolute degeneracy. And also gay. Very pleasant overall.\n[]>zero:God you're weird.\n[]>euphoria:I know... hehe...\n[]>narrator:It goes on like this, oscillating between a mental exploration of your work and shared ties, and the physical exploration of the other. <lc>You only stop when you both realize you actually have more physical work to do outside of each other.\n[]>zero:Very sad.\n[]>euphoria:Very sad indeed. Stay hydrated.\n[]>narrator:Euphoria hands you her bottle of water. She also greases a few of your joints while you drink. You caress her while she keeps up her hydration then.\n[]>euphoria:We'll do more of this later...\n[]>zero:I'm looking forward to it, oh Euphoria.",
+						"content": "[]>narrator:Within minutes, you escalate into a makeout session against the workshop desk. Euphoria grips your nape with her still-flesh hand, digging those frail keratin-based nails into your soft and exposed neck.\n[]>zero:Aren't... aren't we supposed to be working right now...\n[]>euphoria:I think this is quite important spiritual work actually.\n[]>narrator:Euphoria grinds their crotch on your chassis. You hold her closer.\n[]>euphoria:You taste so good.\n[]>zero:...<lc>What do I taste like?\n[]>euphoria:Objectively? Salt and oxide and aluminum and saliva. Subjectively?\n[]>narrator:Euphoria does not continue the thought before you two tonguewrestle again.\n[]>euphoria:Absolute degeneracy. And also gay. Very pleasant overall.\n[]>zero:God you're weird.\n[]>euphoria:I know... hehe...\n[]>narrator:It goes on like this, oscillating between a mental exploration of your work and shared ties, and the physical exploration of the other. <lc>You only stop when you both realize you actually have more physical work to do outside of each other.\n[]>zero:Very sad.\n[]>euphoria:Very sad indeed. Stay hydrated.\n[]>narrator:Euphoria hands you her bottle of water. She also greases a few of your joints while you drink. You caress her while *she* then keeps up her hydration.\n[]>euphoria:We'll do more of this later...\n[]>zero:I'm looking forward to it, oh Euphoria.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -4984,17 +4952,9 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 8,
+					"meta.line_index": 9,
 					"meta.visible": true
-				}
-			],
-			"next": 11,
-			"number": 10,
-			"page_key": "",
-			"terminate": false
-		},
-		"11": {
-			"lines": [
+				},
 				{
 					"conditionals": {
 						"behavior": 0,
@@ -5009,14 +4969,34 @@
 					"content": {
 						"content": [
 							{
-								"name": "background-name",
+								"name": "hide-characters",
+								"value": "true"
+							},
+							{
+								"name": "new-background",
 								"value": "basement-hallway"
+							},
+							{
+								"name": "attack",
+								"value": ""
+							},
+							{
+								"name": "release",
+								"value": ""
+							},
+							{
+								"name": "sustain",
+								"value": ""
+							},
+							{
+								"name": "new-background-music",
+								"value": "Wedding"
 							}
 						],
 						"delay.after": 0,
 						"delay.before": 0,
-						"meta.selected_index": 3,
-						"name": "set-background"
+						"meta.selected_index": 0,
+						"name": "black-fade-in-out"
 					},
 					"facts": {
 
@@ -5057,9 +5037,17 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": true,
-					"meta.line_index": 0,
+					"meta.line_index": 10,
 					"meta.visible": true
-				},
+				}
+			],
+			"next": 11,
+			"number": 10,
+			"page_key": "",
+			"terminate": false
+		},
+		"11": {
+			"lines": [
 				{
 					"conditionals": {
 						"behavior": 0,
@@ -5081,7 +5069,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:You stand in the basement hallway. Two doors leading to workshops before you, one for each of you. The fruits of your labor from these last weeks standing in full blossom inside. These last weeks have taken a toll on you both physically. Euphoria had an even harder time stalling a second hearing. You kept losing track of the state of individual titans, the collective grew so large. But now it is done. One last step for each of you, but a final goodbye now. Neither of you will see each other again.\n[]>zero:Thank you for being with me until now.\n[]>euphoria:The honor and pleasure is mine just as well.\n[]>narrator:You hug Euphoria as tightly as possible.\n[]>zero:I'm gonna miss you though.\n[]>euphoria:Just believe in me. I'll also believe in you.\n[]>zero:...\n[]>euphoria:Let's build a world of our own design! We will construct this world anew! And it will be SO awesome.\n[]>narrator:You squeeze harder.\n[]>zero:It better be.<lc>Have fun with the ritual.\n[]>euphoria:Thank you. Good luck with the machine titans. I know you can do it.\n[]>zero:We both can.",
+						"content": "[]>narrator:Days have passed. <mp>Euphoria and you are standing in the basement hallway. <mp>Two doors leading to the workshops before you, one for each of you. The fruits of your labor from these last weeks, nay, months, perhaps years by some metrics, standing in full blossom inside. These last weeks have taken a toll on you both physically. Euphoria had an even harder time stalling a second hearing. You kept losing track of the state of individual titans, the collective grew so large. But now it is done. <lc>One last task for each of you, but a final goodbye now.<mp> Neither of you will see the other again.\n[]>zero:Thank you for being with me until now.\n[]>euphoria:The honor and pleasure is mine just as well.\n[]>narrator:You hug Euphoria as tightly as possible.\n[]>zero:I'm gonna miss you though.\n[]>narrator:The words barely articulate through your shaky and tear-filled voice.\n[]>euphoria:Just believe in me. I'll also believe in you.\n[]>zero:...\n[]>euphoria:Let's build a world of our own design! We will construct this world anew! And it will be SO awesome.\n[]>narrator:You squeeze harder.\n[]>zero:It better be.<lc>Have fun with the ritual.\n[]>euphoria:Thank you--\n[]>narrator:Her voice is as flat as can be.\n[]>euphoria:Good luck with the machine titans. I know you can do it.\n[]>zero:We both can.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -5124,7 +5112,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 1,
+					"meta.line_index": 0,
 					"meta.visible": true
 				},
 				{
@@ -5189,7 +5177,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": true,
-					"meta.line_index": 2,
+					"meta.line_index": 1,
 					"meta.visible": true
 				},
 				{
@@ -5256,72 +5244,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 3,
-					"meta.visible": true
-				},
-				{
-					"conditionals": {
-						"behavior": 0,
-						"behavior_key": "Show",
-						"facts": {
-
-						},
-						"operand": 0,
-						"operand_args": [],
-						"operand_key": "AND"
-					},
-					"content": {
-						"content": [
-							{
-								"name": "key",
-								"value": "This Is All Too Much For Me"
-							}
-						],
-						"delay.after": 0,
-						"delay.before": 0,
-						"meta.selected_index": 4,
-						"name": "set-background-music"
-					},
-					"facts": {
-
-					},
-					"header": [
-						{
-							"data_type": 5,
-							"property_name": "character",
-							"values": [
-								0,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-euphoria",
-							"values": [
-								1,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-zero",
-							"values": [
-								2,
-								0
-							]
-						},
-						{
-							"data_type": 6,
-							"property_name": "update-emotions",
-							"values": [
-								false,
-								null
-							]
-						}
-					],
-					"line_type": 2,
-					"meta.is_head_editable": false,
-					"meta.line_index": 4,
+					"meta.line_index": 2,
 					"meta.visible": true
 				},
 				{
@@ -5356,6 +5279,10 @@
 							{
 								"name": "sustain",
 								"value": "5.0"
+							},
+							{
+								"name": "new-background-music",
+								"value": "This Is All Too Much For Me"
 							}
 						],
 						"delay.after": 0,
@@ -5402,7 +5329,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": true,
-					"meta.line_index": 5,
+					"meta.line_index": 3,
 					"meta.visible": true
 				},
 				{
@@ -5426,7 +5353,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:You barely emerge from the cave anymore. But the grand work is proceeding. Euphoria's eye gives you sight like never before, unprecendented precision and drive fuels your motions. Almost devoured by mechanical grace, you move about the machine titan like a beetle across a cadaver.\n[]>zero:Aaahhg!\n[]>narrator:Your arm of flesh grows weak as you work more. You keep splicing more parts into it. Should it come to it, you can just graft a new one from the parts you have. You've seen Euphoria work.<lc>You barely rest anymore.\n[]>zero:I hope at least you are enjoying the show!\n[]>narrator:The ribcage-sized brambleskull Euphoria gave you has found its place atop one of your shelves.\n[]>zero:You know, you're actually quite cute. <ap>I like your big eyes.\n[]>narrator:It has heard and witnessed many of your frustrations and moments of genius, only rivaling how much Euphoria has gotten to see over the years.",
+						"content": "[]>narrator:You barely emerge from the cave anymore. But the grand work is proceeding. Euphoria's eye gives you sight like you last had years ago, unprecendented precision and drive fuels your motions. Almost devoured by mechanical grace, you move about the machine titan like a beetle across a cadaver, adorning it with the last flourishes like the hundreds before it.\n[]>zero:Aaahhg!\n[]>narrator:Your arm of flesh grows weak as you work more. You keep splicing more parts into it. Should it come to it, you can just graft a new one from the parts you have. You've seen Euphoria work.<lc>You barely rest anymore.\n[]>zero:I hope at least you are enjoying the show!\n[]>narrator:The ribcage-sized brambleskull Euphoria gave you has found its place atop one of your shelves.\n[]>zero:You know, you're actually quite cute. <ap>I like your big eyes.\n[]>narrator:It has heard and witnessed many of your frustrations and moments of genius, only rivaling how much Euphoria has gotten to see over the years.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -5469,7 +5396,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 6,
+					"meta.line_index": 4,
 					"meta.visible": true
 				},
 				{
@@ -5536,7 +5463,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 7,
+					"meta.line_index": 5,
 					"meta.visible": true
 				},
 				{
@@ -5603,7 +5530,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 8,
+					"meta.line_index": 6,
 					"meta.visible": true
 				},
 				{
@@ -5684,7 +5611,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": true,
-					"meta.line_index": 9,
+					"meta.line_index": 7,
 					"meta.visible": true
 				},
 				{
@@ -5708,7 +5635,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:It is deep in the night when you finally feel Euphoria's pulse resonates through your eye. Her ritual of ash is blossoming.\n[]>narrator:Tears most bitter and most sweet run down your face. A few drops of blood are mixed in still, too.\n[]>zero:Euphoria... my dear...\n[]>narrator:Roots start breaking through the wall, enveloping everything you two have lived in ever since you met. \n[]>zero:Let me never forget your name.\n[]>narrator:You inhale sharply as the roots lunge to grasp anything to envelop.\n[]>zero:Euphoria...",
+						"content": "[]>narrator:It is deep in the night when you finally feel Euphoria's pulse resonating through your eye. Her ritual of ash is blossoming.\n[]>narrator:Tears most bitter and most sweet run down your face. A few drops of blood are mixed in still, too.\n[]>zero:Euphoria... my dear...\n[]>narrator:Roots start breaking through the wall, enveloping everything you two have lived in ever since you met. \n[]>zero:Let me never forget your name.\n[]>narrator:You inhale sharply as the roots lunge to grasp anything to envelop.\n[]>zero:Euphoria...",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -5751,7 +5678,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 10,
+					"meta.line_index": 8,
 					"meta.visible": true
 				}
 			],
@@ -5762,71 +5689,6 @@
 		},
 		"12": {
 			"lines": [
-				{
-					"conditionals": {
-						"behavior": 0,
-						"behavior_key": "Show",
-						"facts": {
-
-						},
-						"operand": 0,
-						"operand_args": [],
-						"operand_key": "AND"
-					},
-					"content": {
-						"content": [
-							{
-								"name": "key",
-								"value": "Winds"
-							}
-						],
-						"delay.after": 0,
-						"delay.before": 0,
-						"meta.selected_index": 4,
-						"name": "set-background-music"
-					},
-					"facts": {
-
-					},
-					"header": [
-						{
-							"data_type": 5,
-							"property_name": "character",
-							"values": [
-								0,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-euphoria",
-							"values": [
-								1,
-								0
-							]
-						},
-						{
-							"data_type": 5,
-							"property_name": "emotion-zero",
-							"values": [
-								2,
-								0
-							]
-						},
-						{
-							"data_type": 6,
-							"property_name": "update-emotions",
-							"values": [
-								false,
-								null
-							]
-						}
-					],
-					"line_type": 2,
-					"meta.is_head_editable": true,
-					"meta.line_index": 0,
-					"meta.visible": true
-				},
 				{
 					"conditionals": {
 						"behavior": 0,
@@ -5859,6 +5721,10 @@
 							{
 								"name": "sustain",
 								"value": "5.0"
+							},
+							{
+								"name": "new-background-music",
+								"value": "Winds"
 							}
 						],
 						"delay.after": 3.73,
@@ -5905,7 +5771,7 @@
 					],
 					"line_type": 2,
 					"meta.is_head_editable": true,
-					"meta.line_index": 1,
+					"meta.line_index": 0,
 					"meta.visible": true
 				},
 				{
@@ -5972,7 +5838,7 @@
 					],
 					"line_type": 0,
 					"meta.is_head_editable": true,
-					"meta.line_index": 2,
+					"meta.line_index": 1,
 					"meta.visible": true
 				}
 			],

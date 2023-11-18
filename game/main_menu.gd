@@ -1,4 +1,4 @@
-extends Node
+extends CanvasLayer
 
 signal request_show_options()
 signal start_game(page: int)
@@ -8,6 +8,14 @@ func _ready() -> void:
 	
 	find_child("CWContainer").visible = false
 	find_child("CreditsContainer").visible = false
+	
+	connect("visibility_changed", on_visibility_changed)
+	
+	Sound.set_background_music(Sound.BGM_MAIN_MENU_LOST_PIANO, 0.0)
+
+func on_visibility_changed():
+	if visible:
+		Sound.set_background_music(Sound.BGM_MAIN_MENU_LOST_PIANO, 0.0)
 
 func _on_confirm_age_button_pressed() -> void:
 	find_child("ConfirmAge").visible = false
@@ -18,8 +26,8 @@ func _on_abort_button_pressed() -> void:
 
 
 func _on_start_new_button_pressed() -> void:
-	find_child("MenuContainer").visible = false
-	Parser.read_page(5)
+	visible = false
+	Parser.read_page(10)
 
 
 func _on_quit_button_pressed() -> void:

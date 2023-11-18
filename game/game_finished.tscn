@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd30e6wacwrav"]
+[gd_scene load_steps=3 format=3 uid="uid://cd30e6wacwrav"]
 
 [ext_resource type="Script" path="res://game/game_finished.gd" id="1_w5s0e"]
+[ext_resource type="Theme" uid="uid://dd3wmvu0xxyhs" path="res://style/theme.tres" id="2_nxd2e"]
 
 [node name="GameFinished" type="CanvasLayer"]
 script = ExtResource("1_w5s0e")
@@ -11,3 +12,48 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_nxd2e")
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "AND SO THE SEA RECEIVED THE SKY"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[center]This is it.
+Thank you for playing :3"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ILYButton" type="Button" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+focus_mode = 0
+text = "i love you (main menu)"
+
+[node name="FadeButton" type="Button" parent="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "fade into nothing (quit)"
+
+[connection signal="pressed" from="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/ILYButton" to="." method="_on_ily_button_pressed"]
+[connection signal="pressed" from="PanelContainer/PanelContainer/VBoxContainer/HBoxContainer/FadeButton" to="." method="_on_fade_button_pressed"]

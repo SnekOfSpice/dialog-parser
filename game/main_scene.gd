@@ -23,3 +23,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_main_menu_request_show_options() -> void:
 	find_child("PauseMenu").visible = true
+
+
+func _on_game_finished_request_main_menu() -> void:
+	find_child("MainMenu").visible = true
+
+
+func _on_pause_menu_request_main_menu() -> void:
+	find_child("MainMenu").visible = true

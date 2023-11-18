@@ -8,16 +8,50 @@ const BGM_WINDS = "res://game/sound/610365__klankbeeld__snow-city-nl-0009pm-2102
 const BGM_TOO_MUCH_FOR_ME = "res://game/sound/CØL - Golden Twilight (Rarities) - 07 This Is All Too Much For Me (Piano Only).ogg"
 const BGM_MELANCHOLY = "res://game/sound/Serge-Quadrado-Melancholy.ogg"
 const BGM_JEREMIAH = "res://game/sound/CØL - Unmedicated IV - 01 Jeremiah I (Intro).ogg"
+const BGM_MAIN_MENU_LOST_PIANO = "res://game/sound/650013__logicmoon__lost-piano-recording.ogg"
+const BGM_UNSTEADY_WORK = "res://game/sound/661484__jim-bretherick__piano-chord-stretched-distorted-echphoned1.ogg"
+const BGM_ZERO_DRAGGING_NAILS = "res://game/sound/425945__timbre__fb-loop-excerpt-of-erokias-freesound-401743.ogg"
+const BGM_WEDDING = "res://game/sound/wedding.ogg"
 
 var gauge_out_eye = preload("res://game/sound/gauge-out-eye.ogg")
 
 var rampup_time := 1.0
 var target_volume := 0
 
+var current_bgm_key := ""
+
+func set_background_music_by_key(key:String):
+	match key:
+		"Failure to Comply Will Result in Death":
+			set_background_music(BGM_FAILURE_TO_COMPLY)
+		"Where is Heaven?":
+			set_background_music(BGM_WHERE_IS_HEAVEN)
+		"Warm 60s":
+			set_background_music(BGM_PSYCH)
+		"Winds":
+			set_background_music(BGM_WINDS)
+		"Slow, Deep Breaths":
+			set_background_music(BGM_SLOW_DEEP_BREATHS)
+		"This Is All Too Much For Me":
+			set_background_music(BGM_TOO_MUCH_FOR_ME)
+		"Melancholy":
+			set_background_music(BGM_MELANCHOLY)
+		"Jeremiah":
+			set_background_music(BGM_JEREMIAH)
+		"Unsteady Work":
+			set_background_music(BGM_UNSTEADY_WORK)
+		"Zero Dragging Nails":
+			set_background_music(BGM_ZERO_DRAGGING_NAILS)
+		"Wedding":
+			set_background_music(BGM_WEDDING)
+		"":
+			set_background_music("")
+
 func set_background_music(key: String, _rampup_time := rampup_time):
 	rampup_time = _rampup_time
+	current_bgm_key = key
 	var t = get_tree().create_tween()
-	t.tween_property($BGMPlayer, "volume_db", -80, _rampup_time)
+	t.tween_property($BGMPlayer, "volume_db", -80, rampup_time)
 	
 	if key == "":
 		return
@@ -26,19 +60,24 @@ func set_background_music(key: String, _rampup_time := rampup_time):
 	
 	
 	
-	var timer = get_tree().create_timer(_rampup_time)
+	var timer = get_tree().create_timer(rampup_time)
 	await timer.timeout
 	$BGMPlayer.stream = load(key)
 	$BGMPlayer.playing = true
 	
-	if key == BGM_WINDS:
-		target_volume = Options.music_volume + 12
+	set_target_volume(Options.music_volume)
+	
+func set_target_volume(value: float):
+	if current_bgm_key == BGM_WINDS:
+		target_volume = value + 12
 	else:
-		target_volume = Options.music_volume
+		target_volume = value
+	$BGMPlayer.volume_db = target_volume
 
 func ramp_up_background_music():
 	var t = get_tree().create_tween()
 	t.tween_property($BGMPlayer, "volume_db", target_volume, rampup_time)
+	rampup_time = 1.0
 
 # idk TODO ig
 func play(soundName:String, randomPitch := true) -> AudioStreamPlayer:

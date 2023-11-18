@@ -147,11 +147,17 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="MenuContainer/CreditsContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-text = "credits"
+text = "Credits"
 horizontal_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuContainer/CreditsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(850, 0)
+[node name="HBoxContainer" type="ScrollContainer" parent="MenuContainer/CreditsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MenuContainer/CreditsContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "[b]=Writing and Coding[/b]
@@ -159,7 +165,7 @@ text = "[b]=Writing and Coding[/b]
 
 [b]=Visuals[/b]
 Fonts via bitfontmaker2
-	ZeldaFont by Anna
+	ATHA by Snek
 	TimesNewPixel by pentacom (Expanded for § and Ø by Snek)
 Character Art
 	Bloodmachine (https://bloodmachine.neocities.org/)
@@ -167,24 +173,28 @@ Character Design
 	Snek
 
 [b]=Audio[/b]
-Music
-	My dear friend CØL (https://colmusic45.bandcamp.com/)
-		Failure to Comply Will Result in Death
-		Jeremiah I (Intro)
-		Where is Heaven?
-		Slow, Deep Breaths
-		This Is All Too Much For Me (Piano Only) 
-	Free Music Archive
-		Giacomo Forte - Warm 60s (CC BY-NC) 
-		Serge Quadrado - Melancholy (CC BY-NC) 
-Other SFX via freesound.org
+My dear friend CØL (https://colmusic45.bandcamp.com/)
+	Failure to Comply Will Result in Death
+	Jeremiah I (Intro)
+	Where is Heaven?
+	Slow, Deep Breaths
+	This Is All Too Much For Me (Piano Only) 
+Free Music Archive
+	Giacomo Forte - Warm 60s (CC BY-NC) 
+	Serge Quadrado - Melancholy (CC BY-NC) 
+Other SFX and music via freesound.org
 	klankbeeld - snow city NL 0009PM 210206_0243.wav
-	Many spliced together for the eye sfx"
+	Many spliced together for the eye sfx
+	LogicMoon - lost piano recording
+	Jim-Bretherick - Piano chord stretched distorted Echphoned1.wav
+	Timbre -  FB-Loop excerpt of Erokia's Freesound #401743.flac
+	Vasyl_Sakal - Beautiful Romantic Piano"
 fit_content = true
 
 [node name="CloseCreditsButton" type="Button" parent="MenuContainer/CreditsContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+focus_mode = 0
 text = "Close"
 
 [node name="CWContainer" type="PanelContainer" parent="MenuContainer"]
@@ -215,6 +225,7 @@ fit_content = true
 [node name="CloseCWButton" type="Button" parent="MenuContainer/CWContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+focus_mode = 0
 text = "close"
 
 [connection signal="pressed" from="MenuContainer/VBoxContainer/StartNewButton" to="." method="_on_start_new_button_pressed"]

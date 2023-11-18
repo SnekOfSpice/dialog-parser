@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+signal request_main_menu()
 
 func _ready() -> void:
 	visible = false
@@ -13,3 +14,21 @@ func handle_page_terminated(page_index: int):
 		return
 	
 	visible = true
+	
+	if Options.ending_chosen == Options.ENDING_NEVER_REACHED:
+		Options.ending_chosen = Options.ENDING_UNDECIDED
+
+
+func _on_ily_button_pressed() -> void:
+	if Options.ending_chosen == Options.ENDING_UNDECIDED:
+		Options.ending_chosen = Options.ENDING_BACK_TO_MAIN_MENU
+	Options.save()
+	visible = false
+	emit_signal("request_main_menu")
+
+
+func _on_fade_button_pressed() -> void:
+	if Options.ending_chosen == Options.ENDING_UNDECIDED:
+		Options.ending_chosen = Options.ENDING_QUIT_GAME
+	Options.save()
+	get_tree().quit()
