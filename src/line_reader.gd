@@ -23,9 +23,23 @@ var is_input_locked := false : set = set_is_input_locked
 var showing_text := false
 var using_dialog_syntax := false
 
+var next_pause_position := -1
+var next_pause_position_index := -1
+var pause_positions := []
+var next_pause_type := 0
+#var goal_pauses_this_chunk := 0
+enum PauseTypes {Manual, Auto}
 var dialog_lines := []
 var dialog_actors := []
 var dialog_line_index := 0
+
+var line_chunks := []
+var chunk_index := 0
+var max_chunk_length := 50
+@onready var next_prompt_container = find_child("NextPrompt")
+
+
+var terminated := false
 
 func _ready() -> void:
 	Parser.connect("read_new_line", read_new_line)
@@ -75,20 +89,17 @@ func _unhandled_input(event: InputEvent) -> void:
 							next_pause_position_index += 1
 							find_next_pause()
 							remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
-						
 					
 			else:
 				emit_signal("line_finished", line_index)
 
 func instruction_completed():
-	print("LINE READER RECEIVED COMPLETED INSTRUCTIO")
 	emit_signal("line_finished", line_index)
 
 func set_is_input_locked(value: bool):
 	is_input_locked = value
 	emit_signal("is_input_locked_changed", is_input_locked)
 
-var terminated := false
 func close(_terminating_page):
 	prints("closing page ", _terminating_page)
 	visible = false
@@ -177,10 +188,12 @@ func read_new_line(new_line: Dictionary):
 
 func _process(delta: float) -> void:
 	if next_pause_position_index < pause_positions.size() and next_pause_position_index != -1:
-		
-		if find_child("TextContent").visible_characters < pause_positions[next_pause_position_index] - 4 * next_pause_position_index :
+		find_next_pause()
+		if find_child("TextContent").visible_characters < pause_positions[next_pause_position_index] - 4 * next_pause_position_index:
 			#find_child("TextContent").visible_characters += text_speed * delta
 			find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
+#		elif next_pause_type == PauseTypes.Manual:
+#			return
 		elif remaining_auto_pause_duration > 0 and next_pause_type == PauseTypes.Auto:
 			var last_dur = remaining_auto_pause_duration
 			remaining_auto_pause_duration -= delta
@@ -192,11 +205,37 @@ func _process(delta: float) -> void:
 		#find_child("TextContent").visible_characters += text_speed * delta
 		find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
 	
+#	var prompt_visible: bool
+#	if next_pause_position_index != -1 and next_pause_position_index < pause_positions.size():
+#		if (
+#		next_pause_type == PauseTypes.Manual and 
+#		find_child("TextContent").visible_characters < 
+#		pause_positions[next_pause_position_index] - 4 * next_pause_position_index
+#		):
+#			prompt_visible = true
+#
+#	if find_child("TextContent").visible_ratio >= 1.0:
+#		prompt_visible = true
+#	elif next_pause_position_index > pause_positions.size() and next_pause_position_index != -1:
+#		prompt_visible = true
+#	elif pause_positions.size() > 0 and next_pause_type == PauseTypes.Manual:
+#		if next_pause_position_index >= pause_positions.size() -1:
+#			prompt_visible = find_child("TextContent").visible_ratio >= 1.0
+#		elif (find_child("TextContent").visible_characters < 
+#		pause_positions[next_pause_position_index] - 4 * next_pause_position_index
+#		):
+#
+#			prompt_visible = true
+#		else:
+#			prompt_visible = false
+#	else:
+#		prompt_visible = false
+#
+#	if not prompt_visible:
+#		next_prompt_container.modulate.a = 0
+#	else:
+#		next_prompt_container.modulate.a = lerp(next_prompt_container.modulate.a, 1.0, 0.05)
 
-
-var line_chunks := []
-var chunk_index := 0
-var max_chunk_length := 50
 func start_showing_text():
 	var content : String = dialog_lines[dialog_line_index]
 	line_chunks = content.split("<lc>")
@@ -204,12 +243,7 @@ func start_showing_text():
 	read_next_chunk()
 
 
-var next_pause_position := -1
-var next_pause_position_index := -1
-var pause_positions := []
-var next_pause_type := 0
-#var goal_pauses_this_chunk := 0
-enum PauseTypes {Manual, Auto}
+
 func read_next_chunk():
 	chunk_index += 1
 	if text_speed > 0:

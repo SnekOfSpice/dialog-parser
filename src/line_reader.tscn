@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb8yvsx0g14vl"]
+[gd_scene load_steps=5 format=3 uid="uid://bb8yvsx0g14vl"]
 
 [ext_resource type="Script" path="res://src/line_reader.gd" id="1_f2s5m"]
 [ext_resource type="Theme" uid="uid://dd3wmvu0xxyhs" path="res://style/theme.tres" id="2_cswuk"]
+
+[sub_resource type="Gradient" id="Gradient_3a5x0"]
+offsets = PackedFloat32Array(0, 0.171875, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.025, 0.025, 0.025, 0.025, 0.85, 0.85, 0.85, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d4d6i"]
+gradient = SubResource("Gradient_3a5x0")
+fill_to = Vector2(0, 0.636752)
 
 [node name="LineReader" type="CanvasLayer" groups=["LineListener"]]
 script = ExtResource("1_f2s5m")
@@ -69,14 +77,24 @@ autowrap_mode = 2
 
 [node name="NextPromptContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 visible = false
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/NextPromptContainer"]
+[node name="NextPrompt" type="MarginContainer" parent="MarginContainer/HBoxContainer/NextPromptContainer"]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/NextPromptContainer/PanelContainer"]
-custom_minimum_size = Vector2(16.68, 6.215)
+[node name="ColorRect" type="TextureRect" parent="MarginContainer/HBoxContainer/NextPromptContainer/NextPrompt"]
+custom_minimum_size = Vector2(15, 87.925)
 layout_mode = 2
+size_flags_vertical = 8
+texture = SubResource("GradientTexture2D_d4d6i")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/NextPromptContainer/NextPrompt"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "V"
+horizontal_alignment = 1
 
 [node name="ChoiceContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
