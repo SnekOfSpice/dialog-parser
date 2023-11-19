@@ -169,7 +169,7 @@ Fonts via bitfontmaker2
 	TimesNewPixel by pentacom (Expanded for § and Ø by Snek)
 Character Art
 	Bloodmachine (https://bloodmachine.neocities.org/)
-Character Design
+Character Design & Background Art
 	Snek
 
 [b]=Audio[/b]
@@ -182,13 +182,24 @@ My dear friend CØL (https://colmusic45.bandcamp.com/)
 Free Music Archive
 	Giacomo Forte - Warm 60s (CC BY-NC) 
 	Serge Quadrado - Melancholy (CC BY-NC) 
-Other SFX and music via freesound.org
-	klankbeeld - snow city NL 0009PM 210206_0243.wav
-	Many spliced together for the eye sfx
-	LogicMoon - lost piano recording
-	Jim-Bretherick - Piano chord stretched distorted Echphoned1.wav
-	Timbre -  FB-Loop excerpt of Erokia's Freesound #401743.flac
-	Vasyl_Sakal - Beautiful Romantic Piano"
+freesound.org
+	Music
+		LogicMoon - lost piano recording
+		Jim-Bretherick - Piano chord stretched distorted Echphoned1.wav
+		Timbre -  FB-Loop excerpt of Erokia's Freesound #401743.flac
+		Vasyl_Sakal - Beautiful Romantic Piano
+		klankbeeld - snow city NL 0009PM 210206_0243.wav
+	Many SFX spliced together for the eye sfx
+		Archos - Slime 28.wav
+		SuperSouper - Big impact blood 2.WAV
+		SilverIllusionist - Heavy Impact
+		simenfo1 - Nasty splat sound.wav
+		Aris621 - Nasty Knife Stab.wav
+		Abyssmal - slashkut.wav
+		LittleRobotSoundFactory - Stab_Knife_01.wav
+		LittleRobotSoundFactory - Splat_02.wav
+		JustInvoke - Bullet Blood 1
+	"
 fit_content = true
 
 [node name="CloseCreditsButton" type="Button" parent="MenuContainer/CreditsContainer/VBoxContainer"]

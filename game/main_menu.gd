@@ -27,7 +27,9 @@ func _on_abort_button_pressed() -> void:
 
 func _on_start_new_button_pressed() -> void:
 	visible = false
-	Parser.read_page(10)
+	Parser.line_reader.terminated = false
+	Parser.line_reader.visible = true
+	Parser.read_page(3)
 
 
 func _on_quit_button_pressed() -> void:
