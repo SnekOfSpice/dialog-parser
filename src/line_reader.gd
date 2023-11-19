@@ -26,6 +26,7 @@ var using_dialog_syntax := false
 var next_pause_position := -1
 var next_pause_position_index := -1
 var pause_positions := []
+var pause_types := []
 var next_pause_type := 0
 #var goal_pauses_this_chunk := 0
 enum PauseTypes {Manual, Auto}
@@ -79,7 +80,9 @@ func _unhandled_input(event: InputEvent) -> void:
 					else:
 						read_next_chunk()
 				else:
-					find_next_pause()
+					#find_next_pause()
+					if next_pause_position_index != -1 and next_pause_position_index < pause_positions.size():
+						next_pause_type = pause_types[next_pause_position_index]
 					if next_pause_position_index >= pause_positions.size():
 						find_child("TextContent").visible_ratio = 1.0
 					
@@ -252,6 +255,7 @@ func read_next_chunk():
 		find_child("TextContent").visible_ratio = 1.0
 	
 	pause_positions.clear()
+	pause_types.clear()
 	var new_text : String = line_chunks[chunk_index]
 	#var current_position = find_child("TextContent").visible_characters
 	var total_pauses_this_chunk := 0
@@ -264,11 +268,18 @@ func read_next_chunk():
 		if next_mp == -1 and next_ap != -1:
 			if not pause_positions.has(next_ap):
 				pause_positions.append(next_ap)
+				pause_types.append(PauseTypes.Auto)
 		elif next_mp != -1 and next_ap == -1:
 			if not pause_positions.has(next_mp):
 				pause_positions.append(next_mp)
+				pause_types.append(PauseTypes.Manual)
 		elif next_mp != -1 and next_ap != -1:
 			if not pause_positions.has(min(next_ap, next_mp)):
+				var is_auto = min(next_ap, next_mp) == next_ap
+				if is_auto:
+					pause_types.append(PauseTypes.Auto)
+				else:
+					pause_types.append(PauseTypes.Manual)
 				pause_positions.append(min(next_ap, next_mp))
 		total_pauses_this_chunk += 1
 	

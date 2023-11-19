@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://tgquth0l2fsr"]
+
+[ext_resource type="Script" path="res://game/zero_hud.gd" id="1_8efop"]
+
+[node name="ZeroHUD" type="CanvasLayer" groups=["FactListener", "ParserDependent"]]
+script = ExtResource("1_8efop")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+modulate = Color(1, 1, 1, 0.317647)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 11.0
+grow_horizontal = 0
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 7
+
+[node name="ColorRect" type="ColorRect" parent="Control/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(20, 2)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 7
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Control/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="Control/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(1, 0, 0, 1)

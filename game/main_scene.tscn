@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhc45ew2mfqbu"]
+[gd_scene load_steps=10 format=3 uid="uid://dhc45ew2mfqbu"]
 
 [ext_resource type="Script" path="res://game/main_scene.gd" id="1_2p4ut"]
 [ext_resource type="PackedScene" uid="uid://bb8yvsx0g14vl" path="res://src/line_reader.tscn" id="1_y64f0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://r0tb7qevdcwr" path="res://game/black.tscn" id="4_ut3ne"]
 [ext_resource type="PackedScene" uid="uid://bu33mw8t7dsk8" path="res://game/pause_menu.tscn" id="4_vd1ov"]
 [ext_resource type="PackedScene" uid="uid://cd30e6wacwrav" path="res://game/game_finished.tscn" id="6_ltep6"]
+[ext_resource type="PackedScene" uid="uid://tgquth0l2fsr" path="res://game/zero_hud.tscn" id="9_vdyrl"]
 
 [node name="MainScene" type="Control"]
 layout_mode = 3
@@ -54,6 +55,8 @@ script = ExtResource("4_axwkl")
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_vd1ov")]
 visible = false
+
+[node name="ZeroHUD" parent="." instance=ExtResource("9_vdyrl")]
 
 [connection signal="instruction_completed" from="LineReader/Black" to="LineReader/InstructionHandler" method="_on_black_instruction_completed"]
 [connection signal="make_screen_black" from="LineReader/InstructionHandler" to="LineReader/Black" method="_on_instruction_handler_make_screen_black"]
