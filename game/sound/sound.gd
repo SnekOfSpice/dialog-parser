@@ -12,6 +12,8 @@ const BGM_MAIN_MENU_LOST_PIANO = "res://game/sound/650013__logicmoon__lost-piano
 const BGM_UNSTEADY_WORK = "res://game/sound/661484__jim-bretherick__piano-chord-stretched-distorted-echphoned1.ogg"
 const BGM_ZERO_DRAGGING_NAILS = "res://game/sound/425945__timbre__fb-loop-excerpt-of-erokias-freesound-401743.ogg"
 const BGM_WEDDING = "res://game/sound/wedding.ogg"
+const BGM_AFTERCARE = "res://game/sound/478318__tri-tachyon__soundscape-dust-ambient-guitar.ogg"
+const BGM_SEX = "res://game/sound/511277__doctor_dreamchip__2020-03-29-downtempo-doctor-dreamchip.ogg"
 
 var gauge_out_eye = preload("res://game/sound/gauge-out-eye.ogg")
 
@@ -44,6 +46,10 @@ func set_background_music_by_key(key:String):
 			set_background_music(BGM_ZERO_DRAGGING_NAILS)
 		"Wedding":
 			set_background_music(BGM_WEDDING)
+		"BDSM Aftercare":
+			set_background_music(BGM_AFTERCARE)
+		"Sex":
+			set_background_music(BGM_SEX)
 		"":
 			set_background_music("")
 

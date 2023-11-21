@@ -29,7 +29,7 @@ func _on_start_new_button_pressed() -> void:
 	visible = false
 	Parser.line_reader.terminated = false
 	Parser.line_reader.visible = true
-	Parser.read_page(3)
+	Parser.read_page(0)
 
 
 func _on_quit_button_pressed() -> void:
@@ -55,3 +55,9 @@ func _on_view_cw_button_pressed() -> void:
 
 func _on_options_button_pressed() -> void:
 	emit_signal("request_show_options")
+
+
+
+
+func _on_credits_label_meta_clicked(meta) -> void:
+	OS.shell_open(str(meta))

@@ -156,24 +156,24 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuContainer/CreditsContainer/VBoxContainer/HBoxContainer"]
+[node name="CreditsLabel" type="RichTextLabel" parent="MenuContainer/CreditsContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "[b]=Writing and Coding[/b]
-	Snek (https://snekofspice.itch.io/)
+	Snek ([url]https://snekofspice.itch.io/[/url])
 
 [b]=Visuals[/b]
-Fonts via bitfontmaker2
+Fonts via [url=https://www.pentacom.jp/pentacom/bitfontmaker2/gallery/]bitfontmaker2[/url]
 	ATHA by Snek
 	TimesNewPixel by pentacom (Expanded for § and Ø by Snek)
 Character Art
-	Bloodmachine (https://bloodmachine.neocities.org/)
+	Bloodmachine ([url]https://bloodmachine.neocities.org/[/url])
 Character Design & Background Art
 	Snek
 
 [b]=Audio[/b]
-My dear friend CØL (https://colmusic45.bandcamp.com/)
+My dear friend CØL ([url]https://colmusic45.bandcamp.com/[/url])
 	Failure to Comply Will Result in Death
 	Jeremiah I (Intro)
 	Where is Heaven?
@@ -189,6 +189,8 @@ freesound.org
 		Timbre -  FB-Loop excerpt of Erokia's Freesound #401743.flac
 		Vasyl_Sakal - Beautiful Romantic Piano
 		klankbeeld - snow city NL 0009PM 210206_0243.wav
+		Doctor_Dreamchip - 2020-03-29 Downtempo - Doctor Dreamchip
+		Tri-Tachyon - Soundscape - Dust - Ambient Guitar
 	Many SFX spliced together for the eye sfx
 		Archos - Slime 28.wav
 		SuperSouper - Big impact blood 2.WAV
@@ -230,7 +232,7 @@ size_flags_vertical = 6
 bbcode_enabled = true
 text = "[center]This game features these following topics:
 
-sexual content, self harm, state repression, body horror, death[/center]"
+sexual content (including BDSM), self harm, state repression, body horror, gore, nihilism, death[/center]"
 fit_content = true
 
 [node name="CloseCWButton" type="Button" parent="MenuContainer/CWContainer/VBoxContainer"]
@@ -246,5 +248,6 @@ text = "close"
 [connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MenuContainer/ConfirmAge/PanelContainer/VBoxContainer/HBoxContainer/ConfirmAgeButton" to="." method="_on_confirm_age_button_pressed"]
 [connection signal="pressed" from="MenuContainer/ConfirmAge/PanelContainer/VBoxContainer/HBoxContainer/AbortButton" to="." method="_on_abort_button_pressed"]
+[connection signal="meta_clicked" from="MenuContainer/CreditsContainer/VBoxContainer/HBoxContainer/CreditsLabel" to="." method="_on_credits_label_meta_clicked"]
 [connection signal="pressed" from="MenuContainer/CreditsContainer/VBoxContainer/CloseCreditsButton" to="." method="_on_close_credits_button_pressed"]
 [connection signal="pressed" from="MenuContainer/CWContainer/VBoxContainer/CloseCWButton" to="." method="_on_close_cw_button_pressed"]

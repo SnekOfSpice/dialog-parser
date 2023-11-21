@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c67ti8jynl2ey"]
+[gd_scene load_steps=14 format=3 uid="uid://c67ti8jynl2ey"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_rvq16"]
 [ext_resource type="PackedScene" uid="uid://baeby0gv4sv22" path="res://game/characters/euphoria.tscn" id="2_w4l3c"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://boitgclj1ehkw" path="res://game/backgrounds/sickbed.png" id="8_3x1rr"]
 [ext_resource type="Texture2D" uid="uid://067cg4hhglf7" path="res://game/backgrounds/workshop-euphoria.png" id="9_2u06j"]
 [ext_resource type="Texture2D" uid="uid://don6j11a5b2sq" path="res://game/backgrounds/workshop-zero.png" id="10_nxijg"]
+[ext_resource type="PackedScene" uid="uid://0ha84tyxyg07" path="res://game/characters/zero+euphoria.tscn" id="13_xqvna"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_rvq16")
@@ -26,3 +27,6 @@ position = Vector2(1075, 523)
 
 [node name="Zero" parent="." instance=ExtResource("2_wckkk")]
 position = Vector2(313, 477)
+
+[node name="Zero+Euphoria" parent="." instance=ExtResource("13_xqvna")]
+position = Vector2(682, 453)

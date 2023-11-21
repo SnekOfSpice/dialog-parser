@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://0ha84tyxyg07"]
+
+[ext_resource type="Script" path="res://game/characters/zero+euphoria.gd" id="1_mgdg7"]
+[ext_resource type="Texture2D" uid="uid://do1oi5wistag1" path="res://game/characters/zero+euphoria-neutral.png" id="2_h60rn"]
+
+[node name="Zero+Euphoria" type="Node2D" groups=["ParserDependent"]]
+script = ExtResource("1_mgdg7")
+character_name = "zero+euphoria"
+
+[node name="Expressions" type="Node2D" parent="."]
+
+[node name="Zero+euphoria-neutral" type="Sprite2D" parent="Expressions"]
+position = Vector2(8, 9)
+texture = ExtResource("2_h60rn")
