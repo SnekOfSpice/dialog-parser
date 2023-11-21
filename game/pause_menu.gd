@@ -1,13 +1,13 @@
 extends CanvasLayer
 
 
-const MAX_TEXT_SPEED := 201
+
 
 signal request_main_menu()
 
 func _ready() -> void:
 	find_child("TextSpeedSlider").min_value = 1
-	find_child("TextSpeedSlider").max_value = MAX_TEXT_SPEED
+	find_child("TextSpeedSlider").max_value = Parser.line_reader.MAX_TEXT_SPEED
 	find_child("TextSpeedSlider").value = 60
 	Parser.line_reader.text_speed = 60
 	
@@ -41,9 +41,9 @@ func on_visibility_changed():
 
 
 func update_text_speed_slider(value: float):
-	if value == MAX_TEXT_SPEED:
+	if value == Parser.line_reader.MAX_TEXT_SPEED:
 		find_child("TextSpeedLabel").text = "Instant"
-		Parser.line_reader.text_speed = 0
+		#Parser.line_reader.text_speed = 0
 	else:
 		find_child("TextSpeedLabel").text = str(value)
 		Parser.line_reader.text_speed = value

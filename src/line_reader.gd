@@ -8,6 +8,8 @@ class_name LineReader
 @export var use_name_map := true
 @export var name_map := {}
 
+const MAX_TEXT_SPEED := 201
+
 signal line_finished(line_index: int)
 signal jump_to_page(page_index: int)
 signal new_header(header: Array)
@@ -194,7 +196,10 @@ func _process(delta: float) -> void:
 		find_next_pause()
 		if find_child("TextContent").visible_characters < pause_positions[next_pause_position_index] - 4 * next_pause_position_index:
 			#find_child("TextContent").visible_characters += text_speed * delta
-			find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
+			if text_speed == MAX_TEXT_SPEED:
+				find_child("TextContent").visible_characters = pause_positions[next_pause_position_index] - 4 * next_pause_position_index
+			else:
+				find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
 #		elif next_pause_type == PauseTypes.Manual:
 #			return
 		elif remaining_auto_pause_duration > 0 and next_pause_type == PauseTypes.Auto:
@@ -205,8 +210,11 @@ func _process(delta: float) -> void:
 				find_next_pause()
 				remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
 	elif find_child("TextContent").visible_ratio < 1.0:
+		if text_speed == MAX_TEXT_SPEED:
+			find_child("TextContent").visible_ratio = 1.0
+		else:
 		#find_child("TextContent").visible_characters += text_speed * delta
-		find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
+			find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
 	
 #	var prompt_visible: bool
 #	if next_pause_position_index != -1 and next_pause_position_index < pause_positions.size():
