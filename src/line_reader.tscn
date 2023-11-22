@@ -13,7 +13,6 @@ fill_to = Vector2(0, 0.636752)
 
 [node name="LineReader" type="CanvasLayer" groups=["LineListener"]]
 script = ExtResource("1_f2s5m")
-property_for_name = "character"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 12
@@ -76,7 +75,6 @@ scroll_active = false
 autowrap_mode = 2
 
 [node name="NextPromptContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 

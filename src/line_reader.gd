@@ -1,3 +1,4 @@
+@icon("res://style/reader_icon_Zeichenfläche 1.svg")
 extends CanvasLayer
 class_name LineReader
 
@@ -8,7 +9,13 @@ class_name LineReader
 @export var use_name_map := true
 @export var name_map := {}
 
-const MAX_TEXT_SPEED := 201
+@export_category("Advance")
+@export var show_advance_available := true
+@export_range(0.0, 1.0) var advance_available_lerp_weight := 0.1
+@export_range(0.0, 10.0) var advance_available_delay := 0.5
+var remaining_advance_delay := advance_available_delay
+
+const MAX_TEXT_SPEED := 101
 
 
 signal line_finished(line_index: int)
@@ -31,7 +38,6 @@ var next_pause_position_index := -1
 var pause_positions := []
 var pause_types := []
 var next_pause_type := 0
-#var goal_pauses_this_chunk := 0
 enum PauseTypes {Manual, Auto, EoL}
 var dialog_lines := []
 var dialog_actors := []
@@ -45,6 +51,8 @@ var max_chunk_length := 50
 
 var terminated := false
 
+
+
 func _ready() -> void:
 	Parser.connect("read_new_line", read_new_line)
 	Parser.connect("terminate_page", close)
@@ -52,7 +60,7 @@ func _ready() -> void:
 	Parser.line_reader = self
 	Parser.open_connection()
 	
-	remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
+	remaining_auto_pause_duration = auto_pause_duration * (1.0 + (1-(text_speed / (MAX_TEXT_SPEED - 1))))
 	
 	if not find_child("InstructionHandler"):
 		push_error("No InsutrctionHandler as child of LineReader (name must be exact match).")
@@ -62,7 +70,8 @@ func _ready() -> void:
 	find_child("InstructionHandler").connect("instruction_wrapped_completed", instruction_completed)
 	
 		
-	
+	if not show_advance_available:
+		next_prompt_container.modulate.a = 0
 	
 
 
@@ -78,9 +87,11 @@ func _unhandled_input(event: InputEvent) -> void:
 						if dialog_line_index >= dialog_lines.size() - 1:
 							emit_signal("line_finished", line_index)
 						else:
+							remaining_advance_delay = advance_available_delay
 							set_dialog_line_index(dialog_line_index + 1)
 							start_showing_text()
 					else:
+						remaining_advance_delay = advance_available_delay
 						read_next_chunk()
 				else:
 					
@@ -90,8 +101,8 @@ func _unhandled_input(event: InputEvent) -> void:
 							if next_pause_position_index < pause_positions.size() - 1:
 								next_pause_position_index += 1
 							find_next_pause()
-							remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
-					
+							remaining_auto_pause_duration = remaining_auto_pause_duration * (1.0 + (1-(text_speed / (MAX_TEXT_SPEED - 1))))
+							remaining_advance_delay = advance_available_delay
 			else:
 				emit_signal("line_finished", line_index)
 
@@ -103,7 +114,6 @@ func set_is_input_locked(value: bool):
 	emit_signal("is_input_locked_changed", is_input_locked)
 
 func close(_terminating_page):
-	prints("closing page ", _terminating_page)
 	visible = false
 	terminated = true
 
@@ -206,14 +216,19 @@ func _process(delta: float) -> void:
 		var last_dur = remaining_auto_pause_duration
 		remaining_auto_pause_duration -= delta
 		if last_dur > 0 and remaining_auto_pause_duration <= 0:
-			print("AAAAAAAAAAAAAAAAAA")
 			next_pause_position_index += 1
 			find_next_pause()
-			remaining_auto_pause_duration = auto_pause_duration
+			remaining_auto_pause_duration = auto_pause_duration * (1.0 + (1-(text_speed / (MAX_TEXT_SPEED - 1))))
 
 	
-		
-#	var prompt_visible: bool
+	if show_advance_available:
+		if remaining_advance_delay <= 0.0:
+			update_advance_available()
+		else:
+			remaining_advance_delay -= delta
+
+func update_advance_available():
+	var prompt_visible: bool
 #	if next_pause_position_index != -1 and next_pause_position_index < pause_positions.size():
 #		if (
 #		next_pause_type == PauseTypes.Manual and 
@@ -221,28 +236,35 @@ func _process(delta: float) -> void:
 #		pause_positions[next_pause_position_index] - 4 * next_pause_position_index
 #		):
 #			prompt_visible = true
-#
-#	if find_child("TextContent").visible_ratio >= 1.0:
-#		prompt_visible = true
-#	elif next_pause_position_index > pause_positions.size() and next_pause_position_index != -1:
-#		prompt_visible = true
-#	elif pause_positions.size() > 0 and next_pause_type == PauseTypes.Manual:
-#		if next_pause_position_index >= pause_positions.size() -1:
-#			prompt_visible = find_child("TextContent").visible_ratio >= 1.0
-#		elif (find_child("TextContent").visible_characters < 
-#		pause_positions[next_pause_position_index] - 4 * next_pause_position_index
-#		):
-#
-#			prompt_visible = true
-#		else:
-#			prompt_visible = false
-#	else:
-#		prompt_visible = false
-#
-#	if not prompt_visible:
-#		next_prompt_container.modulate.a = 0
-#	else:
-#		next_prompt_container.modulate.a = lerp(next_prompt_container.modulate.a, 1.0, 0.05)
+
+	if find_child("TextContent").visible_ratio >= 1.0:
+		prompt_visible = true
+	elif next_pause_position_index > pause_positions.size() and next_pause_position_index != -1:
+		prompt_visible = true
+	elif pause_positions.size() > 0 and next_pause_type == PauseTypes.Manual:
+		if next_pause_position_index >= pause_positions.size() -1:
+			prompt_visible = find_child("TextContent").visible_ratio >= 1.0
+		elif (find_child("TextContent").visible_characters < 
+		pause_positions[next_pause_position_index] - 4 * next_pause_position_index
+		):
+
+			prompt_visible = true
+		else:
+			prompt_visible = false
+	else:
+		prompt_visible = false
+	if find_child("TextContent").visible_characters < get_end_of_chunk_position():
+		prompt_visible = false
+		if find_child("TextContent").visible_characters == -1:
+			prompt_visible = true
+	
+	if is_input_locked:
+		prompt_visible = false
+	
+	if not prompt_visible:
+		next_prompt_container.modulate.a = 0
+	else:
+		next_prompt_container.modulate.a = lerp(next_prompt_container.modulate.a, 1.0, advance_available_lerp_weight)
 
 func start_showing_text():
 	var content : String = dialog_lines[dialog_line_index]
@@ -297,10 +319,9 @@ func read_next_chunk():
 	for pos in pause_positions:
 		if pause_types[i] == PauseTypes.EoL:
 			break
-		printt(pos, pos-(i*4), cleaned_text)
+		
 		cleaned_text = cleaned_text.erase(pos-(i*4), 4)
 		i += 1
-	print(cleaned_text)
 	
 	find_child("TextContent").text = cleaned_text
 
