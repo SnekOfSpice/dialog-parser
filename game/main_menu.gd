@@ -29,6 +29,7 @@ func _on_start_new_button_pressed() -> void:
 	visible = false
 	Parser.line_reader.terminated = false
 	Parser.line_reader.visible = true
+	Parser.reset_facts()
 	Parser.read_page(0)
 
 

@@ -19,6 +19,7 @@ var lines := []
 var line_chunks := []
 
 var facts := {}
+var starting_facts := {}
 
 var max_line_index_on_page := 0
 
@@ -52,6 +53,7 @@ func _ready() -> void:
 	page_data = int_data.duplicate()
 	
 	facts = data.get("facts")
+	starting_facts = facts.duplicate(true)
 	dropdown_titles = data.get("dropdown_titles")
 	dropdowns = data.get("dropdowns")
 	
@@ -118,3 +120,8 @@ func change_fact(fact_name: String, new_value: bool):
 	facts[fact_name] = new_value
 	for l in get_tree().get_nodes_in_group("FactListener"):
 		l.fact_changed(fact_name, new_value)
+
+
+func reset_facts():
+	for fact in starting_facts.keys():
+		change_fact(fact, starting_facts.get(fact))
