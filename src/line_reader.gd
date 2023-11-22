@@ -10,6 +10,7 @@ class_name LineReader
 
 const MAX_TEXT_SPEED := 201
 
+
 signal line_finished(line_index: int)
 signal jump_to_page(page_index: int)
 signal new_header(header: Array)
@@ -25,13 +26,13 @@ var is_input_locked := false : set = set_is_input_locked
 var showing_text := false
 var using_dialog_syntax := false
 
-var next_pause_position := -1
+
 var next_pause_position_index := -1
 var pause_positions := []
 var pause_types := []
 var next_pause_type := 0
 #var goal_pauses_this_chunk := 0
-enum PauseTypes {Manual, Auto}
+enum PauseTypes {Manual, Auto, EoL}
 var dialog_lines := []
 var dialog_actors := []
 var dialog_line_index := 0
@@ -82,16 +83,12 @@ func _unhandled_input(event: InputEvent) -> void:
 					else:
 						read_next_chunk()
 				else:
-					#find_next_pause()
-					if next_pause_position_index != -1 and next_pause_position_index < pause_positions.size():
-						next_pause_type = pause_types[next_pause_position_index]
-					if next_pause_position_index >= pause_positions.size():
-						find_child("TextContent").visible_ratio = 1.0
 					
-					elif next_pause_position_index < pause_positions.size():
-						find_child("TextContent").visible_characters = pause_positions[next_pause_position_index] - 4 * next_pause_position_index 
-						if next_pause_type == PauseTypes.Manual:
-							next_pause_position_index += 1
+					if next_pause_position_index < pause_positions.size():
+						find_child("TextContent").visible_characters = get_end_of_chunk_position() 
+						if next_pause_type != PauseTypes.EoL:
+							if next_pause_position_index < pause_positions.size() - 1:
+								next_pause_position_index += 1
 							find_next_pause()
 							remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
 					
@@ -189,33 +186,33 @@ func read_new_line(new_line: Dictionary):
 		Parser.change_fact(f, facts.get(f))
 	
 	
-
+func get_end_of_chunk_position() -> int:
+	if pause_positions.size() == 0:
+		return find_child("TextContent").text.length()
+	elif pause_types[next_pause_position_index] == PauseTypes.EoL:
+		return find_child("TextContent").text.length()
+	else:
+		return pause_positions[next_pause_position_index] - 4 * next_pause_position_index
 
 func _process(delta: float) -> void:
 	if next_pause_position_index < pause_positions.size() and next_pause_position_index != -1:
 		find_next_pause()
-		if find_child("TextContent").visible_characters < pause_positions[next_pause_position_index] - 4 * next_pause_position_index:
-			#find_child("TextContent").visible_characters += text_speed * delta
-			if text_speed == MAX_TEXT_SPEED:
-				find_child("TextContent").visible_characters = pause_positions[next_pause_position_index] - 4 * next_pause_position_index
-			else:
-				find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
-#		elif next_pause_type == PauseTypes.Manual:
-#			return
-		elif remaining_auto_pause_duration > 0 and next_pause_type == PauseTypes.Auto:
-			var last_dur = remaining_auto_pause_duration
-			remaining_auto_pause_duration -= delta
-			if last_dur > 0 and remaining_auto_pause_duration <= 0:
-				next_pause_position_index += 1
-				find_next_pause()
-				remaining_auto_pause_duration = auto_pause_duration# * (100.0 / text_speed)
-	elif find_child("TextContent").visible_ratio < 1.0:
+	if find_child("TextContent").visible_characters < get_end_of_chunk_position():
 		if text_speed == MAX_TEXT_SPEED:
-			find_child("TextContent").visible_ratio = 1.0
+			find_child("TextContent").visible_characters = get_end_of_chunk_position()
 		else:
-		#find_child("TextContent").visible_characters += text_speed * delta
 			find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
+	elif remaining_auto_pause_duration > 0 and next_pause_type == PauseTypes.Auto:
+		var last_dur = remaining_auto_pause_duration
+		remaining_auto_pause_duration -= delta
+		if last_dur > 0 and remaining_auto_pause_duration <= 0:
+			print("AAAAAAAAAAAAAAAAAA")
+			next_pause_position_index += 1
+			find_next_pause()
+			remaining_auto_pause_duration = auto_pause_duration
+
 	
+		
 #	var prompt_visible: bool
 #	if next_pause_position_index != -1 and next_pause_position_index < pause_positions.size():
 #		if (
@@ -257,71 +254,60 @@ func start_showing_text():
 
 func read_next_chunk():
 	chunk_index += 1
-	if text_speed > 0:
-		find_child("TextContent").visible_characters = 0
-	else:
+	if text_speed == MAX_TEXT_SPEED:
 		find_child("TextContent").visible_ratio = 1.0
+	else:
+		find_child("TextContent").visible_characters = 0
 	
 	pause_positions.clear()
 	pause_types.clear()
 	var new_text : String = line_chunks[chunk_index]
-	#var current_position = find_child("TextContent").visible_characters
-	var total_pauses_this_chunk := 0
-	var next_mp = new_text.find("<mp>")
-	var next_ap = new_text.find("<ap>")
-	while  next_ap !=  -1 or next_mp != -1:
-		var next_pause = max(min(next_mp, next_ap), 0)
-		next_mp = new_text.find("<mp>", next_pause + 4 * total_pauses_this_chunk)
-		next_ap = new_text.find("<ap>", next_pause + 4 * total_pauses_this_chunk)
-		if next_mp == -1 and next_ap != -1:
-			if not pause_positions.has(next_ap):
-				pause_positions.append(next_ap)
-				pause_types.append(PauseTypes.Auto)
-		elif next_mp != -1 and next_ap == -1:
-			if not pause_positions.has(next_mp):
-				pause_positions.append(next_mp)
-				pause_types.append(PauseTypes.Manual)
-		elif next_mp != -1 and next_ap != -1:
-			if not pause_positions.has(min(next_ap, next_mp)):
-				var is_auto = min(next_ap, next_mp) == next_ap
-				if is_auto:
-					pause_types.append(PauseTypes.Auto)
-				else:
+	
+	
+	
+	
+	
+	pause_positions.clear()
+	pause_types.clear()
+	var scan_index := 0
+	var last_pause := 0
+	while scan_index < new_text.length():
+		if new_text[scan_index] == "<":
+			if new_text.find("<mp>", scan_index) == scan_index:
+				if not pause_positions.has(scan_index):
+					pause_positions.append(scan_index)
 					pause_types.append(PauseTypes.Manual)
-				pause_positions.append(min(next_ap, next_mp))
-		total_pauses_this_chunk += 1
+			elif new_text.find("<ap>", scan_index) == scan_index:
+				if not pause_positions.has(scan_index):
+					pause_positions.append(scan_index)
+					pause_types.append(PauseTypes.Auto)
+		scan_index += 1
+	
+	#pause_positions.erase(-1)
+	pause_positions.append(new_text.length()-1)
+	pause_types.append(PauseTypes.EoL)
+	
 	
 	
 	next_pause_position_index = 0
-	#goal_pauses_this_chunk = line_chunks[chunk_index].count("<mp>") + line_chunks[chunk_index].count("<ap>")
 	find_next_pause()
 	
 	var cleaned_text : String = line_chunks[chunk_index]
 	var i = 0
 	for pos in pause_positions:
+		if pause_types[i] == PauseTypes.EoL:
+			break
+		printt(pos, pos-(i*4), cleaned_text)
 		cleaned_text = cleaned_text.erase(pos-(i*4), 4)
 		i += 1
-		
+	print(cleaned_text)
 	
 	find_child("TextContent").text = cleaned_text
 
-var pause_count_this_chunk := 0
 func find_next_pause():
-	var new_text : String = line_chunks[chunk_index]
-	var current_position = find_child("TextContent").visible_characters
-	var next_mp = new_text.find("<mp>", current_position - 4 * next_pause_position_index)
-	var next_ap = new_text.find("<ap>", current_position - 4 * next_pause_position_index)
-	if next_ap == -1:
-		if next_mp == -1:
-			next_pause_position = -1
-		else:
-			next_pause_position = next_mp
-			next_pause_type = PauseTypes.Manual
-			pause_count_this_chunk += 1
-	elif next_ap != -1:
-		next_pause_position = next_ap
-		next_pause_type = PauseTypes.Auto
-		pause_count_this_chunk += 1
+	if pause_types.size() > 0 and next_pause_position_index < pause_types.size():
+		next_pause_type = pause_types[next_pause_position_index]
+	
 
 
 func build_choices(choices):
