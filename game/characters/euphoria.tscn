@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c3wgljutoapes" path="res://game/characters/euphoria-caring-wound.png" id="11_ntfjk"]
 
 [node name="Euphoria" type="Node2D" groups=["ParserDependent"]]
+texture_filter = 1
 script = ExtResource("1_syira")
 character_name = "euphoria"
 
@@ -20,7 +21,6 @@ character_name = "euphoria"
 
 [node name="Euphoria-exhausted" type="Sprite2D" parent="Expressions"]
 visible = false
-position = Vector2(-9, -17)
 texture = ExtResource("2_n14ul")
 
 [node name="Eye" type="Sprite2D" parent="Expressions/Euphoria-exhausted"]
@@ -28,7 +28,6 @@ texture = ExtResource("3_j1tki")
 
 [node name="Euphoria-horny" type="Sprite2D" parent="Expressions"]
 visible = false
-position = Vector2(-9, -17)
 texture = ExtResource("4_gc0ce")
 
 [node name="Eye" type="Sprite2D" parent="Expressions/Euphoria-horny"]
@@ -37,7 +36,6 @@ texture = ExtResource("5_2whfk")
 
 [node name="Euphoria-neutral" type="Sprite2D" parent="Expressions"]
 visible = false
-position = Vector2(-9, -17)
 texture = ExtResource("5_w840y")
 
 [node name="Eye" type="Sprite2D" parent="Expressions/Euphoria-neutral"]
@@ -45,14 +43,12 @@ texture = ExtResource("7_quyd4")
 
 [node name="Euphoria-taking-notes" type="Sprite2D" parent="Expressions"]
 visible = false
-position = Vector2(-9, -17)
 texture = ExtResource("6_h81kd")
 
 [node name="Eye" type="Sprite2D" parent="Expressions/Euphoria-taking-notes"]
 texture = ExtResource("9_2vukg")
 
 [node name="Euphoria-caring" type="Sprite2D" parent="Expressions"]
-position = Vector2(-4, -14)
 texture = ExtResource("7_sw1qy")
 
 [node name="Eye" type="Sprite2D" parent="Expressions/Euphoria-caring"]

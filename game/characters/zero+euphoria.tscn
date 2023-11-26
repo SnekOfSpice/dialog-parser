@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://do1oi5wistag1" path="res://game/characters/zero+euphoria-neutral.png" id="2_h60rn"]
 
 [node name="Zero+Euphoria" type="Node2D" groups=["ParserDependent"]]
+texture_filter = 1
 script = ExtResource("1_mgdg7")
 character_name = "zero+euphoria"
 

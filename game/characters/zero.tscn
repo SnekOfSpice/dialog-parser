@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bgcpwrgbghh0r" path="res://game/characters/zero-working-eye.png" id="11_vrel0"]
 
 [node name="Zero" type="Node2D" groups=["ParserDependent"]]
+texture_filter = 1
 script = ExtResource("1_r51iq")
 character_name = "zero"
 

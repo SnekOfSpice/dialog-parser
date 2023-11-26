@@ -34,6 +34,9 @@ func handle_new_header(header: Array):
 func handle_currently_speaking(actor_name: String):
 	if actor_name == character_name:
 		visible = true
+		modulate.v = 1.0
+	else:
+		modulate.v = 0.8
 
 func handle_page_finished(_page_index: int):
 	visible = false

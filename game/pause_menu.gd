@@ -16,6 +16,8 @@ func _ready() -> void:
 	
 	connect("visibility_changed", on_visibility_changed)
 	
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	Options.fullscreen = true
 	find_child("FullscreenButton").button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 	find_child("WindowedButton").button_pressed = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
 

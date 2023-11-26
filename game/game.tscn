@@ -23,10 +23,13 @@ texture = ExtResource("2_xhcvx")
 centered = false
 
 [node name="Euphoria" parent="." instance=ExtResource("2_w4l3c")]
-position = Vector2(1075, 523)
+position = Vector2(1074, 500)
+scale = Vector2(2, 2)
 
 [node name="Zero" parent="." instance=ExtResource("2_wckkk")]
-position = Vector2(313, 477)
+position = Vector2(312, 456)
+scale = Vector2(2, 2)
 
 [node name="Zero+Euphoria" parent="." instance=ExtResource("13_xqvna")]
-position = Vector2(682, 453)
+position = Vector2(575, 378)
+scale = Vector2(2.5, 2.5)

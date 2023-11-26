@@ -143,6 +143,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Panel" type="Panel" parent="MenuContainer/CreditsContainer"]
+self_modulate = Color(1, 1, 1, 0.631373)
+layout_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/CreditsContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -161,7 +165,7 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
 [node name="CreditsLabel" type="RichTextLabel" parent="MenuContainer/CreditsContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "[b]=Writing and Coding[/b]
@@ -236,7 +240,7 @@ size_flags_vertical = 6
 bbcode_enabled = true
 text = "[center]This game features these following topics:
 
-sexual content (including BDSM), self harm, state repression, body horror, gore, nihilism, death[/center]"
+sexual content (including bondage, impact play, blood play), self harm, state repression, body horror, gore, nihilism, death[/center]"
 fit_content = true
 
 [node name="CloseCWButton" type="Button" parent="MenuContainer/CWContainer/VBoxContainer"]
