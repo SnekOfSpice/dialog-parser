@@ -64,8 +64,10 @@ func _on_close_options_button_pressed() -> void:
 
 func _on_main_menu_button_pressed() -> void:
 	visible = false
+	Options.save_gamestate()
 	emit_signal("request_main_menu")
 
 
 func _on_quit_button_pressed() -> void:
+	Options.save_gamestate()
 	get_tree().quit()

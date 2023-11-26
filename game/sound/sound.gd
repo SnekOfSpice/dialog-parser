@@ -14,15 +14,18 @@ const BGM_ZERO_DRAGGING_NAILS = "res://game/sound/425945__timbre__fb-loop-excerp
 const BGM_WEDDING = "res://game/sound/wedding.ogg"
 const BGM_AFTERCARE = "res://game/sound/478318__tri-tachyon__soundscape-dust-ambient-guitar.ogg"
 const BGM_SEX = "res://game/sound/511277__doctor_dreamchip__2020-03-29-downtempo-doctor-dreamchip.ogg"
+const BGM_LYING_TO_ME = "res://game/sound/CØL - Unmedicated IV - 01 Jeremiah I (Intro).ogg"
 
 var gauge_out_eye = preload("res://game/sound/gauge-out-eye.ogg")
 
 var rampup_time := 1.0
 var target_volume := 0
 
+var current_bgm := ""
 var current_bgm_key := ""
 
 func set_background_music_by_key(key:String):
+	current_bgm_key = key
 	match key:
 		"Failure to Comply Will Result in Death":
 			set_background_music(BGM_FAILURE_TO_COMPLY)
@@ -50,12 +53,14 @@ func set_background_music_by_key(key:String):
 			set_background_music(BGM_AFTERCARE)
 		"Sex":
 			set_background_music(BGM_SEX)
+		"Lying to Me":
+			set_background_music(BGM_LYING_TO_ME)
 		"":
 			set_background_music("")
 
 func set_background_music(key: String, _rampup_time := rampup_time):
 	rampup_time = _rampup_time
-	current_bgm_key = key
+	current_bgm = key
 	var t = get_tree().create_tween()
 	t.tween_property($BGMPlayer, "volume_db", -80, rampup_time)
 	
@@ -74,7 +79,7 @@ func set_background_music(key: String, _rampup_time := rampup_time):
 	set_target_volume(Options.music_volume)
 	
 func set_target_volume(value: float):
-	if current_bgm_key == BGM_WINDS:
+	if current_bgm == BGM_WINDS:
 		target_volume = value + 12
 	else:
 		target_volume = value
@@ -97,7 +102,7 @@ func play(soundName:String, randomPitch := true) -> AudioStreamPlayer:
 	if s:
 		var p = AudioStreamPlayer.new()
 		add_child(p)
-		p.volume_db = 4
+		p.volume_db = 4 + Options.music_volume
 		p.connect("finished", p.queue_free)
 		p.stream = s
 		p.play()

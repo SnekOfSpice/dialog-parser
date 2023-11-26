@@ -13,7 +13,8 @@ config_version=5
 config/name="When The Sea Received The Sky"
 run/main_scene="res://game/main_scene.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://game/icon.png"
+config/windows_native_icon="res://game/icon.ico"
 
 [autoload]
 

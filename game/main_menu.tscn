@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bo3vwa8qi2bm8"]
+[gd_scene load_steps=6 format=3 uid="uid://bo3vwa8qi2bm8"]
 
 [ext_resource type="Script" path="res://game/main_menu.gd" id="1_w2x55"]
 [ext_resource type="Theme" uid="uid://dd3wmvu0xxyhs" path="res://style/theme.tres" id="2_j2yue"]
@@ -6,6 +6,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cckjw"]
 bg_color = Color(0.0235294, 0.0156863, 0.0588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6o04q"]
+content_margin_left = 10.0
+content_margin_top = 2.0
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_w2x55")
@@ -52,13 +56,21 @@ focus_mode = 0
 text = "Start"
 alignment = 0
 
-[node name="LoadButton" type="Button" parent="MenuContainer/VBoxContainer"]
-visible = false
+[node name="LoadButtonContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LoadButton" type="Button" parent="MenuContainer/VBoxContainer/LoadButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 0
 text = "Load"
 alignment = 0
+
+[node name="GameProgressLabel" type="RichTextLabel" parent="MenuContainer/VBoxContainer/LoadButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6o04q")
+text = "(65%)"
 
 [node name="ViewCWButton" type="Button" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
@@ -136,6 +148,7 @@ size_flags_horizontal = 10
 text = "Get me out"
 
 [node name="CreditsContainer" type="PanelContainer" parent="MenuContainer"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -250,6 +263,7 @@ focus_mode = 0
 text = "close"
 
 [connection signal="pressed" from="MenuContainer/VBoxContainer/StartNewButton" to="." method="_on_start_new_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/LoadButtonContainer/LoadButton" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/ViewCWButton" to="." method="_on_view_cw_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]

@@ -4,10 +4,10 @@ class_name LineReader
 
 @export var property_for_name := ""
 @export var name_for_blank_name := ""
-@export var text_speed := 0.5#100.0
+@export var text_speed := 0.5
 @export var auto_pause_duration := 0.2
-@export var use_name_map := true
 @export var name_map := {}
+@export var name_colors := {}
 
 @export_category("Advance")
 @export var show_advance_available := true
@@ -437,12 +437,13 @@ func set_dialog_line_index(value: int):
 		update_name_label(dialog_actors[dialog_line_index])
 
 func update_name_label(actor_name: String):
-	var display_name: String
-	if use_name_map:
-		display_name = name_map.get(actor_name, actor_name)
-	else:
-		display_name = actor_name
+	var display_name: String = name_map.get(actor_name, actor_name)
+	
+	var name_color :Color = name_colors.get(actor_name, Color.WHITE)
+	
 	find_child("NameLabel").text = display_name
+	find_child("NameLabel").add_theme_color_override("font_color", name_color)
+
 	emit_signal("currently_speaking", actor_name)
 	find_child("NameContainer").visible = actor_name != name_for_blank_name
 

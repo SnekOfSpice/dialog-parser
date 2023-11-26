@@ -69,7 +69,7 @@ func drop_down_values_to_string_array(values:=[0,0]) -> Array:
 	result[1] = value
 	return result
 
-func read_page(number: int):
+func read_page(number: int, starting_line_index := 0):
 	if not page_data.keys().has(number):
 		push_warning("number not in page data")
 		return
@@ -79,13 +79,30 @@ func read_page(number: int):
 	lines = page_data.get(page_index).get("lines")
 	max_line_index_on_page = lines.size() - 1
 	
-	line_index = 0
+	line_index = starting_line_index
 	read_line(line_index)
+
+func get_game_progress() -> float:
+	var max_line_index_used_for_calc := 0
+	var calc_lines = page_data.get(page_index).get("lines")
+	max_line_index_used_for_calc = calc_lines.size() - 1
+	if max_line_index_used_for_calc <= 0:
+		return 0.0
+	var max_page_index :int= max(page_data.keys().size(), 1)
+	
+	if max_page_index <= 0:
+		return 0.0
+	
+	var page_progress = (int(page_index) / float(max_page_index))
+	var line_progress = float(line_index) / float(max_line_index_used_for_calc)
+	
+	return page_progress + (line_progress / float(max_page_index))
 
 func read_line(index: int):
 	if lines.size() == 0:
 		push_warning(str("No lines defined for page ", page_index))
 		return
+	line_index = index
 	emit_signal("read_new_line", lines[index])
 	
 
@@ -121,7 +138,23 @@ func change_fact(fact_name: String, new_value: bool):
 	for l in get_tree().get_nodes_in_group("FactListener"):
 		l.fact_changed(fact_name, new_value)
 
+func apply_facts(f: Dictionary):
+	for fact in f.keys():
+		change_fact(fact, f.get(fact))
 
 func reset_facts():
 	for fact in starting_facts.keys():
 		change_fact(fact, starting_facts.get(fact))
+
+func serialize() -> Dictionary:
+	var result := {}
+	
+	result["Parser.facts"] = facts
+	result["Parser.page_index"] = page_index
+	result["Parser.line_index"] = line_index
+	prints("SERIALIZING ", result)
+	return result
+
+func deserialize(data: Dictionary):
+	facts = data.get("facts")
+	read_page(int(data.get("page_index")), int(data.get("line_index")))

@@ -43,6 +43,11 @@ name_map = {
 "zero": "Zero",
 "zero+euphoria": "Zero & Euphoria"
 }
+name_colors = {
+"euphoria": Color(0.992157, 0.796078, 0.670588, 1),
+"oldrone": Color(0.576471, 0.694118, 0.776471, 1),
+"zero": Color(0.898039, 0.933333, 0.85098, 1)
+}
 show_advance_available = false
 
 [node name="Black" parent="LineReader" instance=ExtResource("4_ut3ne")]
