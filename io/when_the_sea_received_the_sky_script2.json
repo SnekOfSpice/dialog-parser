@@ -6282,7 +6282,7 @@
 						"active_actors_title": "character",
 						"content": "[]>narrator:One more. You cannot tell how long you passed out this time.\n[]>euphoria:You're doing so well.\n[]>narrator:You can feel her hugging you from behind, kissing your nape.\n[]>narrator:Good Zero.\n[]>narrator:Fists joined like prayer around you, Euphoria hits you right in your midriff. <mp>Your breath exits your lungs and your vision goes dark.",
 						"selected_actor_dropdown_index": 0,
-						"use_dialog_syntax": false
+						"use_dialog_syntax": true
 					},
 					"facts": {
 
@@ -6584,7 +6584,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>narrator:It is noon-ish and you awake to Euphoria still in your workshop, already up and very much busy.\n[]>euphoria:Hii! Sorry. After, <ap>like, <ap>3 hours I felt the urge to work a bit on what you asked me for. I am currently to map out the eye placements of this cranial exoskeleton, correct?\n[]>zero:Morning...<mp> yeah..., that's it.\n[]>narrator:She puts down her notepad and kneels down next to the bed. You exchange a thousand bite-sized affections.\n[]>euphoria:I also applied the nanogel to suture yesterday's lacerations.\n[]>zero:Thank you.\n[]>euphoria:Always.\n[]>narrator:You go through your shared morning routine. Eventually, you also get into the mood for work.\n[]>euphoria:Extrasensory titan, huh?\n[]>zero:Yes. Basically, all the light we cannot see, all the sounds we cannot hear... all the emotions we cannot feel.\n[]>euphoria:Soooo... acid.\n[]>zero:Kinda. Do some if you think it'd help the construction process.\n[]>euphoria:I will... think on that.",
+						"content": "[]>narrator:It is noon-ish and you awake to Euphoria still in your workshop, already up and very much busy.\n[]>euphoria:Hii! Sorry. After, <ap>like, <ap>3 hours I felt the urge to work a bit on what you asked me for. I am currently to map out the eye placements of this cranial exoskeleton, correct?\n[]>zero:Morning...<mp> yeah... that's it.\n[]>narrator:She puts down her notepad and kneels down next to the bed. You exchange a thousand bite-sized affections.\n[]>euphoria:I also applied the nanogel to suture yesterday's lacerations.\n[]>zero:Thank you.\n[]>euphoria:Always.\n[]>narrator:You go through your shared morning routine. Eventually, you also get into the mood for work.\n[]>euphoria:Extrasensory titan, huh?\n[]>zero:Yes. Basically, all the light we cannot see, all the sounds we cannot hear... all the emotions we cannot feel.\n[]>euphoria:Soooo... acid.\n[]>zero:Kinda. Do some if you think it'd help the construction process.\n[]>euphoria:I will... think on that.",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},
@@ -7280,7 +7280,7 @@
 							""
 						],
 						"active_actors_title": "character",
-						"content": "[]>euphoria:Then I will got back to my plants.\n[]>zero:Later!",
+						"content": "[]>euphoria:Then I will go back to my plants.\n[]>zero:Later!",
 						"selected_actor_dropdown_index": 0,
 						"use_dialog_syntax": true
 					},

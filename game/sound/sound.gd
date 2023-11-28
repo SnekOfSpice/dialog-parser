@@ -14,7 +14,7 @@ const BGM_ZERO_DRAGGING_NAILS = "res://game/sound/425945__timbre__fb-loop-excerp
 const BGM_WEDDING = "res://game/sound/wedding.ogg"
 const BGM_AFTERCARE = "res://game/sound/478318__tri-tachyon__soundscape-dust-ambient-guitar.ogg"
 const BGM_SEX = "res://game/sound/511277__doctor_dreamchip__2020-03-29-downtempo-doctor-dreamchip.ogg"
-const BGM_LYING_TO_ME = "res://game/sound/CØL - Unmedicated IV - 01 Jeremiah I (Intro).ogg"
+const BGM_LYING_TO_ME = "res://game/sound/CØL - Lying to Me (Single).ogg"
 
 var gauge_out_eye = preload("res://game/sound/gauge-out-eye.ogg")
 

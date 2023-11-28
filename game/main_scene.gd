@@ -11,7 +11,6 @@ func _ready() -> void:
 	
 	find_child("PauseMenu").visible = false
 	
-#	Parser.read_page(0)
 
 func request_background_change(new_background):
 	find_child("Game").request_background_change(new_background)
