@@ -1,15 +1,86 @@
+@tool
 @icon("res://style/reader_icon_Zeichenfläche 1.svg")
 extends CanvasLayer
 class_name LineReader
 
-@export var property_for_name := ""
-@export var name_for_blank_name := ""
+
+@export_group("Setup")
+## The name of the dropdown property used for keying names. Usually something like "character"
+@export
+var property_for_name := ""
+## If set, this name will instead hide the name label alltogether.
+@export
+var name_for_blank_name := ""
 @export var text_speed := 0.5
 @export var auto_pause_duration := 0.2
 @export var name_map := {}
 @export var name_colors := {}
 
-@export_category("Advance")
+@export_group("Mandatory Children")
+## The Control holding Choice Option Container. Should be set to block all inputs outside of the choice buttons.
+@export var choice_container:PanelContainer:
+	get:
+		return choice_container
+	set(value):
+		choice_container = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
+## The Control used for enumerating options when they are presented. Should be HBoxContainer, VBoxContainer, or GridContainer.
+@export
+var choice_option_container:Control:
+	get:
+		return choice_option_container
+	set(value):
+		choice_option_container = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
+## Your custom handling of instructions defined in the dialog editor.
+@export
+var instruction_handler: InstructionHandler:
+	get:
+		return instruction_handler
+	set(value):
+		instruction_handler = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
+@export var text_content: RichTextLabel:
+	get:
+		return text_content
+	set(value):
+		text_content = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
+## The Control holding ALL text; Name Label & Text Content.
+@export var text_container: Control:
+	get:
+		return text_container
+	set(value):
+		text_container = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
+## A label that displays a currently speaking character's name.
+@export
+var name_label: Label:
+	get:
+		return name_label
+	set(value):
+		name_label = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
+## The Control holding the Name Label. Has its visiblity toggled by name_for_blank_name.
+@export
+var name_container: Control:
+	get:
+		return name_container
+	set(value):
+		name_container = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
+
+@export_group("Optional Children")
+@export var next_prompt_container: Control
+
+@export_group("Advance")
 @export var show_advance_available := true
 @export_range(0.0, 1.0) var advance_available_lerp_weight := 0.1
 @export_range(0.0, 10.0) var advance_available_delay := 0.5
@@ -46,12 +117,29 @@ var dialog_line_index := 0
 var line_chunks := []
 var chunk_index := 0
 var max_chunk_length := 50
-@onready var next_prompt_container = find_child("NextPrompt")
 
 
 var terminated := false
 
-
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings = []
+	
+	if not choice_container:
+		warnings.append("Choice Container is null")
+	if not choice_option_container:
+		warnings.append("Choice Option Container is null")
+	if not instruction_handler:
+		warnings.append("Instruction Handler is null")
+	if not text_content:
+		warnings.append("Text Content is null")
+	if not text_container:
+		warnings.append("Text Container is null")
+	if not name_label:
+		warnings.append("Name Label is null")
+	if not name_container:
+		warnings.append("Name Container is null")
+	
+	return warnings
 
 func _ready() -> void:
 	Parser.connect("read_new_line", read_new_line)
@@ -62,15 +150,15 @@ func _ready() -> void:
 	
 	remaining_auto_pause_duration = auto_pause_duration * (1.0 + (1-(text_speed / (MAX_TEXT_SPEED - 1))))
 	
-	if not find_child("InstructionHandler"):
-		push_error("No InsutrctionHandler as child of LineReader (name must be exact match).")
+	if not instruction_handler:
+		push_error("No InsutrctionHandler as child of LineReader.")
 		return
 	
-	find_child("InstructionHandler").connect("set_input_lock", set_is_input_locked)
-	find_child("InstructionHandler").connect("instruction_wrapped_completed", instruction_completed)
+	instruction_handler.connect("set_input_lock", set_is_input_locked)
+	instruction_handler.connect("instruction_wrapped_completed", instruction_completed)
 	
 		
-	if not show_advance_available:
+	if not show_advance_available and next_prompt_container:
 		next_prompt_container.modulate.a = 0
 	
 
@@ -82,7 +170,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if terminated: return
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if showing_text:
-				if find_child("TextContent").visible_ratio >= 1.0:
+				if text_content.visible_ratio >= 1.0:
 					if chunk_index >= line_chunks.size() - 1:
 						if dialog_line_index >= dialog_lines.size() - 1:
 							emit_signal("line_finished", line_index)
@@ -96,7 +184,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				else:
 					
 					if next_pause_position_index < pause_positions.size():
-						find_child("TextContent").visible_characters = get_end_of_chunk_position() 
+						text_content.visible_characters = get_end_of_chunk_position() 
 						if next_pause_type != PauseTypes.EoL:
 							if next_pause_position_index < pause_positions.size() - 1:
 								next_pause_position_index += 1
@@ -142,9 +230,9 @@ func read_new_line(new_line: Dictionary):
 		content = line_data.get("content").get("choices")
 	var content_name = line_data.get("content").get("name") # wtf is this
 	
-	find_child("TextContainer").visible = line_type == Parser.LineType.Text
+	text_container.visible = line_type == Parser.LineType.Text
 	showing_text = line_type == Parser.LineType.Text
-	find_child("ChoiceContainer").visible = line_type == Parser.LineType.Choice
+	choice_container.visible = line_type == Parser.LineType.Choice
 	match line_type:
 		Parser.LineType.Text:
 			using_dialog_syntax = line_data.get("content").get("use_dialog_syntax", false)
@@ -170,10 +258,10 @@ func read_new_line(new_line: Dictionary):
 		Parser.LineType.Choice:
 			build_choices(content)
 		Parser.LineType.Instruction:
-			if not find_child("InstructionHandler"):
-				push_error("No InsutrctionHandler as child of LineReader (name must be exact match).")
+			if not instruction_handler:
+				push_error("No InsutrctionHandler as child of LineReader.")
 				return
-			if not find_child("InstructionHandler").has_method("execute"):
+			if not instruction_handler.has_method("execute"):
 				push_error("InsutrctionHandler doesn't have execute method.")
 				return
 			
@@ -187,7 +275,7 @@ func read_new_line(new_line: Dictionary):
 			var delay_before = new_line.get("content").get("delay.before")
 			var delay_after = new_line.get("content").get("delay.after")
 			
-			find_child("InstructionHandler").wrapper_execute(instruction_name, args, delay_before, delay_after)
+			instruction_handler.wrapper_execute(instruction_name, args, delay_before, delay_after)
 			
 			
 	# register facts
@@ -198,20 +286,20 @@ func read_new_line(new_line: Dictionary):
 	
 func get_end_of_chunk_position() -> int:
 	if pause_positions.size() == 0:
-		return find_child("TextContent").text.length()
+		return text_content.text.length()
 	elif pause_types[next_pause_position_index] == PauseTypes.EoL:
-		return find_child("TextContent").text.length()
+		return text_content.text.length()
 	else:
 		return pause_positions[next_pause_position_index] - 4 * next_pause_position_index
 
 func _process(delta: float) -> void:
 	if next_pause_position_index < pause_positions.size() and next_pause_position_index != -1:
 		find_next_pause()
-	if find_child("TextContent").visible_characters < get_end_of_chunk_position():
+	if text_content.visible_characters < get_end_of_chunk_position():
 		if text_speed == MAX_TEXT_SPEED:
-			find_child("TextContent").visible_characters = get_end_of_chunk_position()
+			text_content.visible_characters = get_end_of_chunk_position()
 		else:
-			find_child("TextContent").visible_ratio += (text_speed / find_child("TextContent").text.length()) * delta
+			text_content.visible_ratio += (text_speed / text_content.text.length()) * delta
 	elif remaining_auto_pause_duration > 0 and next_pause_type == PauseTypes.Auto:
 		var last_dur = remaining_auto_pause_duration
 		remaining_auto_pause_duration -= delta
@@ -232,19 +320,19 @@ func update_advance_available():
 #	if next_pause_position_index != -1 and next_pause_position_index < pause_positions.size():
 #		if (
 #		next_pause_type == PauseTypes.Manual and 
-#		find_child("TextContent").visible_characters < 
+#		text_content.visible_characters < 
 #		pause_positions[next_pause_position_index] - 4 * next_pause_position_index
 #		):
 #			prompt_visible = true
 
-	if find_child("TextContent").visible_ratio >= 1.0:
+	if text_content.visible_ratio >= 1.0:
 		prompt_visible = true
 	elif next_pause_position_index > pause_positions.size() and next_pause_position_index != -1:
 		prompt_visible = true
 	elif pause_positions.size() > 0 and next_pause_type == PauseTypes.Manual:
 		if next_pause_position_index >= pause_positions.size() -1:
-			prompt_visible = find_child("TextContent").visible_ratio >= 1.0
-		elif (find_child("TextContent").visible_characters < 
+			prompt_visible = text_content.visible_ratio >= 1.0
+		elif (text_content.visible_characters < 
 		pause_positions[next_pause_position_index] - 4 * next_pause_position_index
 		):
 
@@ -253,9 +341,9 @@ func update_advance_available():
 			prompt_visible = false
 	else:
 		prompt_visible = false
-	if find_child("TextContent").visible_characters < get_end_of_chunk_position():
+	if text_content.visible_characters < get_end_of_chunk_position():
 		prompt_visible = false
-		if find_child("TextContent").visible_characters == -1:
+		if text_content.visible_characters == -1:
 			prompt_visible = true
 	
 	if is_input_locked:
@@ -277,9 +365,9 @@ func start_showing_text():
 func read_next_chunk():
 	chunk_index += 1
 	if text_speed == MAX_TEXT_SPEED:
-		find_child("TextContent").visible_ratio = 1.0
+		text_content.visible_ratio = 1.0
 	else:
-		find_child("TextContent").visible_characters = 0
+		text_content.visible_characters = 0
 	
 	pause_positions.clear()
 	pause_types.clear()
@@ -323,7 +411,7 @@ func read_next_chunk():
 		cleaned_text = cleaned_text.erase(pos-(i*4), 4)
 		i += 1
 	
-	find_child("TextContent").text = cleaned_text
+	text_content.text = cleaned_text
 
 func find_next_pause():
 	if pause_types.size() > 0 and next_pause_position_index < pause_types.size():
@@ -332,7 +420,7 @@ func find_next_pause():
 
 
 func build_choices(choices):
-	for c in find_child("ChoiceOptionContainer").get_children():
+	for c in choice_option_container.get_children():
 		c.queue_free()
 	
 	for option in choices:
@@ -375,7 +463,7 @@ func build_choices(choices):
 		
 		new_option.connect("choice_pressed", choice_pressed)
 		
-		find_child("ChoiceOptionContainer").add_child(new_option)
+		choice_option_container.add_child(new_option)
 
 func choice_pressed(do_jump_page, target_page):
 	if do_jump_page:
@@ -441,11 +529,11 @@ func update_name_label(actor_name: String):
 	
 	var name_color :Color = name_colors.get(actor_name, Color.WHITE)
 	
-	find_child("NameLabel").text = display_name
-	find_child("NameLabel").add_theme_color_override("font_color", name_color)
+	name_label.text = display_name
+	name_label.add_theme_color_override("font_color", name_color)
 
 	emit_signal("currently_speaking", actor_name)
-	find_child("NameContainer").visible = actor_name != name_for_blank_name
+	name_container.visible = actor_name != name_for_blank_name
 
 func _on_finished_button_pressed() -> void:
 	emit_signal("line_finished", line_index)
