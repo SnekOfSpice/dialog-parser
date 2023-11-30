@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://dhc45ew2mfqbu"]
 
 [ext_resource type="Script" path="res://game/main_scene.gd" id="1_2p4ut"]
-[ext_resource type="PackedScene" uid="uid://bb8yvsx0g14vl" path="res://src/line_reader.tscn" id="1_y64f0"]
+[ext_resource type="PackedScene" uid="uid://bb8yvsx0g14vl" path="res://addons/dialog-parser/src/line_reader.tscn" id="1_y64f0"]
 [ext_resource type="PackedScene" uid="uid://c67ti8jynl2ey" path="res://game/game.tscn" id="2_opnta"]
 [ext_resource type="PackedScene" uid="uid://bo3vwa8qi2bm8" path="res://game/main_menu.tscn" id="3_b52at"]
-[ext_resource type="Script" path="res://src/InstructionHandlerInherit.gd" id="4_axwkl"]
+[ext_resource type="Script" path="res://addons/dialog-parser/src/InstructionHandlerInherit.gd" id="4_axwkl"]
 [ext_resource type="PackedScene" uid="uid://r0tb7qevdcwr" path="res://game/black.tscn" id="4_ut3ne"]
 [ext_resource type="PackedScene" uid="uid://bu33mw8t7dsk8" path="res://game/pause_menu.tscn" id="4_vd1ov"]
-[ext_resource type="Theme" uid="uid://dd3wmvu0xxyhs" path="res://style/theme.tres" id="6_jah4o"]
+[ext_resource type="Theme" uid="uid://dd3wmvu0xxyhs" path="res://addons/dialog-parser/style/theme.tres" id="6_jah4o"]
 [ext_resource type="PackedScene" uid="uid://cd30e6wacwrav" path="res://game/game_finished.tscn" id="6_ltep6"]
 [ext_resource type="PackedScene" uid="uid://tgquth0l2fsr" path="res://game/zero_hud.tscn" id="9_vdyrl"]
 
@@ -42,7 +42,7 @@ render_target_update_mode = 4
 
 [node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_opnta")]
 
-[node name="LineReader" parent="." node_paths=PackedStringArray("choice_container", "choice_option_container", "instruction_handler", "text_content", "text_container", "name_label", "name_container", "next_prompt_container") instance=ExtResource("1_y64f0")]
+[node name="LineReader" parent="." node_paths=PackedStringArray("choice_container", "choice_option_container", "instruction_handler", "text_content", "text_container", "name_label", "name_container") instance=ExtResource("1_y64f0")]
 property_for_name = "character"
 name_for_blank_name = "narrator"
 auto_pause_duration = 0.4
@@ -64,7 +64,6 @@ text_content = NodePath("MarginContainer2/HBoxContainer/TextContainer/MarginCont
 text_container = NodePath("MarginContainer2/HBoxContainer/TextContainer")
 name_label = NodePath("MarginContainer2/HBoxContainer/TextContainer/NameContainer/Panel/NameLabel")
 name_container = NodePath("MarginContainer2/HBoxContainer/TextContainer/NameContainer")
-next_prompt_container = NodePath("MarginContainer/HBoxContainer/NextPromptContainer/NextPrompt")
 show_advance_available = false
 
 [node name="Black" parent="LineReader" instance=ExtResource("4_ut3ne")]

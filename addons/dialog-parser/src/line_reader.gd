@@ -453,7 +453,7 @@ func build_choices(choices):
 		var do_jump_page = option.get("do_jump_page")
 		var target_page = option.get("target_page")
 		
-		var new_option = preload("res://src/choice_option.tscn").instantiate()
+		var new_option = preload("res://addons/dialog-parser/src/choice_option.tscn").instantiate()
 		new_option.disabled = not enable_option
 		new_option.text = option_text
 		

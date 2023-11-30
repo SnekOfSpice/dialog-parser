@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qj72ge36u31p"
-path="res://.godot/imported/parser_icon.png-fd7a2fba562ae9e2dd5e15f815340038.ctex"
+uid="uid://dgf242nwi7c37"
+path="res://.godot/imported/reader_icon_Zeichenfläche 1.svg-e15357aba7698c75e1bdad9b11260766.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://style/parser_icon.png"
-dest_files=["res://.godot/imported/parser_icon.png-fd7a2fba562ae9e2dd5e15f815340038.ctex"]
+source_file="res://addons/dialog-parser/style/reader_icon_Zeichenfläche 1.svg"
+dest_files=["res://.godot/imported/reader_icon_Zeichenfläche 1.svg-e15357aba7698c75e1bdad9b11260766.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

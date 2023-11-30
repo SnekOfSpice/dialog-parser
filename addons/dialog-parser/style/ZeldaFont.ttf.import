@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cfvy1kmgrhnn7"
-path="res://.godot/imported/TimesNewPixel.ttf-b8c03fcccbe60d48acbbd1434a0a6f92.fontdata"
+uid="uid://ckbctvwh4kk0m"
+path="res://.godot/imported/ZeldaFont.ttf-d2c02d94cc454b8a9eabb8c71dd8befc.fontdata"
 
 [deps]
 
-source_file="res://style/TimesNewPixel.ttf"
-dest_files=["res://.godot/imported/TimesNewPixel.ttf-b8c03fcccbe60d48acbbd1434a0a6f92.fontdata"]
+source_file="res://addons/dialog-parser/style/ZeldaFont.ttf"
+dest_files=["res://.godot/imported/ZeldaFont.ttf-d2c02d94cc454b8a9eabb8c71dd8befc.fontdata"]
 
 [params]
 
@@ -20,9 +20,9 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=0
-subpixel_positioning=3
-oversampling=0.9
+hinting=1
+subpixel_positioning=1
+oversampling=1.9
 Fallbacks=null
 fallbacks=[]
 Compress=null

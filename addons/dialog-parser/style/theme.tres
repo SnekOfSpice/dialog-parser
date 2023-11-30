@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=16 format=3 uid="uid://dd3wmvu0xxyhs"]
 
-[ext_resource type="FontFile" uid="uid://rvnhwlkt81ow" path="res://style/TimesNewPixelexp.ttf" id="1_t6bxu"]
-[ext_resource type="FontFile" uid="uid://bnqgb1fpoaocj" path="res://style/atha.ttf" id="2_38r3n"]
-[ext_resource type="Texture2D" uid="uid://bo0vxwjt20et6" path="res://style/grabber.png" id="2_hlghn"]
-[ext_resource type="Texture2D" uid="uid://crl6nvmyp0nus" path="res://style/grabber_hl.png" id="3_gda16"]
+[ext_resource type="FontFile" uid="uid://rvnhwlkt81ow" path="res://addons/dialog-parser/style/TimesNewPixelexp.ttf" id="1_t6bxu"]
+[ext_resource type="FontFile" uid="uid://bnqgb1fpoaocj" path="res://addons/dialog-parser/style/atha.ttf" id="2_38r3n"]
+[ext_resource type="Texture2D" uid="uid://bo0vxwjt20et6" path="res://addons/dialog-parser/style/grabber.png" id="2_hlghn"]
+[ext_resource type="Texture2D" uid="uid://crl6nvmyp0nus" path="res://addons/dialog-parser/style/grabber_hl.png" id="3_gda16"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwf55"]
 bg_color = Color(0.0666667, 0.0509804, 0.0941176, 0.45098)

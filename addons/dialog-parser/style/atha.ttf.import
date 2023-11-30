@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bnqgb1fpoaocj"
-path="res://.godot/imported/atha.ttf-0ecd26c004cabf0ca3f0406365fbeb24.fontdata"
+path="res://.godot/imported/atha.ttf-7e33759fc06e6e541afef1810a47f413.fontdata"
 
 [deps]
 
-source_file="res://style/atha.ttf"
-dest_files=["res://.godot/imported/atha.ttf-0ecd26c004cabf0ca3f0406365fbeb24.fontdata"]
+source_file="res://addons/dialog-parser/style/atha.ttf"
+dest_files=["res://.godot/imported/atha.ttf-7e33759fc06e6e541afef1810a47f413.fontdata"]
 
 [params]
 

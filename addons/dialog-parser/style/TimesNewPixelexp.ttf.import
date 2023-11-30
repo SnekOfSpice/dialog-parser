@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://rvnhwlkt81ow"
-path="res://.godot/imported/TimesNewPixelexp.ttf-8a0d45bd7633f5cfff014fdb75cb7067.fontdata"
+path="res://.godot/imported/TimesNewPixelexp.ttf-6b5afe54ff19a1890ceff71e015e953e.fontdata"
 
 [deps]
 
-source_file="res://style/TimesNewPixelexp.ttf"
-dest_files=["res://.godot/imported/TimesNewPixelexp.ttf-8a0d45bd7633f5cfff014fdb75cb7067.fontdata"]
+source_file="res://addons/dialog-parser/style/TimesNewPixelexp.ttf"
+dest_files=["res://.godot/imported/TimesNewPixelexp.ttf-6b5afe54ff19a1890ceff71e015e953e.fontdata"]
 
 [params]
 
