@@ -76,6 +76,15 @@ var name_container: Control:
 		name_container = value
 		if Engine.is_editor_hint():
 			update_configuration_warnings()
+## The Control holding the Name Label. Has its visiblity toggled by name_for_blank_name.
+@export
+var inline_evaluator: Node:
+	get:
+		return inline_evaluator
+	set(value):
+		inline_evaluator = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
 
 @export_group("Optional Children")
 @export var next_prompt_container: Control
@@ -138,6 +147,8 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("Name Label is null")
 	if not name_container:
 		warnings.append("Name Container is null")
+	if not inline_evaluator:
+		warnings.append("Inline Evaluator is null")
 	
 	return warnings
 
@@ -293,6 +304,18 @@ func get_end_of_chunk_position() -> int:
 		return pause_positions[next_pause_position_index] - 4 * next_pause_position_index
 
 func _process(delta: float) -> void:
+	# this is a @tool script so this prevents the console from getting flooded
+	if not (
+		choice_container and
+		choice_option_container and
+		instruction_handler and
+		text_content and
+		text_container and
+		name_label and
+		name_container and
+		inline_evaluator
+		):
+		return
 	if next_pause_position_index < pause_positions.size() and next_pause_position_index != -1:
 		find_next_pause()
 	if text_content.visible_characters < get_end_of_chunk_position():
@@ -373,13 +396,60 @@ func read_next_chunk():
 	pause_types.clear()
 	var new_text : String = line_chunks[chunk_index]
 	
-	
-	
-	
+	# replace var and func calls
+	var scan_index := 0
+	var text_length := new_text.length()
+	while scan_index < text_length:
+		if new_text[scan_index] == "<":
+			if new_text.find("<var:", scan_index) == scan_index:
+				var local_scan_index := scan_index
+				var control_to_replace := ""
+				var var_name := ""
+				var start_reading_var_name := false
+				while new_text[local_scan_index] != ">":
+					control_to_replace += new_text[local_scan_index]
+					if start_reading_var_name:
+						var_name += new_text[local_scan_index]
+					if new_text[local_scan_index] == ":":
+						start_reading_var_name = true
+					local_scan_index += 1
+				var_name = var_name.trim_suffix(">")
+				control_to_replace += ">"
+				new_text = new_text.replace(control_to_replace, str(inline_evaluator.get(var_name)))
+			elif new_text.find("<func:", scan_index) == scan_index:
+				var local_scan_index := scan_index
+				var control_to_replace := ""
+				var func_name := ""
+				var start_reading_func_name := false
+				while new_text[local_scan_index] != ">":
+					if new_text[local_scan_index] == ",":
+						start_reading_func_name = false
+					control_to_replace += new_text[local_scan_index]
+					if start_reading_func_name:
+						func_name += new_text[local_scan_index]
+					if new_text[local_scan_index] == ":":
+						start_reading_func_name = true
+					
+					local_scan_index += 1
+				#func_name = func_name.trim_suffix(">")
+				control_to_replace += ">"
+				
+				var control_prepared_for_split = control_to_replace.trim_prefix(str("<func:", func_name))
+				control_prepared_for_split = control_prepared_for_split.trim_suffix(">")
+				var packed_func_args := control_prepared_for_split.split(",")
+				var func_args = []
+				for a in packed_func_args:
+					if not a.is_empty():
+						func_args.append(a)
+				printt(control_to_replace, func_name, func_args)
+				new_text = new_text.replace(control_to_replace, str(inline_evaluator.callv(func_name, func_args)))
+		
+		text_length = new_text.length()
+		scan_index += 1
 	
 	pause_positions.clear()
 	pause_types.clear()
-	var scan_index := 0
+	scan_index = 0
 	var last_pause := 0
 	while scan_index < new_text.length():
 		if new_text[scan_index] == "<":
@@ -391,6 +461,7 @@ func read_next_chunk():
 				if not pause_positions.has(scan_index):
 					pause_positions.append(scan_index)
 					pause_types.append(PauseTypes.Auto)
+				
 		scan_index += 1
 	
 	#pause_positions.erase(-1)
@@ -402,7 +473,7 @@ func read_next_chunk():
 	next_pause_position_index = 0
 	find_next_pause()
 	
-	var cleaned_text : String = line_chunks[chunk_index]
+	var cleaned_text : String = new_text
 	var i = 0
 	for pos in pause_positions:
 		if pause_types[i] == PauseTypes.EoL:
@@ -410,6 +481,7 @@ func read_next_chunk():
 		
 		cleaned_text = cleaned_text.erase(pos-(i*4), 4)
 		i += 1
+	
 	
 	text_content.text = cleaned_text
 

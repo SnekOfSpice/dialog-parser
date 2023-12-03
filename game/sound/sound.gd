@@ -35,7 +35,7 @@ func set_background_music_by_key(key:String):
 			set_background_music(BGM_PSYCH)
 		"Winds":
 			set_background_music(BGM_WINDS)
-		"Slow, Deep Breaths":
+		"Slow Deep Breaths":
 			set_background_music(BGM_SLOW_DEEP_BREATHS)
 		"This Is All Too Much For Me":
 			set_background_music(BGM_TOO_MUCH_FOR_ME)
@@ -57,6 +57,10 @@ func set_background_music_by_key(key:String):
 			set_background_music(BGM_LYING_TO_ME)
 		"":
 			set_background_music("")
+		"none":
+			set_background_music("")
+		"continue":
+			pass
 
 func set_background_music(key: String, _rampup_time := rampup_time):
 	rampup_time = _rampup_time
