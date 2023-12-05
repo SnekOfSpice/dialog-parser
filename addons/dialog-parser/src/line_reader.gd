@@ -492,7 +492,7 @@ func read_next_chunk():
 	pause_positions.clear()
 	pause_types.clear()
 	scan_index = 0
-	var last_pause := 0
+	
 	while scan_index < new_text.length():
 		if new_text[scan_index] == "<":
 			if new_text.find("<mp>", scan_index) == scan_index:
