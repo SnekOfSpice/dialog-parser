@@ -123,10 +123,51 @@ var dialog_line_index := 0
 
 var line_chunks := []
 var chunk_index := 0
-var max_chunk_length := 50
 
 
 var terminated := false
+
+func serialize() -> Dictionary:
+	var result := {}
+	
+	result["line_data"] = line_data 
+	result["line_index"] = line_index 
+	result["remaining_auto_pause_duration"] = remaining_auto_pause_duration 
+	result["is_input_locked"] = is_input_locked 
+	result["showing_text"] = showing_text 
+	result["using_dialog_syntax"] = using_dialog_syntax 
+	result["next_pause_position_index"] = next_pause_position_index 
+	result["pause_positions"] = pause_positions 
+	result["pause_types"] = pause_types 
+	result["next_pause_type"] = next_pause_type 
+	result["dialog_lines"] = dialog_lines 
+	result["dialog_actors"] = dialog_actors 
+	result["dialog_line_index"] = dialog_line_index 
+	result["line_chunks"] = line_chunks 
+	result["chunk_index"] = chunk_index 
+	result["terminated"] = terminated 
+	
+	return result
+
+func deserialize(data: Dictionary):
+	if not data:
+		return
+	line_data = data.get("line_data")
+	line_index = data.get("line_index")
+	remaining_auto_pause_duration = data.get("remaining_auto_pause_duration")
+	is_input_locked = data.get("is_input_locked")
+	showing_text = data.get("showing_text")
+	using_dialog_syntax = data.get("using_dialog_syntax")
+	next_pause_position_index = data.get("next_pause_position_index")
+	pause_positions = data.get("pause_positions")
+	pause_types = data.get("pause_types")
+	next_pause_type = data.get("next_pause_type")
+	dialog_lines = data.get("dialog_lines")
+	dialog_actors = data.get("dialog_actors")
+	dialog_line_index = data.get("dialog_line_index")
+	line_chunks = data.get("line_chunks")
+	chunk_index = data.get("chunk_index")
+	terminated = data.get("terminated")
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings = []
@@ -178,6 +219,10 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
+	
+	if Parser.paused:
+		return
+	
 	if event is InputEventMouseButton:
 		if is_input_locked: return
 		if terminated: return
@@ -308,6 +353,9 @@ func get_end_of_chunk_position() -> int:
 func _process(delta: float) -> void:
 	# this is a @tool script so this prevents the console from getting flooded
 	if Engine.is_editor_hint():
+		return
+	
+	if Parser.paused:
 		return
 	
 	if next_pause_position_index < pause_positions.size() and next_pause_position_index != -1:

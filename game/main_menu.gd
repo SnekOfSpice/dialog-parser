@@ -55,7 +55,7 @@ func _on_load_button_pressed() -> void:
 	visible = false
 	Parser.line_reader.terminated = false
 	Parser.line_reader.visible = true
-	Parser.read_page(Parser.page_index, Parser.line_index)
+	#Parser.read_page(Parser.page_index, Parser.line_index)
 	Sound.set_background_music_by_key(Options.loaded_bgm_key)
 	get_parent().find_child("Game").request_background_change(Options.current_background_image)
 

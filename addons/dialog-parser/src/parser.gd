@@ -18,6 +18,7 @@ var dropdown_titles := []
 var dropdowns := {}
 
 var line_reader : LineReader = null
+var paused := false
 
 var page_index := 0
 var line_index := 0
@@ -85,7 +86,7 @@ func handle_event(event_name: String, event_args: Dictionary):
 			currently_speaking_name = event_args.get("actor_name")
 			currently_speaking_visible = event_args.get("is_name_container_visible")
 		"text_content_text_changed":
-			var text = event_args.get("old_text")
+			var text = event_args.get("new_text")
 			history.append(str(str("[b]",currently_speaking_name, "[/b]: ") if currently_speaking_visible else "", text))
 		"choice_pressed":
 			if append_choices_to_history:
@@ -202,6 +203,7 @@ func serialize() -> Dictionary:
 	result["Parser.page_index"] = page_index
 	result["Parser.line_index"] = line_index
 	result["Parser.history"] = history
+	result["Parser.line_reader"] = line_reader.serialize()
 	
 	return result
 

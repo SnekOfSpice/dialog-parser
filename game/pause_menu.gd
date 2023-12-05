@@ -49,6 +49,7 @@ func on_visibility_changed():
 	update_text_speed_slider(find_child("TextSpeedSlider").value)
 	Parser.line_reader.text_speed = Options.text_speed
 	find_child("SaveLabel").modulate.a = 0.0
+	Parser.paused = visible
 
 
 func update_text_speed_slider(value: float):

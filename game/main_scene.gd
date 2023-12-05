@@ -48,6 +48,8 @@ func _on_pause_button_pressed() -> void:
 
 func _on_pause_menu_visibility_changed() -> void:
 	$InGameControls.visible = not $PauseMenu.visible
+	if $PauseMenu.visible:
+		$History.visible = false 
 
 
 func _on_history_button_pressed() -> void:

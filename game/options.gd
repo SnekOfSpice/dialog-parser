@@ -66,5 +66,6 @@ func load_gamestate():
 	Parser.page_index = int(data.get("Parser.page_index", 0))
 	Parser.line_index = int(data.get("Parser.line_index", 0))
 	Parser.apply_facts(data.get("Parser.facts", {}))
+	Parser.line_reader.deserialize(data.get("Parser.line_reader", null))
 	loaded_bgm_key = data.get("Sound.current_bgm_key", "")
 	current_background_image = data.get("Game.current_background_image", "")
