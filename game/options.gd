@@ -17,9 +17,6 @@ var loaded_bgm_key := ""
 var current_background_image := ""
 
 func _ready() -> void:
-	
-
-	var score_data = {}
 	var config = ConfigFile.new()
 
 	# Load data from a file.

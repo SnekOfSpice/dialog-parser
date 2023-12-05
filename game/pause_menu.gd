@@ -15,11 +15,19 @@ func _ready() -> void:
 	find_child("VolumeSlider").value = Options.music_volume + 80
 	
 	connect("visibility_changed", on_visibility_changed)
+	find_child("SaveLabel").modulate.a = 0.0
 	
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	Options.fullscreen = true
-	find_child("FullscreenButton").button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
-	find_child("WindowedButton").button_pressed = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
+	if Parser.show_demo:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		Options.fullscreen = false
+		find_child("FullscreenButton").button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+		find_child("WindowedButton").button_pressed = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
+
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		Options.fullscreen = true
+		find_child("FullscreenButton").button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+		find_child("WindowedButton").button_pressed = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
 
 func _on_fullscreen_button_pressed() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -40,6 +48,7 @@ func on_visibility_changed():
 	find_child("TextSpeedSlider").value = Options.text_speed
 	update_text_speed_slider(find_child("TextSpeedSlider").value)
 	Parser.line_reader.text_speed = Options.text_speed
+	find_child("SaveLabel").modulate.a = 0.0
 
 
 func update_text_speed_slider(value: float):
@@ -67,6 +76,11 @@ func _on_main_menu_button_pressed() -> void:
 	Options.save_gamestate()
 	emit_signal("request_main_menu")
 
+func show_save_text():
+	find_child("SaveLabel").modulate.a = 1.0
+
+func hide_save_text():
+	find_child("SaveLabel").modulate.a = 0.0
 
 func _on_quit_button_pressed() -> void:
 	Options.save_gamestate()

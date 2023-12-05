@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhc45ew2mfqbu"]
+[gd_scene load_steps=15 format=3 uid="uid://dhc45ew2mfqbu"]
 
 [ext_resource type="Script" path="res://game/main_scene.gd" id="1_2p4ut"]
 [ext_resource type="PackedScene" uid="uid://bb8yvsx0g14vl" path="res://addons/dialog-parser/src/line_reader.tscn" id="1_y64f0"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cd30e6wacwrav" path="res://game/game_finished.tscn" id="6_ltep6"]
 [ext_resource type="Script" path="res://game/Evaluator.gd" id="7_pg7iq"]
 [ext_resource type="PackedScene" uid="uid://tgquth0l2fsr" path="res://game/zero_hud.tscn" id="9_vdyrl"]
+[ext_resource type="Script" path="res://game/AutoScrollContainer.gd" id="12_m0uu8"]
 
 [sub_resource type="Gradient" id="Gradient_3a5x0"]
 offsets = PackedFloat32Array(0, 0.171875, 1)
@@ -172,17 +173,112 @@ alignment = 1
 [node name="Evaluator" type="Node" parent="LineReader"]
 script = ExtResource("7_pg7iq")
 
+[node name="InGameControls" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="InGameControls"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("6_jah4o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameControls/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="PauseButton" type="Button" parent="InGameControls/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+text = "pause"
+
+[node name="HistoryButton" type="Button" parent="InGameControls/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+text = "history"
+
 [node name="GameFinished" parent="." instance=ExtResource("6_ltep6")]
 
 [node name="MainMenu" parent="." instance=ExtResource("3_b52at")]
+visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_vd1ov")]
 visible = false
 
 [node name="ZeroHUD" parent="." instance=ExtResource("9_vdyrl")]
 
+[node name="History" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="History"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("6_jah4o")
+
+[node name="PanelContainer" type="PanelContainer" parent="History/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="History/Control/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HistoryLabelScrollContainer" type="ScrollContainer" parent="History/Control/PanelContainer/PanelContainer"]
+custom_minimum_size = Vector2(700, 700)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("12_m0uu8")
+
+[node name="HistoryLabel" type="RichTextLabel" parent="History/Control/PanelContainer/PanelContainer/HistoryLabelScrollContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "dfghdfjgdfgjd
+sfdgdfg
+
+dfg
+
+dghdgh"
+fit_content = true
+scroll_active = false
+
+[node name="CloseHistoryButton" type="Button" parent="History/Control/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "close history"
+
 [connection signal="instruction_completed" from="LineReader/Black" to="LineReader/InstructionHandler" method="_on_black_instruction_completed"]
 [connection signal="make_screen_black" from="LineReader/InstructionHandler" to="LineReader/Black" method="_on_instruction_handler_make_screen_black"]
+[connection signal="pressed" from="InGameControls/Control/VBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="InGameControls/Control/VBoxContainer/HistoryButton" to="." method="_on_history_button_pressed"]
 [connection signal="request_main_menu" from="GameFinished" to="." method="_on_game_finished_request_main_menu"]
 [connection signal="request_show_options" from="MainMenu" to="." method="_on_main_menu_request_show_options"]
 [connection signal="request_main_menu" from="PauseMenu" to="." method="_on_pause_menu_request_main_menu"]
+[connection signal="visibility_changed" from="PauseMenu" to="." method="_on_pause_menu_visibility_changed"]
+[connection signal="visibility_changed" from="History" to="." method="_on_history_visibility_changed"]
+[connection signal="pressed" from="History/Control/PanelContainer/CloseHistoryButton" to="." method="_on_close_history_button_pressed"]

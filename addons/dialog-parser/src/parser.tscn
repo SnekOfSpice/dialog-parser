@@ -5,5 +5,4 @@
 [node name="Parser" type="Node"]
 script = ExtResource("1_0uufo")
 source_file = "res://io/script_instruction2.json"
-source_path = "D:/100_godot/dialog-editor/io/when_the_sea_received_the_sky_script2.json"
-source_path_demo = "D:/100_godot/dialog-editor/io/demo-nov1.json"
+demo_file = "res://io/dialogarg_demo.json"

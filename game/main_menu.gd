@@ -11,7 +11,16 @@ func _ready() -> void:
 	
 	connect("visibility_changed", on_visibility_changed)
 	
+	visible = true
 	begin()
+	
+	if Parser.show_demo:
+		visible = false
+		Parser.line_reader.terminated = false
+		Parser.line_reader.visible = true
+		Parser.reset_facts()
+		Parser.read_page(0)
+		Parser.history = []
 
 func begin():
 	Sound.set_background_music(Sound.BGM_MAIN_MENU_LOST_PIANO, 0.0)
@@ -39,6 +48,7 @@ func _on_start_new_button_pressed() -> void:
 	Parser.line_reader.visible = true
 	Parser.reset_facts()
 	Parser.read_page(0)
+	Parser.history = []
 
 
 func _on_load_button_pressed() -> void:

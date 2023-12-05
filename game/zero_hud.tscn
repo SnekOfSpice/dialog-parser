@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game/zero_hud.gd" id="1_8efop"]
 
-[node name="ZeroHUD" type="CanvasLayer" groups=["FactListener", "ParserDependent"]]
+[node name="ZeroHUD" type="CanvasLayer" groups=["ParserDependent"]]
 script = ExtResource("1_8efop")
 
 [node name="Control" type="Control" parent="."]

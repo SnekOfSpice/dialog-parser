@@ -1,5 +1,5 @@
-@tool
 @icon("res://style/reader_icon_Zeichenfläche 1.svg")
+@tool
 extends CanvasLayer
 class_name LineReader
 
@@ -100,9 +100,7 @@ const MAX_TEXT_SPEED := 101
 
 signal line_finished(line_index: int)
 signal jump_to_page(page_index: int)
-signal new_header(header: Array)
 signal is_input_locked_changed(new_value: bool)
-signal currently_speaking(actor_name: String)
 
 var line_data := {}
 
@@ -153,11 +151,13 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return warnings
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	Parser.connect("read_new_line", read_new_line)
 	Parser.connect("terminate_page", close)
 	
-	Parser.line_reader = self
-	Parser.open_connection()
+	Parser.open_connection(self)
 	
 	remaining_auto_pause_duration = auto_pause_duration * (1.0 + (1-(text_speed / (MAX_TEXT_SPEED - 1))))
 	
@@ -176,6 +176,8 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Engine.is_editor_hint():
+		return
 	if event is InputEventMouseButton:
 		if is_input_locked: return
 		if terminated: return
@@ -305,17 +307,9 @@ func get_end_of_chunk_position() -> int:
 
 func _process(delta: float) -> void:
 	# this is a @tool script so this prevents the console from getting flooded
-	if not (
-		choice_container and
-		choice_option_container and
-		instruction_handler and
-		text_content and
-		text_container and
-		name_label and
-		name_container and
-		inline_evaluator
-		):
+	if Engine.is_editor_hint():
 		return
+	
 	if next_pause_position_index < pause_positions.size() and next_pause_position_index != -1:
 		find_next_pause()
 	if text_content.visible_characters < get_end_of_chunk_position():
@@ -482,7 +476,7 @@ func read_next_chunk():
 		cleaned_text = cleaned_text.erase(pos-(i*4), 4)
 		i += 1
 	
-	
+	ParserEvents.start("text_content_text_changed", {"old_text": text_content.text, "new_text": cleaned_text})
 	text_content.text = cleaned_text
 
 func find_next_pause():
@@ -495,6 +489,7 @@ func build_choices(choices):
 	for c in choice_option_container.get_children():
 		c.queue_free()
 	
+	var built_choices := []
 	for option in choices:
 		var conditional_eval = evaluate_conditionals(option.get("conditionals"), option.get("choice_text.enabled_as_default"))
 		var cond_true = conditional_eval[0]
@@ -536,6 +531,14 @@ func build_choices(choices):
 		new_option.connect("choice_pressed", choice_pressed)
 		
 		choice_option_container.add_child(new_option)
+		built_choices.append({
+			"disabled": not enable_option,
+			"option_text": option_text,
+			"facts": facts,
+			"do_jump_page": do_jump_page,
+			"target_page": target_page,
+		})
+	ParserEvents.start("choices_presented", {"choices": built_choices})
 
 func choice_pressed(do_jump_page, target_page):
 	if do_jump_page:
@@ -588,13 +591,33 @@ func handle_header(header: Array):
 		if property_name == property_for_name:
 			update_name_label(values[1])
 	
-	emit_signal("new_header", header)
+	ParserEvents.start("new_header", {"header":header})
 
 
 func set_dialog_line_index(value: int):
 	dialog_line_index = value
 	if using_dialog_syntax:
-		update_name_label(dialog_actors[dialog_line_index])
+		var raw_name : String = dialog_actors[dialog_line_index]
+		var actual_name: String
+		var dialog_line_arg_dict := {}
+		if "{" in raw_name:
+			actual_name = raw_name.split("{")[0]
+			var dialog_line_args = raw_name.split("{")[1]
+			dialog_line_args = dialog_line_args.trim_suffix("}")
+			dialog_line_args = dialog_line_args.split(",")
+			
+			for arg in dialog_line_args:
+				var arg_key = arg.split("|")[0]
+				var arg_value = arg.split("|")[1]
+				dialog_line_arg_dict[arg_key] = arg_value
+		else:
+			actual_name = raw_name
+		var e = {
+			"actual_name": actual_name,
+			"dialog_line_arg_dict": dialog_line_arg_dict
+		}
+		ParserEvents.start("dialog_line_args_passed", e)
+		update_name_label(actual_name)
 
 func update_name_label(actor_name: String):
 	var display_name: String = name_map.get(actor_name, actor_name)
@@ -603,9 +626,11 @@ func update_name_label(actor_name: String):
 	
 	name_label.text = display_name
 	name_label.add_theme_color_override("font_color", name_color)
-
-	emit_signal("currently_speaking", actor_name)
+	
 	name_container.visible = actor_name != name_for_blank_name
+	
+	ParserEvents.start("name_label_updated", {"actor_name": display_name, "is_name_container_visible": name_container.visible})
+	ParserEvents.start("new_actor_speaking", {"actor_name": actor_name, "is_name_container_visible": name_container.visible})
 
 func _on_finished_button_pressed() -> void:
 	emit_signal("line_finished", line_index)

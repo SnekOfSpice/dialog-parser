@@ -2,9 +2,16 @@ extends Node
 
 
 @export_file("*.json") var source_file
-@export var source_path := ""
-@export var source_path_demo := ""
+@export_file("*.json") var demo_file
+#@export var source_path := ""
+#@export var source_path_demo := ""
 @export var show_demo := false
+
+@export_group("Choices")
+## If true, will append the text of choice buttons to the history.
+@export var append_choices_to_history := true
+##A space will be inserted between this String and the text of the choice made.
+@export var choice_appendation_string := "Choice made:"
 
 var page_data := {}
 var dropdown_titles := []
@@ -36,15 +43,23 @@ signal terminate_page(page_index: int)
 signal page_finished(page_index: int)
 signal read_new_page(page_index: int)
 
+var currently_speaking_name := ""
+var currently_speaking_visible := true
+var history := []
+
 func _ready() -> void:
 	#var path = source_path_demo if show_demo else source_path
-	var file = FileAccess.open(source_file, FileAccess.READ)
+	var file : FileAccess
+	if show_demo:
+		file = FileAccess.open(demo_file, FileAccess.READ)
+	else:
+		file = FileAccess.open(source_file, FileAccess.READ)
 	var data : Dictionary = JSON.parse_string(file.get_as_text())
 	file.close()
 	
 	
 	# all keys are now strings instead of ints
-	var int_data = {}
+	var int_data := {}
 	var loaded_data = data.get("page_data")
 	for i in loaded_data.size():
 		var where = int(loaded_data.get(str(i)).get("number"))
@@ -59,6 +74,34 @@ func _ready() -> void:
 	
 	if show_demo:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	
+	ParserEvents.listen(self, "name_label_updated")
+	ParserEvents.listen(self, "text_content_text_changed")
+	ParserEvents.listen(self, "choice_pressed")
+
+func handle_event(event_name: String, event_args: Dictionary):
+	match event_name:
+		"name_label_updated":
+			currently_speaking_name = event_args.get("actor_name")
+			currently_speaking_visible = event_args.get("is_name_container_visible")
+		"text_content_text_changed":
+			var text = event_args.get("old_text")
+			history.append(str(str("[b]",currently_speaking_name, "[/b]: ") if currently_speaking_visible else "", text))
+		"choice_pressed":
+			if append_choices_to_history:
+				history.append(str(choice_appendation_string, " ", event_args.get("choice_text")))
+
+func build_history_string() -> String:
+	var result  := ""
+	
+	for s in history:
+		result += s
+		result += "\n"
+		result += "\n"
+	
+	result = result.trim_suffix("\n\n")
+	
+	return result
 
 func drop_down_values_to_string_array(values:=[0,0]) -> Array:
 	var result = ["", ""]
@@ -74,7 +117,8 @@ func read_page(number: int, starting_line_index := 0):
 		push_warning("number not in page data")
 		return
 	
-	emit_signal("read_new_page", number)
+	#emit_signal("read_new_page", number)
+	ParserEvents.start("read_new_page", {"number":number})
 	page_index = number
 	lines = page_data.get(page_index).get("lines")
 	max_line_index_on_page = lines.size() - 1
@@ -110,33 +154,38 @@ func read_next_line(finished_line_index: int):
 	if finished_line_index >= max_line_index_on_page:
 		var do_terminate = bool(page_data.get(page_index).get("terminate"))
 		if do_terminate:
+			ParserEvents.start("terminate_page", {"page_index": page_index})
 			emit_signal("terminate_page", page_index)
 		else:
 			var next = int(page_data.get(page_index).get("next"))
 			if page_data.keys().has(next):
 				emit_signal("page_finished", page_index)
+				ParserEvents.start("page_finished", {"page_index": page_index})
 				read_page(next)
 			else:
 				emit_signal("terminate_page", page_index)
+				ParserEvents.start("page_finished", {"page_index": page_index})
+				ParserEvents.start("terminate_page", {"page_index": page_index})
 				push_warning(str("tried to read non-existent page ", next, " after non-terminating page ", page_index))
 		return
 	read_line(finished_line_index + 1)
 
 
 
-func open_connection():
-	for l in get_tree().get_nodes_in_group("LineListener"):
-		l.connect("line_finished", read_next_line)
-		l.connect("jump_to_page", read_page)
-	
-	for l in get_tree().get_nodes_in_group("ParserDependent"):
-		l.parser_init()
+func open_connection(new_lr: LineReader):
+	line_reader = new_lr
+	line_reader.connect("line_finished", read_next_line)
+	line_reader.connect("jump_to_page", read_page)
 	
 
 func change_fact(fact_name: String, new_value: bool):
+	var e = {
+		"old_value" : facts[fact_name],
+		"fact_name": fact_name,
+		"new_value": new_value
+	}
 	facts[fact_name] = new_value
-	for l in get_tree().get_nodes_in_group("FactListener"):
-		l.fact_changed(fact_name, new_value)
+	ParserEvents.start("fact_changed", e)
 
 func apply_facts(f: Dictionary):
 	for fact in f.keys():
@@ -152,9 +201,11 @@ func serialize() -> Dictionary:
 	result["Parser.facts"] = facts
 	result["Parser.page_index"] = page_index
 	result["Parser.line_index"] = line_index
-	prints("SERIALIZING ", result)
+	result["Parser.history"] = history
+	
 	return result
 
 func deserialize(data: Dictionary):
 	facts = data.get("facts")
+	history = data.get("history")
 	read_page(int(data.get("page_index")), int(data.get("line_index")))

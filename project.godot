@@ -18,6 +18,7 @@ config/windows_native_icon="res://game/icon.ico"
 
 [autoload]
 
+ParserEvents="*res://addons/dialog-parser/src/parser_events.tscn"
 Parser="*res://addons/dialog-parser/src/parser.tscn"
 Sound="*res://game/sound/sound.tscn"
 Options="*res://game/options.tscn"

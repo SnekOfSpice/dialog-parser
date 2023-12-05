@@ -4,14 +4,24 @@ class_name Character
 @export var character_name := ""
 
 func _ready() -> void:
-	add_to_group("FactListener")
+	ParserEvents.listen(self, "fact_changed")
+	ParserEvents.listen(self, "page_finished")
+	ParserEvents.listen(self, "new_header")
+	ParserEvents.listen(self, "new_actor_speaking")
 	add_to_group("Character")
 	visible = false
+	
 
-func parser_init():
-	Parser.line_reader.connect("new_header", handle_new_header)
-	Parser.line_reader.connect("currently_speaking", handle_currently_speaking)
-	Parser.connect("page_finished", handle_page_finished)
+func handle_event(event_name: String, event_args: Dictionary):
+	match event_name:
+		"fact_changed":
+			fact_changed(event_args.get("fact_name"), event_args.get("new_value"))
+		"page_finished":
+			handle_page_finished(event_args.get("page_index"))
+		"new_header":
+			handle_new_header(event_args.get("header"))
+		"new_actor_speaking":
+			handle_currently_speaking(event_args.get("actor_name"))
 
 func handle_new_header(header: Array):
 	var update_emotions := true
@@ -40,6 +50,7 @@ func handle_currently_speaking(actor_name: String):
 
 func handle_page_finished(_page_index: int):
 	visible = false
+
 
 func fact_changed(fact_name: String, new_value: bool):
 	pass
