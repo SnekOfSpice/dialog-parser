@@ -46,26 +46,19 @@ func save_prefs():
 	config.save(OPTIONS_PATH)
 
 func save_gamestate():
-	var file = FileAccess.open(SAVEGAME_PATH, FileAccess.WRITE)
-	var data_to_save = Parser.serialize()
+	var data_to_save := {}
 	data_to_save["Sound.current_bgm_key"] = Sound.current_bgm_key
 	data_to_save["Game.current_background_image"] = current_background_image
-	file.store_string(JSON.stringify(data_to_save, "\t"))
-	file.close()
+	var character_visibilities := {}
+	for c in get_tree().get_nodes_in_group("Character"):
+		character_visibilities[c.character_name] = c.serialize()
+	data_to_save["Game.character_visibilities"] = character_visibilities
+	Parser.save_parser_state_to_file(SAVEGAME_PATH, data_to_save)
 
 func load_gamestate():
-	var file = FileAccess.open(SAVEGAME_PATH, FileAccess.READ)
-	if not file:
-		Parser.page_index = 0
-		Parser.line_index = 0
-		return
-	
-	var data : Dictionary = JSON.parse_string(file.get_as_text())
-	file.close()
-	
-	Parser.page_index = int(data.get("Parser.page_index", 0))
-	Parser.line_index = int(data.get("Parser.line_index", 0))
-	Parser.apply_facts(data.get("Parser.facts", {}))
-	Parser.line_reader.deserialize(data.get("Parser.line_reader", null))
-	loaded_bgm_key = data.get("Sound.current_bgm_key", "")
-	current_background_image = data.get("Game.current_background_image", "")
+	var game_data := Parser.load_parser_state_from_file(SAVEGAME_PATH)
+	loaded_bgm_key = game_data.get("Sound.current_bgm_key", "")
+	current_background_image = game_data.get("Game.current_background_image", "")
+	var character_visibilities : Dictionary= game_data.get("Game.character_visibilities", {})
+	for c in get_tree().get_nodes_in_group("Character"):
+		c.deserialize(character_visibilities.get(c.character_name, {}))

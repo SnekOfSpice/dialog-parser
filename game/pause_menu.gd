@@ -16,6 +16,7 @@ func _ready() -> void:
 	
 	connect("visibility_changed", on_visibility_changed)
 	find_child("SaveLabel").modulate.a = 0.0
+	find_child("QuitButton").visible = not OS.has_feature("web")
 	
 	if Parser.show_demo:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

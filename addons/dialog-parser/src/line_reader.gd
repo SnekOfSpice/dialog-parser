@@ -1,4 +1,4 @@
-@icon("res://style/reader_icon_Zeichenfläche 1.svg")
+@icon("res://addons/dialog-parser/style/reader_icon_Zeichenfläche 1.svg")
 @tool
 extends CanvasLayer
 class_name LineReader
@@ -103,7 +103,7 @@ signal jump_to_page(page_index: int)
 signal is_input_locked_changed(new_value: bool)
 
 var line_data := {}
-
+var line_type := 0
 var line_index
 var remaining_auto_pause_duration := 0.0
 
@@ -123,7 +123,7 @@ var dialog_line_index := 0
 
 var line_chunks := []
 var chunk_index := 0
-
+var current_raw_name := ""
 
 var terminated := false
 
@@ -132,6 +132,7 @@ func serialize() -> Dictionary:
 	
 	result["line_data"] = line_data 
 	result["line_index"] = line_index 
+	result["line_type"] = line_type 
 	result["remaining_auto_pause_duration"] = remaining_auto_pause_duration 
 	result["is_input_locked"] = is_input_locked 
 	result["showing_text"] = showing_text 
@@ -146,6 +147,8 @@ func serialize() -> Dictionary:
 	result["line_chunks"] = line_chunks 
 	result["chunk_index"] = chunk_index 
 	result["terminated"] = terminated 
+	result["text_content.text"] = text_content.text
+	result["current_raw_name"] = current_raw_name
 	
 	return result
 
@@ -153,21 +156,29 @@ func deserialize(data: Dictionary):
 	if not data:
 		return
 	line_data = data.get("line_data")
-	line_index = data.get("line_index")
+	line_index = int(data.get("line_index"))
+	line_type = int(data.get("line_type", Parser.LineType.Text))
 	remaining_auto_pause_duration = data.get("remaining_auto_pause_duration")
 	is_input_locked = data.get("is_input_locked")
 	showing_text = data.get("showing_text")
 	using_dialog_syntax = data.get("using_dialog_syntax")
-	next_pause_position_index = data.get("next_pause_position_index")
+	next_pause_position_index = int(data.get("next_pause_position_index"))
 	pause_positions = data.get("pause_positions")
 	pause_types = data.get("pause_types")
-	next_pause_type = data.get("next_pause_type")
+	next_pause_type = int(data.get("next_pause_type"))
 	dialog_lines = data.get("dialog_lines")
 	dialog_actors = data.get("dialog_actors")
-	dialog_line_index = data.get("dialog_line_index")
+	dialog_line_index = int(data.get("dialog_line_index"))
 	line_chunks = data.get("line_chunks")
-	chunk_index = data.get("chunk_index")
+	chunk_index = int(data.get("chunk_index"))
 	terminated = data.get("terminated")
+	
+	text_container.visible = line_type == Parser.LineType.Text
+	showing_text = line_type == Parser.LineType.Text
+	choice_container.visible = line_type == Parser.LineType.Choice
+	
+	text_content.text = data.get("text_content.text", "")
+	update_name_label(data.get("current_raw_name", name_for_blank_name))
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings = []
@@ -282,7 +293,7 @@ func read_new_line(new_line: Dictionary):
 	
 	handle_header(line_data.get("header"))
 	
-	var line_type = int(line_data.get("line_type"))
+	line_type = int(line_data.get("line_type"))
 	var content = line_data.get("content").get("content")
 	if line_type == Parser.LineType.Choice:
 		content = line_data.get("content").get("choices")
@@ -668,6 +679,7 @@ func set_dialog_line_index(value: int):
 		update_name_label(actual_name)
 
 func update_name_label(actor_name: String):
+	current_raw_name = actor_name
 	var display_name: String = name_map.get(actor_name, actor_name)
 	
 	var name_color :Color = name_colors.get(actor_name, Color.WHITE)

@@ -10,7 +10,23 @@ func _ready() -> void:
 	ParserEvents.listen(self, "new_actor_speaking")
 	add_to_group("Character")
 	visible = false
+
+func serialize() -> Dictionary:
+	var result := {}
 	
+	result["visible"] = visible
+	var expressions := {}
+	for expr in find_child("Expressions").get_children():
+		expressions[expr.name] = expr.visible
+	result["expressions"] = expressions
+	
+	return result
+
+func deserialize(data: Dictionary):
+	visible = data.get("visible", false)
+	var expressions_data = data.get("expressions", {})
+	for expr in find_child("Expressions").get_children():
+		expr.visible = expressions_data.get(expr.name, false)
 
 func handle_event(event_name: String, event_args: Dictionary):
 	match event_name:

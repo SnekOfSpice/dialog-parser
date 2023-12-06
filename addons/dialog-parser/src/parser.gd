@@ -6,6 +6,7 @@ extends Node
 #@export var source_path := ""
 #@export var source_path_demo := ""
 @export var show_demo := false
+@export var max_history_length := -1
 
 @export_group("Choices")
 ## If true, will append the text of choice buttons to the history.
@@ -22,9 +23,7 @@ var paused := false
 
 var page_index := 0
 var line_index := 0
-var chunk_index := 0
 var lines := []
-var line_chunks := []
 
 var facts := {}
 var starting_facts := {}
@@ -88,9 +87,19 @@ func handle_event(event_name: String, event_args: Dictionary):
 		"text_content_text_changed":
 			var text = event_args.get("new_text")
 			history.append(str(str("[b]",currently_speaking_name, "[/b]: ") if currently_speaking_visible else "", text))
+			if max_history_length > -1:
+				if history.size() > max_history_length:
+					history.reverse()
+					history.pop_back()
+					history.reverse()
 		"choice_pressed":
 			if append_choices_to_history:
 				history.append(str(choice_appendation_string, " ", event_args.get("choice_text")))
+				if max_history_length > -1:
+					if history.size() > max_history_length:
+						history.reverse()
+						history.pop_back()
+						history.reverse()
 
 func build_history_string() -> String:
 	var result  := ""
@@ -127,19 +136,38 @@ func read_page(number: int, starting_line_index := 0):
 	line_index = starting_line_index
 	read_line(line_index)
 
-func get_game_progress() -> float:
+func get_game_progress(save_file_path:="", full_if_on_last_page:= true) -> float:
 	var max_line_index_used_for_calc := 0
 	var calc_lines = page_data.get(page_index).get("lines")
 	max_line_index_used_for_calc = calc_lines.size() - 1
+	var max_page_index :int= max(page_data.keys().size(), 1)
+	var page_index_used_for_calc := page_index
+	var line_index_used_for_calc := line_index
+	
+#	if FileAccess.file_exists(save_file_path):
+#		var file = FileAccess.open(save_file_path, FileAccess.READ)
+#
+#		var data : Dictionary = JSON.parse_string(file.get_as_text())
+#		file.close()
+#
+#		var parser_data = data.get("Parser", {})
+#
+#		page_index_used_for_calc = int(parser_data.get("Parser.page_index", 0))
+#		line_index_used_for_calc = int(parser_data.get("Parser.line_index", 0))
+	
+	
 	if max_line_index_used_for_calc <= 0:
 		return 0.0
-	var max_page_index :int= max(page_data.keys().size(), 1)
+	
 	
 	if max_page_index <= 0:
 		return 0.0
 	
-	var page_progress = (int(page_index) / float(max_page_index))
-	var line_progress = float(line_index) / float(max_line_index_used_for_calc)
+	var page_progress = (int(page_index_used_for_calc) / float(max_page_index))
+	var line_progress = float(line_index_used_for_calc) / float(max_line_index_used_for_calc)
+	
+	if full_if_on_last_page and page_index_used_for_calc == max_page_index:
+		return 1.0
 	
 	return page_progress + (line_progress / float(max_page_index))
 
@@ -200,6 +228,8 @@ func serialize() -> Dictionary:
 	var result := {}
 	
 	result["Parser.facts"] = facts
+	result["Parser.lines"] = lines
+	result["Parser.max_line_index_on_page"] = max_line_index_on_page
 	result["Parser.page_index"] = page_index
 	result["Parser.line_index"] = line_index
 	result["Parser.history"] = history
@@ -208,6 +238,42 @@ func serialize() -> Dictionary:
 	return result
 
 func deserialize(data: Dictionary):
-	facts = data.get("facts")
-	history = data.get("history")
-	read_page(int(data.get("page_index")), int(data.get("line_index")))
+	lines = data.get("Parser.lines")
+	max_line_index_on_page = int(data.get("Parser.max_line_index_on_page"))
+	
+	page_index = int(data.get("Parser.page_index", 0))
+	line_index = int(data.get("Parser.line_index", 0))
+	apply_facts(data.get("Parser.facts", {}))
+	history = data.get("Parser.history", [])
+	var line_reader_data = data.get("Parser.line_reader", {})
+	if line_reader_data == {}:
+		read_page(page_index, line_index)
+	else:
+		line_reader.deserialize(line_reader_data)
+
+
+func save_parser_state_to_file(file_path: String, additional_data: Dictionary):
+	var file = FileAccess.open(file_path, FileAccess.WRITE)
+	var data_to_save := {}
+	data_to_save["Parser"] = serialize()
+	data_to_save["Custom"] = additional_data
+	file.store_string(JSON.stringify(data_to_save, "\t"))
+	file.close()
+
+## returns any additional custom arguments that were passed during saving.
+func load_parser_state_from_file(file_path: String) -> Dictionary:
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	if not file:
+		push_warning(str("No file at ", file_path))
+		page_index = 0
+		line_index = 0
+		return {}
+	
+	var data : Dictionary = JSON.parse_string(file.get_as_text())
+	file.close()
+	
+	deserialize(data.get("Parser", {}))
+	
+	
+	
+	return data.get("Custom", {})
