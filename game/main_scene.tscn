@@ -68,6 +68,7 @@ name_label = NodePath("MarginContainer2/HBoxContainer/TextContainer/NameContaine
 name_container = NodePath("MarginContainer2/HBoxContainer/TextContainer/NameContainer")
 inline_evaluator = NodePath("Evaluator")
 show_advance_available = false
+non_word_characters = [".", ",", "/", ";", ":", "_", "-", "?", "!", "~"]
 
 [node name="Black" parent="LineReader" instance=ExtResource("4_ut3ne")]
 visible = false

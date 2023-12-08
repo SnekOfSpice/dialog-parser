@@ -4,3 +4,4 @@
 
 [node name="LineReader" type="CanvasLayer"]
 script = ExtResource("1_f2s5m")
+non_word_characters = null

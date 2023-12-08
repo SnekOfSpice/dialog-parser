@@ -13,6 +13,8 @@ var property_for_name := ""
 var name_for_blank_name := ""
 @export var text_speed := 0.5
 @export var auto_pause_duration := 0.2
+#@export var auto_continue := false
+#@export var auto_continue_delay := 4.0
 @export var name_map := {}
 @export var name_colors := {}
 
@@ -94,6 +96,23 @@ var inline_evaluator: Node:
 @export_range(0.0, 1.0) var advance_available_lerp_weight := 0.1
 @export_range(0.0, 10.0) var advance_available_delay := 0.5
 var remaining_advance_delay := advance_available_delay
+#var remaining_auto_continue_duration := auto_continue_delay
+
+
+@export_group("Parser Event Configurations")
+## List of characters that will not be part of the read_word parser event and instead be treated as spaces.
+@export var non_word_characters := [
+	".",
+	",",
+	"/",
+	";",
+	":",
+	"_",
+	"-",
+	"?",
+	"!",
+	"~",
+]
 
 const MAX_TEXT_SPEED := 101
 
@@ -126,6 +145,11 @@ var chunk_index := 0
 var current_raw_name := ""
 
 var terminated := false
+
+var started_word_buffer :=""
+var characters_visible_so_far := ""
+
+var last_visible_ratio := 0.0
 
 func serialize() -> Dictionary:
 	var result := {}
@@ -177,7 +201,7 @@ func deserialize(data: Dictionary):
 	showing_text = line_type == Parser.LineType.Text
 	choice_container.visible = line_type == Parser.LineType.Choice
 	
-	text_content.text = data.get("text_content.text", "")
+	set_text_content_text(data.get("text_content.text", ""))
 	update_name_label(data.get("current_raw_name", name_for_blank_name))
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -211,6 +235,7 @@ func _ready() -> void:
 	
 	Parser.open_connection(self)
 	
+	ParserEvents.listen(self, "word_read")
 	remaining_auto_pause_duration = auto_pause_duration * (1.0 + (1-(text_speed / (MAX_TEXT_SPEED - 1))))
 	
 	if not instruction_handler:
@@ -224,7 +249,10 @@ func _ready() -> void:
 	if not show_advance_available and next_prompt_container:
 		next_prompt_container.modulate.a = 0
 	
-
+func handle_event(event_name: String, event_args: Dictionary):
+	match event_name:
+		"word_read":
+			print(event_args.get("word"))
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -390,6 +418,51 @@ func _process(delta: float) -> void:
 			update_advance_available()
 		else:
 			remaining_advance_delay -= delta
+	
+	var new_characters_visible_so_far = text_content.text.substr(0, text_content.visible_characters)
+	var new_characters : String = new_characters_visible_so_far.trim_prefix(characters_visible_so_far)
+	if " " in new_characters:
+		var split_new_characters : Array = new_characters.split(" ")
+		for s in split_new_characters:
+			s = remove_symbols(s)
+		started_word_buffer += split_new_characters[0]
+		remove_spaces_and_send_word_read_event(remove_symbols(started_word_buffer))
+		var i = 1
+		while i < split_new_characters.size() - 1:
+			remove_spaces_and_send_word_read_event(remove_symbols(split_new_characters[i]))
+			i += 1
+		started_word_buffer = split_new_characters.back()
+	else:
+		started_word_buffer += new_characters
+		if text_content.text.ends_with(started_word_buffer):
+			if not started_word_buffer.is_empty():
+				remove_spaces_and_send_word_read_event(remove_symbols(started_word_buffer))
+				started_word_buffer = ""
+	characters_visible_so_far = new_characters_visible_so_far
+	
+	
+#	if last_visible_ratio < 1.0 and text_content.visible_ratio >= 1.0:
+#		if auto_continue:
+#			remaining_auto_continue_duration = auto_continue_delay
+#	last_visible_ratio = text_content.visible_ratio
+#
+#	if auto_continue and text_content.visible_ratio >= 1.0:
+#		remaining_auto_continue_duration -= delta
+#		if remaining_auto_continue_duration <= 0.0:
+#			emit_signal("line_finished", line_index)
+#			remaining_auto_continue_duration = auto_continue_delay
+
+func remove_spaces_and_send_word_read_event(word: String):
+	word = word.replace(" ", "")
+	ParserEvents.start("word_read", {"word": word})
+
+func remove_symbols(from: String, symbols:=non_word_characters) -> String:
+	var s = from
+	
+	for c in symbols:
+		s = s.replace(c, " ")
+	
+	return s
 
 func update_advance_available():
 	var prompt_visible: bool
@@ -509,6 +582,9 @@ func read_next_chunk():
 			if new_text.find("<mp>", scan_index) == scan_index:
 				if not pause_positions.has(scan_index):
 					pause_positions.append(scan_index)
+#					if auto_continue:
+#						pause_types.append(PauseTypes.Auto)
+#					else:
 					pause_types.append(PauseTypes.Manual)
 			elif new_text.find("<ap>", scan_index) == scan_index:
 				if not pause_positions.has(scan_index):
@@ -536,7 +612,12 @@ func read_next_chunk():
 		i += 1
 	
 	ParserEvents.start("text_content_text_changed", {"old_text": text_content.text, "new_text": cleaned_text})
-	text_content.text = cleaned_text
+	set_text_content_text(cleaned_text)
+
+func set_text_content_text(text: String):
+	text_content.text = text
+	characters_visible_so_far = ""
+	started_word_buffer = ""
 
 func find_next_pause():
 	if pause_types.size() > 0 and next_pause_position_index < pause_types.size():

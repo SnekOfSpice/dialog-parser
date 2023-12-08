@@ -15,7 +15,7 @@ func _ready() -> void:
 	for c in get_tree().get_nodes_in_group("Character"):
 		c.visible = false
 	begin()
-	
+	Parser.paused = true
 	find_child("QuitButton").visible = not OS.has_feature("web")
 	find_child("AbortButton").visible = not OS.has_feature("web")
 	
@@ -50,6 +50,7 @@ func _on_start_new_button_pressed() -> void:
 	visible = false
 	Parser.line_reader.terminated = false
 	Parser.line_reader.visible = true
+	Parser.paused = false
 	Parser.reset_facts()
 	Parser.read_page(0)
 	Parser.history = []
@@ -60,6 +61,7 @@ func _on_start_new_button_pressed() -> void:
 func _on_load_button_pressed() -> void:
 	Options.load_gamestate()
 	visible = false
+	Parser.paused = false
 	#Parser.line_reader.terminated = false
 	#Parser.line_reader.visible = true
 	#Parser.read_page(Parser.page_index, Parser.line_index)
