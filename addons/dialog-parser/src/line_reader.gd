@@ -3,18 +3,19 @@
 extends CanvasLayer
 class_name LineReader
 
+@export_group("Timing")
+@export var text_speed := 0.5
+@export var auto_pause_duration := 0.2
+@export var auto_continue := false
+@export_range(0.1, 60.0, 0.1) var auto_continue_delay := 4.0
 
-@export_group("Setup")
+@export_group("Name Setup")
 ## The name of the dropdown property used for keying names. Usually something like "character"
 @export
 var property_for_name := ""
 ## If set, this name will instead hide the name label alltogether.
 @export
 var name_for_blank_name := ""
-@export var text_speed := 0.5
-@export var auto_pause_duration := 0.2
-#@export var auto_continue := false
-#@export var auto_continue_delay := 4.0
 @export var name_map := {}
 @export var name_colors := {}
 
@@ -263,33 +264,42 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if event is InputEventMouseButton:
-		if is_input_locked: return
-		if terminated: return
+		if is_input_locked:
+			return
+		if terminated:
+			return
+		if auto_continue:
+			return
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if showing_text:
-				if text_content.visible_ratio >= 1.0:
-					if chunk_index >= line_chunks.size() - 1:
-						if dialog_line_index >= dialog_lines.size() - 1:
-							emit_signal("line_finished", line_index)
-						else:
-							remaining_advance_delay = advance_available_delay
-							set_dialog_line_index(dialog_line_index + 1)
-							start_showing_text()
-					else:
-						remaining_advance_delay = advance_available_delay
-						read_next_chunk()
+			advance()
+
+func advance():
+	if auto_continue:
+		$AutoContinueTimer.stop()
+	if showing_text:
+		if text_content.visible_ratio >= 1.0:
+			if chunk_index >= line_chunks.size() - 1:
+				if dialog_line_index >= dialog_lines.size() - 1:
+					emit_signal("line_finished", line_index)
 				else:
-					
-					if next_pause_position_index < pause_positions.size():
-						text_content.visible_characters = get_end_of_chunk_position() 
-						if next_pause_type != PauseTypes.EoL:
-							if next_pause_position_index < pause_positions.size() - 1:
-								next_pause_position_index += 1
-							find_next_pause()
-							remaining_auto_pause_duration = remaining_auto_pause_duration * (1.0 + (1-(text_speed / (MAX_TEXT_SPEED - 1))))
-							remaining_advance_delay = advance_available_delay
+					remaining_advance_delay = advance_available_delay
+					set_dialog_line_index(dialog_line_index + 1)
+					start_showing_text()
 			else:
-				emit_signal("line_finished", line_index)
+				remaining_advance_delay = advance_available_delay
+				read_next_chunk()
+		else:
+			
+			if next_pause_position_index < pause_positions.size():
+				text_content.visible_characters = get_end_of_chunk_position() 
+				if next_pause_type != PauseTypes.EoL:
+					if next_pause_position_index < pause_positions.size() - 1:
+						next_pause_position_index += 1
+					find_next_pause()
+					remaining_auto_pause_duration = remaining_auto_pause_duration * (1.0 + (1-(text_speed / (MAX_TEXT_SPEED - 1))))
+					remaining_advance_delay = advance_available_delay
+	else:
+		emit_signal("line_finished", line_index)
 
 func instruction_completed():
 	emit_signal("line_finished", line_index)
@@ -441,16 +451,24 @@ func _process(delta: float) -> void:
 	characters_visible_so_far = new_characters_visible_so_far
 	
 	
-#	if last_visible_ratio < 1.0 and text_content.visible_ratio >= 1.0:
-#		if auto_continue:
-#			remaining_auto_continue_duration = auto_continue_delay
-#	last_visible_ratio = text_content.visible_ratio
+	if last_visible_ratio < 1.0 and text_content.visible_ratio >= 1.0:
+		if auto_continue:
+			start_auto_continue_timer()
+			print("A")
+	elif text_content.visible_characters >= pause_positions[next_pause_position_index]:
+		if auto_continue:
+			start_auto_continue_timer()
+			print("B")
+	last_visible_ratio = text_content.visible_ratio
 #
 #	if auto_continue and text_content.visible_ratio >= 1.0:
 #		remaining_auto_continue_duration -= delta
 #		if remaining_auto_continue_duration <= 0.0:
 #			emit_signal("line_finished", line_index)
 #			remaining_auto_continue_duration = auto_continue_delay
+
+func start_auto_continue_timer():
+	$AutoContinueTimer.start(auto_continue_delay)
 
 func remove_spaces_and_send_word_read_event(word: String):
 	word = word.replace(" ", "")
@@ -775,3 +793,7 @@ func update_name_label(actor_name: String):
 
 func _on_finished_button_pressed() -> void:
 	emit_signal("line_finished", line_index)
+
+
+func _on_auto_continue_timer_timeout() -> void:
+	advance()

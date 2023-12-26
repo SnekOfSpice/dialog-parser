@@ -8,7 +8,7 @@ signal request_main_menu()
 func _ready() -> void:
 	find_child("TextSpeedSlider").min_value = 1
 	find_child("TextSpeedSlider").max_value = Parser.line_reader.MAX_TEXT_SPEED
-	find_child("TextSpeedSlider").value = 60
+	find_child("TextSpeedSlider").value = Options.text_speed
 	Parser.line_reader.text_speed = 60
 	
 	find_child("VolumeLabel").text = str(Options.music_volume + 80)
@@ -25,8 +25,6 @@ func _ready() -> void:
 		find_child("WindowedButton").button_pressed = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
 
 	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-		Options.fullscreen = true
 		find_child("FullscreenButton").button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 		find_child("WindowedButton").button_pressed = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
 
@@ -70,11 +68,13 @@ func _on_volume_slider_value_changed(value: float) -> void:
 
 
 func _on_close_options_button_pressed() -> void:
+	Options.save_prefs()
 	visible = false
 
 
 func _on_main_menu_button_pressed() -> void:
 	visible = false
+	Options.save_prefs()
 	Options.save_gamestate()
 	emit_signal("request_main_menu")
 
@@ -85,5 +85,6 @@ func hide_save_text():
 	find_child("SaveLabel").modulate.a = 0.0
 
 func _on_quit_button_pressed() -> void:
+	Options.save_prefs()
 	Options.save_gamestate()
 	get_tree().quit()

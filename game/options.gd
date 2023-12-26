@@ -24,12 +24,19 @@ func _ready() -> void:
 
 	# If the file didn't load, ignore it.
 	if err != OK:
+		print("ERR")
 		return
 
 	music_volume = config.get_value("preferences", "music_volume", 0)
+	text_speed = config.get_value("preferences", "text_speed", 60)
 	fullscreen = config.get_value("preferences", "fullscreen", true)
 	confirmed_age = config.get_value("preferences", "confirmed_age", false)
 	ending_chosen = config.get_value("preferences", "ending_chosen", ENDING_NEVER_REACHED)
+	
+	if fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 
 func save_prefs():
@@ -38,6 +45,7 @@ func save_prefs():
 
 	# Store some values.
 	config.set_value("preferences", "music_volume", music_volume)
+	config.set_value("preferences", "text_speed", text_speed)
 	config.set_value("preferences", "fullscreen", fullscreen)
 	config.set_value("preferences", "confirmed_age", confirmed_age)
 	config.set_value("preferences", "ending_chosen", ending_chosen)

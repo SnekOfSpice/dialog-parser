@@ -4,4 +4,8 @@
 
 [node name="LineReader" type="CanvasLayer"]
 script = ExtResource("1_f2s5m")
-non_word_characters = null
+
+[node name="AutoContinueTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="AutoContinueTimer" to="." method="_on_auto_continue_timer_timeout"]
