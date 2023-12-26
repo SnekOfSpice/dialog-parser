@@ -231,6 +231,8 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
+	auto_continue = false # broken atm
+	
 	Parser.connect("read_new_line", read_new_line)
 	Parser.connect("terminate_page", close)
 	
@@ -246,14 +248,15 @@ func _ready() -> void:
 	instruction_handler.connect("set_input_lock", set_is_input_locked)
 	instruction_handler.connect("instruction_wrapped_completed", instruction_completed)
 	
-		
+	connect("line_finished", start_auto_continue_timer)
+	
 	if not show_advance_available and next_prompt_container:
 		next_prompt_container.modulate.a = 0
 	
 func handle_event(event_name: String, event_args: Dictionary):
 	match event_name:
 		"word_read":
-			print(event_args.get("word"))
+			pass
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -451,14 +454,14 @@ func _process(delta: float) -> void:
 	characters_visible_so_far = new_characters_visible_so_far
 	
 	
-	if last_visible_ratio < 1.0 and text_content.visible_ratio >= 1.0:
-		if auto_continue:
-			start_auto_continue_timer()
-			print("A")
-	elif text_content.visible_characters >= pause_positions[next_pause_position_index]:
-		if auto_continue:
-			start_auto_continue_timer()
-			print("B")
+#	if last_visible_ratio < 1.0 and text_content.visible_ratio >= 1.0:
+#		if auto_continue:
+#			start_auto_continue_timer()
+#			print("A")
+#	if text_content.visible_characters >= pause_positions[next_pause_position_index]:
+#		if auto_continue and $AutoContinueTimer.time_left == 0:
+#			start_auto_continue_timer()
+#			print("B")
 	last_visible_ratio = text_content.visible_ratio
 #
 #	if auto_continue and text_content.visible_ratio >= 1.0:
@@ -467,8 +470,13 @@ func _process(delta: float) -> void:
 #			emit_signal("line_finished", line_index)
 #			remaining_auto_continue_duration = auto_continue_delay
 
-func start_auto_continue_timer():
-	$AutoContinueTimer.start(auto_continue_delay)
+func start_auto_continue_timer(_cringe:= 0):
+	if not auto_continue:
+		return
+	if line_type == Parser.LineType.Text:
+		$AutoContinueTimer.start(auto_continue_delay)
+		return
+	advance()
 
 func remove_spaces_and_send_word_read_event(word: String):
 	word = word.replace(" ", "")
@@ -585,7 +593,6 @@ func read_next_chunk():
 				for a in packed_func_args:
 					if not a.is_empty():
 						func_args.append(a)
-				printt(control_to_replace, func_name, func_args)
 				new_text = new_text.replace(control_to_replace, str(inline_evaluator.callv(func_name, func_args)))
 		
 		text_length = new_text.length()
@@ -600,9 +607,6 @@ func read_next_chunk():
 			if new_text.find("<mp>", scan_index) == scan_index:
 				if not pause_positions.has(scan_index):
 					pause_positions.append(scan_index)
-#					if auto_continue:
-#						pause_types.append(PauseTypes.Auto)
-#					else:
 					pause_types.append(PauseTypes.Manual)
 			elif new_text.find("<ap>", scan_index) == scan_index:
 				if not pause_positions.has(scan_index):

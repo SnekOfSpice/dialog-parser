@@ -19,23 +19,53 @@ extends Node
 #					"do_jump_page": bool,
 #					"target_page": int,
 #				}
-#"dialog_line_args_passed", e
-#e = {
+# "dialog_line_args_passed"
+#		args:
 #			"actual_name": actual_name,
 #			"dialog_line_arg_dict": dialog_line_arg_dict
-#		}
-#"fact_changed",  {"old_value" : facts[fact_name],"fact_name": fact_name, "new_value": new_value}
-#"name_label_updated", {"actor_name": display_name, "is_name_container_visible": name_container.visible}
-## uses the actual string that ends up in the label
-#"new_actor_speaking", {"actor_name": actor_name, "is_name_container_visible": name_container.visible}
-## uses internal key
-#"new_header", {"header":header}
-#header: Array where every item is {"data_type": int, "property_name": String, "values": Array of size 2}
-#"page_finished", {"page_index": page_index}
-#"read_new_page", {"number":number}
-#"terminate_page", {"page_index": page_index}
-#"text_content_text_changed", {"old_text": text_content.text, "new_text": cleaned_text}
-#"word_read", {"word": word}
+#		
+# "fact_changed"
+# 	args:
+#		"old_value" : Array of Strings
+#		"fact_name": String
+#		"new_value": bool
+#
+# "name_label_updated"
+	## uses the actual string that ends up in LineReader.name_label
+#	args:
+#		"actor_name": String
+#		"is_name_container_visible": bool
+#
+# "new_actor_speaking"
+	## uses internal key of the name from name_label_updated (may be identical)
+#	"actor_name": String
+#	"is_name_container_visible": bool
+#
+# "new_header"
+#	args:
+#		"header": Array where every item is {"data_type": int, "property_name": String, "values": Array of size 2}
+#
+# "page_finished"
+#	args:
+#		"page_index": int
+#
+# "read_new_page"
+#	args:
+#		"number":int
+#
+# "terminate_page"
+#	args:
+#		"page_index": int
+#
+# "text_content_text_changed"
+#	the entire text, irregardless of visible_characters
+#	args:
+#		"old_text": String
+#		"new_text": String
+#
+# "word_read"
+#	args:
+#		"word": String
 
 
 var event_listeners := {}
