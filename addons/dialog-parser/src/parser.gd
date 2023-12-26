@@ -136,7 +136,19 @@ func read_page(number: int, starting_line_index := 0):
 	line_index = starting_line_index
 	read_line(line_index)
 
-func get_game_progress(save_file_path:="", full_if_on_last_page:= true) -> float:
+func get_saved_game_progress(file_path: String) -> float:
+	var file : FileAccess
+	file = FileAccess.open(file_path, FileAccess.READ)
+	var data : Dictionary = JSON.parse_string(file.get_as_text())
+	file.close()
+	
+	if not file:
+		return 0.0
+	
+	# all keys are now strings instead of ints
+	return float(data.get("Parser", {}).get("Parser.game_progress", 0.0))
+ 
+func get_game_progress(full_if_on_last_page:= true) -> float:
 	var max_line_index_used_for_calc := 0
 	var calc_lines = page_data.get(page_index).get("lines")
 	max_line_index_used_for_calc = calc_lines.size() - 1
@@ -234,6 +246,7 @@ func serialize() -> Dictionary:
 	result["Parser.line_index"] = line_index
 	result["Parser.history"] = history
 	result["Parser.line_reader"] = line_reader.serialize()
+	result["Parser.game_progress"] = get_game_progress()
 	
 	return result
 

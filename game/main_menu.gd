@@ -29,10 +29,9 @@ func _ready() -> void:
 
 func begin():
 	Sound.set_background_music(Sound.BGM_MAIN_MENU_LOST_PIANO, 0.0)
-	Options.load_gamestate()
-	var progress_percent := int(Parser.get_game_progress(Options.SAVEGAME_PATH) * 100)
-	find_child("LoadButtonContainer").visible = progress_percent > 0 and progress_percent < 100 and FileAccess.file_exists(Options.SAVEGAME_PATH)
-	find_child("GameProgressLabel").text = str("(", progress_percent, "%)")
+	var progress := Parser.get_saved_game_progress(Options.SAVEGAME_PATH)
+	find_child("LoadButtonContainer").visible = progress > 0 and progress < 100 and FileAccess.file_exists(Options.SAVEGAME_PATH)
+	find_child("GameProgressLabel").text = str("(", int(progress * 100), "%)")
 
 func on_visibility_changed():
 	if visible:
