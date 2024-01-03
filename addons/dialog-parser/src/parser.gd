@@ -139,12 +139,12 @@ func read_page(number: int, starting_line_index := 0):
 func get_saved_game_progress(file_path: String) -> float:
 	var file : FileAccess
 	file = FileAccess.open(file_path, FileAccess.READ)
-	var data : Dictionary = JSON.parse_string(file.get_as_text())
-	file.close()
 	
 	if not file:
 		return 0.0
 	
+	var data : Dictionary = JSON.parse_string(file.get_as_text())
+	file.close()
 	# all keys are now strings instead of ints
 	return float(data.get("Parser", {}).get("Parser.game_progress", 0.0))
  
